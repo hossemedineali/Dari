@@ -1,0 +1,12 @@
+{
+    "tailwindCSS.emmetCompletions": true,
+    "tailwindCSS.classAttributes": [
+        "class",
+        "className",
+        "ngClass",
+        "className"
+    ],
+    "tailwindCSS.includeLanguages": {
+        "plaintext": "ts"
+    }
+}

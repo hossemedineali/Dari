@@ -4,18 +4,40 @@ import { loggerLink } from "@trpc/client/links/loggerLink";
 import { withTRPC } from "@trpc/next";
 import { SessionProvider } from "next-auth/react";
 import superjson from "superjson";
-import type { AppType } from "next/app";
+import type { AppType,AppProps } from "next/app";
 import type { AppRouter } from "../server/router";
 import type { Session } from "next-auth";
+
+import type { ReactElement, ReactNode } from 'react'
+import type { NextPage } from 'next'
+import type {  } from 'next/app'
+
 import "../styles/globals.css";
 
-const MyApp: AppType<{ session: Session | null }> = ({
+import { ThemeProvider } from "../context/context";
+
+
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps &AppType& {
+  Component: NextPageWithLayout,
+  session: Session | null
+}
+
+const MyApp: AppType<AppPropsWithLayout> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
     <SessionProvider session={session}>
+      <ThemeProvider>
+
       <Component {...pageProps} />
+      
+      </ThemeProvider>
+      
     </SessionProvider>
   );
 };

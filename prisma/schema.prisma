@@ -44,7 +44,7 @@ model Session {
 
 model User {
     id            String    @id @default(cuid())
-    first_name    String?
+    first_name    String
     last_name     String
     phone         Int  @unique
     
@@ -58,6 +58,14 @@ model User {
 model Post {
     id String @id @default(cuid())
     auther User @relation(fields: [id],references: [id])
+    type String
+    location String 
+    bednum Int
+    Parking Boolean
+    backyard Boolean
+    
+    price Float
+
 
 }
 

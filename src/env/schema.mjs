@@ -32,3 +32,17 @@ export const clientSchema = z.object({
 export const clientEnv = {
   // NEXT_PUBLIC_BAR: process.env.NEXT_PUBLIC_BAR,
 };
+
+
+//user schema 
+
+export const userschema=z.object({
+  first_name:z.string(),
+  lastname:z.string(),
+  phone:z.number()
+})
+//post schema
+
+export const postschema=z.object({
+  
+})
