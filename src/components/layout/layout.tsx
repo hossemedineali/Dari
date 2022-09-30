@@ -1,7 +1,7 @@
 
 import Navbar from "./navbar";
 
-const Layout : React.FC= ({children}:any) => {
+const Layout = ({children}:any) => {
     return ( 
         <>
         <Navbar/>
