@@ -11,8 +11,12 @@ import { NextPageWithLayout } from "./_app";
 
 const page:NextPageWithLayout=()=>{
   return<p>hello</p>
+
+
 }
 const Home: NextPageWithLayout = () => {
+
+  console.log('index page rerendered')
  // const hello = trpc.useQuery(["auth.getSecretMessage"]);
 
   return (
@@ -24,11 +28,13 @@ const Home: NextPageWithLayout = () => {
       </Head>
 
       
-     <Navbar/>
+     
         
-<main className="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
+<main className="container mx-auto flex flex-col items-center   p-4">
+<div className="mt-24 w-full flex justify-center">
 
     <Searchwrapper/>
+</div>
 
  
 </main>

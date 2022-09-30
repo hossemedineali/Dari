@@ -15,6 +15,8 @@ import type {  } from 'next/app'
 import "../styles/globals.css";
 
 import { ThemeProvider } from "../context/context";
+import Navbar from "../components/layout/navbar";
+import Layout from "../components/layout/layout";
 
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -32,11 +34,14 @@ const MyApp: AppType<AppPropsWithLayout> = ({
 }) => {
   return (
     <SessionProvider session={session}>
+      <Layout>
+
       <ThemeProvider>
 
       <Component {...pageProps} />
       
       </ThemeProvider>
+      </Layout>
       
     </SessionProvider>
   );

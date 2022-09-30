@@ -9,7 +9,7 @@ const MobileMenu = () => {
 
 
     return (
-        <div className="absolute top-16 left-0  h-screen  bg-primary1 " >
+        <div className="z-20 absolute top-16 left-0  h-screen  bg-primary1 " >
         <motion.aside
              initial={{ width: 0 }} 
              animate={{ width: 300 }}
@@ -19,7 +19,7 @@ const MobileMenu = () => {
 
             <ul className="p-16 flex flex-col gap-5">
                 {links.map((link,index)=>(<>
-                    <li key={index} className='cursor-pointer hover:text-secondary2'> {links[index]}</li>
+                    <li key={links[index]} className='cursor-pointer hover:text-secondary2'> {links[index]}</li>
                     
                 </>
                     ))}

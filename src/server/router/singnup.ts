@@ -4,12 +4,23 @@ import {prisma} from "../../server/db/client"
 import { userschema } from "../../env/schema.mjs";
 import { postschema } from "../../env/schema.mjs";
 
+import { getAuth ,RecaptchaVerifier} from "firebase/auth";
+
+const auth = getAuth();
+auth.languageCode = 'en'
+
+
+
+
+
 export const signup=createRouter()
 .mutation("adduser", {
     input: userschema,
     async resolve({ input }) {
     
-      try{
+
+
+      /* try{
        const newuser= await prisma.user.create({
           data:{
       
@@ -33,7 +44,7 @@ export const signup=createRouter()
           message :"failed", 
           data:e
         }
-      }
+      } */
     },
   })
   

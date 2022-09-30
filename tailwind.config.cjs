@@ -12,10 +12,14 @@ module.exports = {
       'primary2':'#cbf3f0',
       'secondary1':'#ff9f1c',
       'secondary2':'#ffbf69',
+      'red'       :'#ef2d2d',
 
 
     },
-    extend: {},
+    extend: {backgroundImage: {
+      'search-wrapper': "url('/../public/family.jpg')",
+      
+    }},
   },
   plugins: [],
 };
