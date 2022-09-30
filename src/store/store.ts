@@ -15,7 +15,7 @@ type ShowFilterState={
 const useMode=create<ModeState>((set)=>({
     mode:'Buy',
     setmode(text) {
-        set((state)=>({
+        set(()=>({
             mode:text
 
         }))
@@ -25,7 +25,7 @@ const useShowFilter=create<ShowFilterState>((set)=>({
     showMobile:false,
     showDesktop:false,
     setShowFilter(mobile,desktop) {
-        set((state)=>({
+        set(()=>({
             
             showDesktop:desktop,showMobile:mobile
 

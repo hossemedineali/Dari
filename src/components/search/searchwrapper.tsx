@@ -1,5 +1,5 @@
-import { url } from "inspector";
-import { useState } from "react";
+
+
 import { useMode } from "../../store/store";
 import SearchInput from "./searchInput";
 
@@ -11,15 +11,11 @@ import SearchInput from "./searchInput";
 const Searchwrapper = () => {
 
     const mode=useMode();
-        const [selectedoption, setselectedoption] = useState('Buy')
+       
 
         
 
-        const toggleselectedoption=(e: React.MouseEvent<HTMLButtonElement>):void=>{
-           
-            setselectedoption(e.currentTarget.name)
-        }
-
+       
       
     return ( 
         <div className=" lg:w-3/5 w-full  item-center  border p-4 h-32 rounded-2xl mb-4">

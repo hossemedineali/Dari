@@ -1,19 +1,15 @@
 
 import Head from "next/head";
 
-import Navbar from "../components/layout/navbar";
+//import Navbar from "../components/layout/navbar";
 import Searchwrapper from "../components/search/searchwrapper";
-import Test from "../components/test/test";
-import { trpc } from "../utils/trpc";
+
+//import { trpc } from "../utils/trpc";
 import { NextPageWithLayout } from "./_app";
 
 
 
-const page:NextPageWithLayout=()=>{
-  return<p>hello</p>
 
-
-}
 const Home: NextPageWithLayout = () => {
 
   console.log('index page rerendered')

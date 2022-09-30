@@ -39,7 +39,8 @@ export const clientEnv = {
 export const userschema=z.object({
   first_name:z.string(),
   lastname:z.string(),
-  phone:z.number()
+  phone:z.string(),
+  racp:z.string()
 })
 //post schema
 

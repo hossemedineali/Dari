@@ -1,9 +1,9 @@
-import {  useState } from "react";
+
 import { useShowFilter } from "../../store/store";
 import DesktopFilter from "./desktopFilter";
 import MobileFilter from "./mobileFilter";
 
-import { motion } from "framer-motion";
+
 
 
 export type StateProps= {

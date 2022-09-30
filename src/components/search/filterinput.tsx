@@ -21,9 +21,9 @@ const FilterInput  = () => {
     <div className="w- drop-shadow-2xl relative mt-2 mb-4  ">
 
         <div className="flex flex-wrap ">
-            <h3 onClick={(e)=>changemode('Buy')} id='Buy' className={`${mode.mode=='Buy'?'border-red':'border-black'}  w-1/3 text-center py-2 border-b-2 transition ease-in-out duration-1150 cursor-pointer` } >Buy</h3>
-            <h3 onClick={(e)=>changemode('Rent')} id='Rent' className={`${mode.mode=='Rent'?'border-red':'border-black'}  w-1/3 text-center py-2 border-b-2 transition ease-in-out duration-1150 cursor-pointer`  }>Rent</h3>
-            <h3 onClick={(e)=>changemode('CoRental')}  className={`${mode.mode=='CoRental'?'border-red':'border-black'}  w-1/3 text-center py-2 border-b-2 transition ease-in-out duration-1150 cursor-pointer` }>CoRental</h3>
+            <h3 onClick={()=>changemode('Buy')} id='Buy' className={`${mode.mode=='Buy'?'border-red':'border-black'}  w-1/3 text-center py-2 border-b-2 transition ease-in-out duration-1150 cursor-pointer` } >Buy</h3>
+            <h3 onClick={()=>changemode('Rent')} id='Rent' className={`${mode.mode=='Rent'?'border-red':'border-black'}  w-1/3 text-center py-2 border-b-2 transition ease-in-out duration-1150 cursor-pointer`  }>Rent</h3>
+            <h3 onClick={()=>changemode('CoRental')}  className={`${mode.mode=='CoRental'?'border-red':'border-black'}  w-1/3 text-center py-2 border-b-2 transition ease-in-out duration-1150 cursor-pointer` }>CoRental</h3>
         </div>
 
 

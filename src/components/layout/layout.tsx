@@ -1,11 +1,16 @@
 
+import React from "react";
 import Navbar from "./navbar";
 
-const Layout = ({children}:any) => {
+type porps={
+    children:JSX.Element
+}
+
+const Layout :React.FC<porps>= (props)=> {
     return ( 
         <>
         <Navbar/>
-            {children}
+            {props.children}
         </>
         
      );

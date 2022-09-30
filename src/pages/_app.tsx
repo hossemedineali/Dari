@@ -10,16 +10,16 @@ import type { Session } from "next-auth";
 
 import type { ReactElement, ReactNode } from 'react'
 import type { NextPage } from 'next'
-import type {  } from 'next/app'
+
 
 import "../styles/globals.css";
 
 import { ThemeProvider } from "../context/context";
-import Navbar from "../components/layout/navbar";
+
 import Layout from "../components/layout/layout";
 
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+export type NextPageWithLayout<P = unknown, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
 }
 
@@ -54,7 +54,7 @@ const getBaseUrl = () => {
 };
 
 export default withTRPC<AppRouter>({
-  config({ ctx }) {
+  config({  }) {
     /**
      * If you want to use SSR, you need to use the server's full URL
      * @link https://trpc.io/docs/ssr

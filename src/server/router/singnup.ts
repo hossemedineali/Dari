@@ -1,13 +1,13 @@
 
 import { createRouter } from "./context"
-import {prisma} from "../../server/db/client"
+//import {prisma} from "../../server/db/client"
 import { userschema } from "../../env/schema.mjs";
-import { postschema } from "../../env/schema.mjs";
+//import { postschema } from "../../env/schema.mjs";
 
-import { getAuth ,RecaptchaVerifier} from "firebase/auth";
+/* import { getAuth ,signInWithPhoneNumber} from "firebase/auth";
 
 const auth = getAuth();
-auth.languageCode = 'en'
+auth.languageCode = 'en' */
 
 
 
@@ -16,8 +16,17 @@ auth.languageCode = 'en'
 export const signup=createRouter()
 .mutation("adduser", {
     input: userschema,
-    async resolve({ input }) {
-    
+    async resolve({  }) {
+     /*  signInWithPhoneNumber(auth, input.phone , input.racp)
+      .then((confirmationResult) => {
+        // SMS sent. Prompt user to type the code from the message, then sign the
+        // user in with confirmationResult.confirm(code).
+        window.confirmationResult = confirmationResult;
+        // ...
+      }).catch((error) => {
+        // Error; SMS not sent
+        // ...
+      }); */
 
 
       /* try{

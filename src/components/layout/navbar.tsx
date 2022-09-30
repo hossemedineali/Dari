@@ -1,4 +1,4 @@
-import { MotionConfig } from "framer-motion";
+
 import { useState } from "react";
 import MobileMenu from "./mobilemenu";
 
