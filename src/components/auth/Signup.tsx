@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { sign } from "crypto";
+
 import { Useauth } from "../../store/store";
+import React from "react";
 
 const schema = z.object({
     firstName:z.string()
@@ -33,7 +34,7 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const signup = () => {
+const signup :React.FC= () => {
 
 
   

@@ -19,7 +19,7 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const signup = () => {
+const login:React.FC = () => {
 
 
   
@@ -91,4 +91,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default login;
