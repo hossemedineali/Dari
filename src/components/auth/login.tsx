@@ -55,7 +55,7 @@ const LogIn = () => {
 
          </form>
          <div className="flex gap-4">
-         <h5>Don't have an account </h5>
+         <h5>Don t have an account </h5>
          <button onClick={()=>auth.setMode('signup')} className="text-smallText underline underline-offset-2">Sign up</button>
 
          </div>

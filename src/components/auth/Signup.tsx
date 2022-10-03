@@ -1,5 +1,5 @@
 
-import { useRef } from "react";
+
 import { Useauth } from "../../store/store";
 
 
@@ -9,15 +9,15 @@ const signup = () => {
 
 
 
-    const firstNameInput=useRef<HTMLInputElement>(null)
+    
 
     const handelsubmit=(e: React.FormEvent)=>{
         e.preventDefault()
         
 
-        const phone=Number()
+       
 
-        console.log('phone',phone ,'type',typeof(phone))
+        console.log('submit ')
     }
     const auth=Useauth()
 
@@ -93,7 +93,7 @@ const signup = () => {
   
   
   
-          <button className="text-center flex mx-auto p-1 rounded-md bg-secondary1">Login</button>
+          <button onClick={handelsubmit} className="text-center flex mx-auto p-1 rounded-md bg-secondary1">Login</button>
   
       </form>
       <div className="flex gap-4">

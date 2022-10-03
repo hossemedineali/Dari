@@ -3,7 +3,7 @@ import { useState } from "react";
 import MobileMenu from "./mobilemenu";
 
 import { Useauth } from "../../store/store";
-import { shallowEqualObjects } from "react-query/types/core/utils";
+
 import AuthWrapper from "../auth/authWrapper";
 
 const links=[
