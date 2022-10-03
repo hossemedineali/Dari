@@ -9,7 +9,7 @@ const MobileMenu = () => {
 
 
     return (
-        <div className="z-20 absolute top-16 left-0  h-screen  bg-primary1 " >
+        <div className="z-30 absolute top-16 left-0  h-screen  bg-primary1 " >
         <motion.aside
              initial={{ width: 0 }} 
              animate={{ width: 300 }}
@@ -35,5 +35,5 @@ export default MobileMenu;
 
 
 
-
+ 
 

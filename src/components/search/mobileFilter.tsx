@@ -11,7 +11,7 @@ const MobileFilter = () => {
 
 
     return (
-        <div className="md:hidden block bg-white w-full absolute top-0 left-0 right-0 bottom-0 z-10 p-4">
+        <div className="block md:hidden absolute z-10 w-full top-16 right-0 bg-white">
        
        <motion.aside
           initial={{width:0 , opacity:0}}
@@ -21,15 +21,15 @@ const MobileFilter = () => {
           
           
           >
-            <div className="flex w-full  top-0 h-12  left-0  fixed bg-primary2 z-10">
+            <div className="flex  w-full  top-0 h-16 left-0  fixed  bg-primary2 z-10 ">
                 <svg
                     onClick={()=>showFilter.setShowFilter(false,false)}
-                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 mt-1 mr-4 ">
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 mt-1 mr-4 ">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
                 </svg>
-               <div className="flex-grow-1 flex w-full ">
+               <div className="flex-grow-1 flex w-full  ">
 
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mt-2 mr-4 ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 mt-2 mr-4 ">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                 </svg>
             {/* Search Input */}
@@ -40,7 +40,7 @@ const MobileFilter = () => {
             
             {/*  devider */}
 
-            <div className="w-full border mt-4"></div>
+            <div className="w-full border "></div>
 
 
             {/* Input */}

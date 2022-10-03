@@ -18,7 +18,7 @@ const FilterInput  = () => {
     }
     
     return ( 
-    <div className="w- drop-shadow-2xl relative mt-2 mb-4  ">
+    <div className=" drop-shadow-2xl relative mt-2 mb-4  ">
 
         <div className="flex flex-wrap ">
             <h3 onClick={()=>changemode('Buy')} id='Buy' className={`${mode.mode=='Buy'?'border-red':'border-black'}  w-1/3 text-center py-2 border-b-2 transition ease-in-out duration-1150 cursor-pointer` } >Buy</h3>
