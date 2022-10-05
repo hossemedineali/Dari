@@ -2,9 +2,8 @@
 import { useState } from "react";
 import MobileMenu from "./mobilemenu";
 
-import { Useauth } from "../../store/store";
 
-import AuthWrapper from "../auth/authWrapper";
+
 
 import { useSession, signIn, signOut } from "next-auth/react"
 
@@ -15,11 +14,11 @@ const links=[
 const Navbar = () => {
   const [togglemenu, settogglemenu] = useState(false)
 
-  const auth=Useauth()
+  
 
-  const { data:sesssion, status } = useSession()
+  const { data:sesssion } = useSession()
 
-  console.log('navbar session test => session : ' ,sesssion , )
+  
 
   const toggle=()=>{
     settogglemenu(prev=>!prev)
