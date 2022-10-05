@@ -2,8 +2,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
+import {trpc} from '../../utils/trpc'
+
 import { Useauth } from "../../store/store";
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 
 const schema = z.object({
     firstName:z.string()
@@ -27,6 +30,9 @@ const schema = z.object({
 }).refine((data) => data.password === data.confpassword, {
   message: "Passwords don't match",
   path: ["confpassword"]
+}).refine((data) => data.password === data.confpassword, {
+  message: "Passwords don't match",
+  path: ["confpassword"]
 })
 
 
@@ -36,21 +42,108 @@ type Schema = z.infer<typeof schema>;
 
 const Signup= () => {
 
+  const createUser=trpc.useMutation(['addUseradduser'])
 
+  
+
+
+  //    to delet (increment phone number )
+  const [phonenum, setphonenum] = useState(100)
+
+  const [customerror,setcustomerror]=useState('')
+  //------------------------------------------
+  
   
 
     const auth=Useauth()
 
+    const fakedata={
+      
+        firstName: 'hossem',
+        lastName: 'edine',
+        email: 'mycoin@test.com',
+        password: 'string255',
+        confpassword: 'string',
+        phone:phonenum
+    }
 
-  const { register, handleSubmit ,formState:{errors}} = useForm<Schema>({
+  const { register, handleSubmit ,setError,formState:{errors,isValid,isDirty,isSubmitted}} = useForm<Schema>({
+    mode:'onBlur',
+    reValidateMode:'onBlur',
+    defaultValues:{},
     resolver: zodResolver(schema)
   });
 
 
 
-  const onSubmit = (data: Schema) => {
-    console.log(data);
+  const onSubmit =async(data: Schema) => {
+
+    //console.log(data);
+    //setphonenum(prev=>prev+1)
+   
+     
+      
+       createUser.mutate({...data,phone:phonenum})
+
+      
+
+      console.log(createUser.status)
+
+        /* await mutate().then(res=>{
+          if(createUser.error?.shape?.message=='email already exists'){
+           // setError('email',{message:'already exist '})
+           // console.log('######',createUser.error?.message)
+   
+            console.log(createUser.error?.shape?.message)
+          }else{
+            console.log("done")
+          }
+        })
+ */
+        
+
+       
+       
+     
+
+       
+
+      /*  if(isSubmitted&&createUser.error?.shape?.message=='Firebase: Error (auth/email-already-in-use).'){
+         setError('email',{message:'already exist '})
+         console.log('######',createUser.error?.message)
+
+         console.log('exists')
+       } */
+    
+      
+       
+     
+     //if(createUser.error?.data?.zodError){
+      //zodResolver
+      //if(createUser.error.data.zodError.fieldErrors){
+       // createUser.error.data.zodError.fieldErrors
+      //}
+      //console.log('console:::',createUser.error.data.zodError)
+      //console.log('console!!!!!')
+     //}
+    //console.log('response user ',res)
+
+
+ 
+   
+  
+
+  
+  
+      
   };
+  //const test=trpc.useQuery(['addUsertest'])
+
+
+  
+
+
+ 
 
   return (
     <div className="w-full flex flex-col gap-3 relative ">
@@ -60,31 +153,33 @@ const Signup= () => {
     onSubmit={handleSubmit(onSubmit)} 
     >
       
-       {/* First NAme */}
-       <div className="flex  flex-col  leading-3">
+       {/* First NAme and last name */}
+          <div className="flex gap-2 justify-between">
+                  <div className="flex   flex-col  leading-3">
 
-       <label htmlFor="firstName" className="text-left">First Name </label><br/>
-              <input {...register("firstName", {required:true,})} type='text'  id="firstName" name="firstName"  placeholder="Enter you first name" 
-       className="w-full px-4 border rounded-md  h-8 "/>
-          {errors.firstName?.message&&<p className="text-red text-start mt-1">{errors.firstName?.message}</p>}
+                  <label htmlFor="firstName" className="text-left">First Name </label><br/>
+                        <input {...register("firstName", {required:true,})} type='text'  id="firstName" name="firstName"  placeholder="Enter you first name" 
+                  className="w-full px-4 border rounded-md  h-8 "/>
+                    {errors.firstName?.message&&<p className="text-red text-start mt-1">{errors.firstName?.message}</p>}
 
-       
-       </div>
-        
+
+                  </div>
+                  
+                  
+
+
+                                    {/* Last Name Input */}
+
+                  <div className="flex  flex-col leading-3">
+
+                    <label htmlFor="lastName" className="text-left">Last Name </label><br/>
+                    <input {...register("lastName")} type='text' id="lastName" name="lastName"  placeholder="Enter you last name  "  
+                    className="w-full px-4 border rounded-md h-8 "/>
+                    {errors.lastName?.message&&<p className="text-red text-start mt-1">{errors.lastName.message}</p>}
+                    </div>
+                    <div className="border-b-2 border-devider  my-2"></div>
+        </div>
         <div className="border-b-2 border-devider  my-2"></div>
-
-
-                         {/* Last Name Input */}
-
-        <div className="flex  flex-col leading-3">
-
-         <label htmlFor="lastName" className="text-left">Last Name </label><br/>
-         <input {...register("lastName")} type='text' id="lastName" name="lastName"  placeholder="Enter you last name  "  
-         className="w-full px-4 border rounded-md h-8 "/>
-         {errors.lastName?.message&&<p className="text-red text-start mt-1">{errors.lastName.message}</p>}
-         </div>
-         <div className="border-b-2 border-devider  my-2"></div>
-
                          {/* Email Name Input */}
 
          <div className="flex  flex-col leading-3">
@@ -123,18 +218,23 @@ const Signup= () => {
           </div>
           <div className="border-b-2 border-devider  my-2"></div>
 
+        <div className="w-full gap-3 flex ">
+        <input type='checkbox' className=""/>
+        <p>Accept term of use</p>
+
+        </div>
 
 
 
-
-        <button className="text-center flex mx-auto p-1 rounded-md bg-secondary1">Login</button>
+        <button className="text-center flex mx-auto p-1 rounded-md bg-secondary1 disabled:opacity-60"  disabled={!isDirty && !isValid}>Login</button>
 
     </form>
     <div className="flex gap-4">
     <h5>have an account </h5>
-    <button  onClick={()=>auth.setMode('login')}  className="text-smallText underline underline-offset-2">login</button>
+    <button  onClick={()=>auth.setMode('login')}  className="text-smallText underline underline-offset-2" >login</button>
 
     </div>
+    <h5 className="text-red">{customerror}</h5>
 </div>
   );
 };

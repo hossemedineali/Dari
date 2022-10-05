@@ -32,6 +32,8 @@ const MyApp: AppType<AppPropsWithLayout> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+
+  console.log('session from _app.tsx:',session)
   return (
     <SessionProvider session={session}>
       <Layout>

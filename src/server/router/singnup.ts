@@ -1,77 +1,80 @@
 
 import { createRouter } from "./context"
-//import {prisma} from "../../server/db/client"
+import {prisma} from "../../server/db/client"
 import { userschema } from "../../env/schema.mjs";
-//import { postschema } from "../../env/schema.mjs";
+import { z } from "zod";
 
-/* import { getAuth ,signInWithPhoneNumber} from "firebase/auth";
-
-const auth = getAuth();
-auth.languageCode = 'en' */
-
+import * as trpc from '@trpc/server';
+import {auth} from '../../../firebaseConfig'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 
-
+//const auth =getAuth()
 
 export const signup=createRouter()
+
 .mutation("adduser", {
     input: userschema,
-    async resolve({  }) {
-     /*  signInWithPhoneNumber(auth, input.phone , input.racp)
-      .then((confirmationResult) => {
-        // SMS sent. Prompt user to type the code from the message, then sign the
-        // user in with confirmationResult.confirm(code).
-        window.confirmationResult = confirmationResult;
-        // ...
-      }).catch((error) => {
-        // Error; SMS not sent
-        // ...
-      }); */
-
-
-      /* try{
-       const newuser= await prisma.user.create({
-          data:{
+    async resolve({input,ctx  }) {
       
-            first_name:input.first_name,
-            last_name:input.lastname,
-            phone:input.phone
-          }
-          
-          
-          
-      })
-
-      return {
-        message:'OK!!',
-        newuser
+        const data={
+          first_name:input.firstName,
+          last_name:input.lastName,
+          email:input.email,
+          phone:input.phone
       }
-      
-      }catch(e){
+
+      await createUserWithEmailAndPassword(auth,data.email,input.password)
+      .then(res=>{
+          return res
+      })
+      .catch(error=>{
+        throw new trpc.TRPCError({
+          code:'BAD_REQUEST',
+          message:'email already exists',
+          cause:error
+        })
         
-        return{
-          message :"failed", 
-          data:e
-        }
-      } */
+      })
+     
+     
+   
+    
+      
+    
     },
+
+    
+  }).query('test',{
+    resolve({}){
+      return {message:'connection'}
+    }
   })
+
+
+
+  /*
+
+  await  prisma.user.create({
+            data
+          }).then((res)=>{
+            return {
+                ok:'ok ',
+                data:{
+                  googleauth_response:usecredential,
+                  prisma_response:res
+                }
+            }
+          }).catch(err=>{
+            return{
+              errorOrigine:'prisme',
+              data:err
+            }
+          })
+
+  */
   
 
 
 
 
-
- /*  try {
-    await client.user.create({ data: { email: 'alreadyexisting@mail.com' } })
-  } catch (e) {
-    if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      // The .code property can be accessed in a type-safe manner
-      if (e.code === 'P2002') {
-        console.log(
-          'There is a unique constraint violation, a new user cannot be created with this email'
-        )
-      }
-    }
-    throw e
-  } */

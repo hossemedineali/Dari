@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 
 const links=[
-    'Buy','Sell','Find coRental'
+    'Buy','Rent','Find coRental'
   ]
 
 

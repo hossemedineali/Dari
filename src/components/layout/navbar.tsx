@@ -6,6 +6,8 @@ import { Useauth } from "../../store/store";
 
 import AuthWrapper from "../auth/authWrapper";
 
+import { useSession, signIn, signOut } from "next-auth/react"
+
 const links=[
   'Buy','Rent','Find coRental'
 ]
@@ -15,7 +17,9 @@ const Navbar = () => {
 
   const auth=Useauth()
 
-  
+  const { data:sesssion, status } = useSession()
+
+  console.log('navbar session test => session : ' ,sesssion , )
 
   const toggle=()=>{
     settogglemenu(prev=>!prev)
@@ -23,7 +27,7 @@ const Navbar = () => {
   return ( 
 
 <>
-  <nav className="bg-primary1 px-0 py-4 flex    w-full relative">
+  <nav className="bg-primary1 px-0 py-4 flex justify-between   w-full relative">
 
 
     
@@ -34,9 +38,9 @@ const Navbar = () => {
   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
 </svg>}
 
-    <h1 className="text-2xl pl-6 sm:w-1/4 flex justify-center w-2/5">Dari</h1>
+    <h1 className="text-2xl pl-6 md:w-1/5 flex justify-center w-2/5 m-auto ">Dari</h1>
     
-    <ul className="sm:flex flex-wrap justify-evenly w-2/4 hidden ">
+    <ul className="sm:flex flex-wrap justify-evenly w-4/5 hidden ">
       
           {links.map((link,index)=>(
             <li key={links[index]}>{links[index]}</li>
@@ -44,17 +48,15 @@ const Navbar = () => {
       
     </ul>
     
-    <div className="sm:w-1/4 w-1/2 ml-auto flex  flex-wrap justify-evenly ">
-            
-            <button onClick={()=>{auth.setToogleShow(true) ,auth.setMode('login')}} className="w-2/5  bg-secondary2 rounded-lg">Login</button>
-            <button onClick={()=>{auth.setToogleShow(true),auth.setMode('signup')}} className="w-2/5 bg-secondary2 rounded-lg">signup</button>
-   
-    </div>
+            {!sesssion&& <button className="py-1 px-3 mr-2  bg-secondary2 rounded-lg" onClick={()=>signIn()} >signin  </button>}
+            {sesssion&&<button className=" py-1 px-3 mr-2  bg-secondary2 rounded-lg" onClick={()=>signOut()} >Log out </button>}
+          
+
 
     {togglemenu&&<MobileMenu/>}
 
   </nav>
-    {auth.show&&<AuthWrapper/>}
+    
            
             </>
      );

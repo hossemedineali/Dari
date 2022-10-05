@@ -9,9 +9,11 @@ import {signup} from './singnup'
 
 export const appRouter = createRouter()
   .transformer(superjson)
-  .merge("example.", exampleRouter)
-  .merge("auth.", protectedExampleRouter)
-  .merge("auth",signup);
+ 
+  .merge("addUser",signup);
 
+
+
+  
 // export type definition of API
 export type AppRouter = typeof appRouter;

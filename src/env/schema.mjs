@@ -12,6 +12,10 @@ export const serverSchema = z.object({
   NEXTAUTH_URL: z.string().url(),
   DISCORD_CLIENT_ID: z.string(),
   DISCORD_CLIENT_SECRET: z.string(),
+  GOOGLE_CLIENT_ID:z.string(),
+  GOOGLE_CLIENT_SECRET:z.string(),
+  FACEBOOK_CLIENT_ID:z.string(),
+  FACEBOOK_CLIENT_SECRET:z.string(),
 });
 
 /**
@@ -32,18 +36,3 @@ export const clientSchema = z.object({
 export const clientEnv = {
   // NEXT_PUBLIC_BAR: process.env.NEXT_PUBLIC_BAR,
 };
-
-
-//user schema 
-
-export const userschema=z.object({
-  first_name:z.string(),
-  lastname:z.string(),
-  phone:z.string(),
-  racp:z.string()
-})
-//post schema
-
-export const postschema=z.object({
-  
-})
