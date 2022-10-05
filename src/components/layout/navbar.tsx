@@ -3,9 +3,10 @@ import { useState } from "react";
 import MobileMenu from "./mobilemenu";
 
 
-
+import { useRouter } from 'next/router'
 
 import { useSession, signIn, signOut } from "next-auth/react"
+import { Useauth } from "../../store/store";
 
 const links=[
   'Buy','Rent','Find coRental'
@@ -14,11 +15,20 @@ const links=[
 const Navbar = () => {
   const [togglemenu, settogglemenu] = useState(false)
 
+  const router=useRouter()
+  const auth=Useauth()
+
   
 
   const { data:sesssion } = useSession()
 
-  
+  const handeladdpostclick=()=>{
+    if(!sesssion){
+      auth.setToogleShow(true)
+    }else{
+      router.push('/Addpost')
+    }
+  }
 
   const toggle=()=>{
     settogglemenu(prev=>!prev)
@@ -26,7 +36,7 @@ const Navbar = () => {
   return ( 
 
 <>
-  <nav className="bg-primary1 px-0 py-4 flex justify-between   w-full relative">
+  <nav className="border-b-2 border-devider px-0 py-4 flex justify-between   w-full relative">
 
 
     
@@ -46,9 +56,17 @@ const Navbar = () => {
             ))}
       
     </ul>
-    
-            {!sesssion&& <button className="py-1 px-3 mr-2  bg-secondary2 rounded-lg" onClick={()=>signIn()} >signin  </button>}
-            {sesssion&&<button className=" py-1 px-3 mr-2  bg-secondary2 rounded-lg" onClick={()=>signOut()} >Log out </button>}
+            <div onClick={handeladdpostclick} className="md:flex  mr-6 bg-red px-4 py-1 rounded-2xl cursor-pointer hidden ">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+
+                <h1 >AddPost</h1>
+            </div>
+
+
+            {!sesssion&& <button className="py-1 px-3 mr-2  bg-secondary2 rounded-lg" onClick={()=>signIn()} >signin</button>}
+            {sesssion&&<button className=" py-1 px-3 mr-2  bg-secondary2 rounded-lg" onClick={()=>signOut()} >Logout </button>}
           
 
 

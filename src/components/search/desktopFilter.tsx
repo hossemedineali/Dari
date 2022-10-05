@@ -4,7 +4,7 @@ import FilterInput from "./filterinput";
 const DesktopFilter = () => {
     const showFilter=useShowFilter()
     return (
-        <div className="hidden md:block absolute z-10 w-full top-28 right-0">
+        <div className="hidden md:block absolute z-10 w-full top-2 right-0">
             <div className="lg:w-3/5 w-4/5  text-center border rounded-2xl bg-white m-auto">
             
             <svg 

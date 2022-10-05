@@ -27,9 +27,10 @@ const Home: NextPageWithLayout = () => {
      
         
 <main className="container mx-auto flex flex-col items-center  relative p-4">
-<div className="mt-24 w-full flex justify-center">
+<div className="mt-0 w-full flex justify-center">
 
     <Searchwrapper/>
+    
 </div>
 
  

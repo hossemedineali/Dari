@@ -13,14 +13,14 @@ type ShowFilterState={
 }
 
 type authState={
-    mode:string,
+    
     show:boolean,
     setToogleShow:(show:boolean)=>void,
-    setMode:(mode:string)=>void
+    
 }
 
 const Useauth=create<authState>((set)=>({
-    mode:'signup',
+    
     show:false,
     setToogleShow() {
         set((state)=>({
@@ -28,12 +28,7 @@ const Useauth=create<authState>((set)=>({
             show:!state.show
         }))
     },
-    setMode(mode) {
-        set((state)=>({
-            ...state,
-            mode:mode
-        }))
-    },
+    
 
 }))
 

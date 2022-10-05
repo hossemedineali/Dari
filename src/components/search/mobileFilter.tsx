@@ -11,7 +11,7 @@ const MobileFilter = () => {
 
 
     return (
-        <div className="block md:hidden absolute z-10 w-full top-16 right-0 bg-white">
+        <div className="block md:hidden absolute z-10 w-full top-0 right-0 bg-white">
        
        <motion.aside
           initial={{width:0 , opacity:0}}
