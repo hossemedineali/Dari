@@ -31,8 +31,8 @@ const FilterInput  = () => {
         <div className="px-4 py-8 border-b">
             <label>Price</label>
             <div className="flex justify-between mt-2">
-                <input type='number'  placeholder="Min" className="border rounded-md "/>
-                <input type='number' placeholder="Max" className="border rounded-md px-1"/>
+                <input type='number'  placeholder="Min" className="border rounded-md w-2/5 "/>
+                <input type='number' placeholder="Max" className="border rounded-md px-1 w-2/5"/>
             </div>
             
         </div>
@@ -41,8 +41,8 @@ const FilterInput  = () => {
         <div className="px-4 py-8 border-b">
             <label>Bedrooms</label>
             <div className="flex justify-between mt-2">
-                <input type='number'  placeholder="Min" className="border rounded-md px-1"/>
-                <input type='number' placeholder="Max" className="border rounded-md px-1"/>
+                <input type='number'  placeholder="Min" className="border rounded-md px-1 w-2/5"/>
+                <input type='number' placeholder="Max" className="border rounded-md px-1 w-2/5"/>
             </div>
             
         </div>
