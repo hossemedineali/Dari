@@ -11,7 +11,7 @@ interface MyType {
 
 
 
-export const cities:MyType  ={
+export const cities: MyType  ={
     //A
    'Ariana':[{value:'Ariana',label:'Ariana'},{value:'Ettadhamen-Mnihla',label: 'Ettadhamen-Mnihla'}, {value:'Kalàt el-Andalous',label:'Kalàt el-Andalous'},{value:'La Soukra',label:'La Soukra'},{value:'Raoued',label:'Raoued'}, {value:'Sidi Thabet',label:'Sidi Thabet'}],
     //B

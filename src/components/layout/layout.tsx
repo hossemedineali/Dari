@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Useauth } from "../../store/store";
-import AddPostForMobile from "./AddPostForMobile";
+import AddPostForMobile from "./AddPostIconForMobile";
 
 import Navbar from "./navbar";
 import SigninModal from "./signinModal";
