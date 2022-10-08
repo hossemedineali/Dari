@@ -15,7 +15,7 @@ export const cities: MyType  ={
     //A
    'Ariana':[{value:'Ariana',label:'Ariana'},{value:'Ettadhamen-Mnihla',label: 'Ettadhamen-Mnihla'}, {value:'Kalàt el-Andalous',label:'Kalàt el-Andalous'},{value:'La Soukra',label:'La Soukra'},{value:'Raoued',label:'Raoued'}, {value:'Sidi Thabet',label:'Sidi Thabet'}],
     //B
-    'Ben Arous':[{value:'Ben Arous',label:'Ben Arous'}, {value:'Bou Mhel el-Bassatine',label:'Bou Mhel el-Bassatine'},{value:'Ezzahra',label:'Ezzahra'},{value:'El Mourouj',label:'El Mourouj'},{value:'El Mourouj',label:'El Mourouj'},{value:'Hammam Chott',label:'Hammam Chott'},{value:'Hammam Lif',label:'Hammam Lif'},{value: 'Khalidia',label:'Khalidia'}, {value:'Mégrine',label:'Mégrine'}, {value:'Mohamedia-Fouchana',label:'Mohamedia-Fouchana'},{value:'Mornag',label:'Mornag'} ,{value:'Radès',label:'Radès'}],
+    'Ben Arous':[{value:'Ben Arous',label:'Ben Arous'}, {value:'Bou Mhel el-Bassatine',label:'Bou Mhel el-Bassatine'},{value:'Ezzahra',label:'Ezzahra'},{value:'El Mourouj',label:'El Mourouj'},{value:'Hammam Chott',label:'Hammam Chott'},{value:'Hammam Lif',label:'Hammam Lif'},{value: 'Khalidia',label:'Khalidia'}, {value:'Mégrine',label:'Mégrine'}, {value:'Mohamedia-Fouchana',label:'Mohamedia-Fouchana'},{value:'Mornag',label:'Mornag'} ,{value:'Radès',label:'Radès'}],
     
     
     'Béja':[{value:'Béja',label:'Béja'},{value:'El Maâgoula',label:'El Maâgoula'},{value:'Goubellat',label:'Goubellat'},{value:'Majaz al Bab',label:'Majaz al Bab'},{value:'Nefza',label:'Nefza'},{value:'Testour',label:'Testour'},{value:'Téboursouk',label:'Téboursouk'},{value:'Zahret Medien',label:'Zahret Medien'}],
