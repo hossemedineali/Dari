@@ -44,10 +44,7 @@ const Addpost = () => {
    
     
 
-    Object.keys(cities).map((item:string)=>{
-      
-    })
-
+    
     const router=useRouter()
     const {data:sesssion}=useSession()
     
@@ -84,11 +81,9 @@ const Post=()=>{
     const [selectedGovernorate, setselectedGovernorate] = useState<string | unknown >()
     const [selectedMunicipality, setselectedMunicipality] = useState<string | unknown >()
 
-    const handleChange = (option:string | unknown  ):void => {
-        setselectedGovernorate((option as string))
-        
-      };
+    console.log(selectedMunicipality)
 
+   
 
      // console.log('typeof(selectedGovernorate) :',typeof(selectedGovernorate))
     return(
