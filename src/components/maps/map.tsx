@@ -24,7 +24,11 @@ type Props={
 const Map:React.FC<Props> = ({position,setposition}) => {
 
  
-
+const Updateposition =()=>{
+  const map=useMap()
+  map.setView(position as [number,number])
+  return(null)
+}
 
  
  
@@ -55,7 +59,7 @@ const Map:React.FC<Props> = ({position,setposition}) => {
          <Marker position={position}></Marker>
       
       <LocationFinder  />
-      <h1>Position</h1>
+      <Updateposition/>
     </MapContainer>}
          </>
   );
