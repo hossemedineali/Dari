@@ -125,12 +125,7 @@
                     <div className="md:w-5/6">
                             <label htmlFor=" municipalities" className="font-medium"> Select  municipality
                             </label>
-                            <Select 
-                       
-                            
-                        isClearable={true}
-                            
-                            id=" municipalities"
+                            <Select  id=" municipalities"
                             options={munoptions}
                            value={selectedMunicipality as MygovernorateType}
 
@@ -206,6 +201,61 @@
            
 
 
+          
+
+           const [location, setLocation] = useState<Location>({
+            loaded: false,
+            coordinates: { lat:null  , lng:null },
+        });
+    
+        console.log(location)
+    
+
+       
+
+       
+
+        
+  
+
+   
+    
+
+    const getDevicePosition=()=>{
+        const onSuccess = (location :any) => {
+
+            setposition([location.coords.latitude,location.coords.longitude])
+            
+        setLocation({
+            loaded: true,
+            coordinates: {
+                lat: location.coords.latitude , 
+                lng: location.coords.longitude ,
+            },
+        });
+    };
+
+    const onError = (error:any) => {
+        setLocation({
+            loaded: true,
+            error: {
+                code: error.code,
+                message: error.message,
+            },
+        });
+    };
+
+   
+        if (!("geolocation" in navigator)) {
+            onError({
+                code: 0,
+                message: "Geolocation not supported",
+            });
+        }
+
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+    }
 
         
             
@@ -337,7 +387,7 @@
 
         {selectedMunicipality.label!=''&&<div>
             
-            <h3>Plase set the property location on the map  <span className="font-bold" >or <button className="  text-red px-1  rounded-2xl">use</button> the device location</span> </h3>
+            <h3>Plase set the property location on the map  <span className="font-bold" >or <button onClick={getDevicePosition} className="  text-red px-1  rounded-2xl">use</button> the device location</span> </h3>
             <div className="w-full h-[60vh]">
 
             

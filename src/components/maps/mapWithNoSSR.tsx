@@ -14,7 +14,6 @@ type Props={
 
 const MapWithNoSSR:React.FC<Props> = ({position,setposition}) => {
 
-  console.log('statment from MapWith no ssr this is the mun poisition :',position)
 
     return ( <MapWithNossr position={position} setposition={setposition}  /> );
 }

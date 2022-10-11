@@ -1,7 +1,11 @@
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
+import { useEffect, useState } from "react";
+import { menuPortalCSS } from "react-select/dist/declarations/src/components/Menu";
+
+
 
 
 
@@ -9,30 +13,29 @@ import "leaflet-defaulticon-compatibility";
 
 
 type Props={
-  position:[number,number]|undefined,
+  position:[number,number],
   setposition:(p: [number,number]) => void
 }
 
 
 
+
+
 const Map:React.FC<Props> = ({position,setposition}) => {
 
-
+ 
+// 
 
  console.log('statment from Map this is the mun poisition :',position)
 
+
  
-
-  const LocationFinderDummy = () => {
-
-
+ 
+  const LocationFinder = () => {
      useMapEvents({
         click(e) {
            setposition([e.latlng.lat,e.latlng.lng])
-
-         
-
-        },
+               },
     });
     return null;
   };
@@ -46,6 +49,7 @@ const Map:React.FC<Props> = ({position,setposition}) => {
       zoom={14}
       scrollWheelZoom={true}
       style={{ height: "100%", width: "100%" }}
+      
       >
       <TileLayer
          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -53,7 +57,7 @@ const Map:React.FC<Props> = ({position,setposition}) => {
          />
          <Marker position={position}></Marker>
       
-      <LocationFinderDummy  />
+      <LocationFinder  />
     </MapContainer>}
          </>
   );
