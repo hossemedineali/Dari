@@ -13,7 +13,7 @@ import { menuPortalCSS } from "react-select/dist/declarations/src/components/Men
 
 
 type Props={
-  position:[number,number],
+  position:[number,number]|undefined,
   setposition:(p: [number,number]) => void
 }
 
