@@ -208,19 +208,6 @@
             coordinates: { lat:null  , lng:null },
         });
     
-        console.log(location)
-    
-
-       
-
-       
-
-        
-  
-
-   
-    
-
     const getDevicePosition=()=>{
         const onSuccess = (location :any) => {
 
@@ -392,6 +379,8 @@
 
             
                 <MapWithNoSSR position={position[0]!=0?position :selectedMunicipality.position} setposition={setposition}  />
+
+                <h1>{position}</h1>
             
             </div>
         </div>}

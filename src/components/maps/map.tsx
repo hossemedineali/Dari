@@ -2,8 +2,8 @@ import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-lea
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
-import { useEffect, useState } from "react";
-import { menuPortalCSS } from "react-select/dist/declarations/src/components/Menu";
+
+
 
 
 
@@ -24,9 +24,6 @@ type Props={
 const Map:React.FC<Props> = ({position,setposition}) => {
 
  
-// 
-
- console.log('statment from Map this is the mun poisition :',position)
 
 
  
@@ -58,6 +55,7 @@ const Map:React.FC<Props> = ({position,setposition}) => {
          <Marker position={position}></Marker>
       
       <LocationFinder  />
+      <h1>Position</h1>
     </MapContainer>}
          </>
   );
