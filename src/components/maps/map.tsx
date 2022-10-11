@@ -1,32 +1,62 @@
-import { useState, useEffect } from 'react';
-import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
+import "leaflet-defaulticon-compatibility";
 
-export function ChangeView({ coords }:any) {
-  const map = useMap();
-  map.setView(coords, 12);
-  return null;
-}
+
+
+
+
 
 type Props={
-  lat:number,
-  lng:number
+  position:[number,number]|undefined,
+  setposition:(p: [number,number]) => void
 }
 
-export default function Map(props :Props) {
 
-  const center = [props.lat, props.lng];
 
+const Map:React.FC<Props> = ({position,setposition}) => {
+
+
+
+ console.log('statment from Map this is the mun poisition :',position)
+
+ 
+
+  const LocationFinderDummy = () => {
+
+
+     useMapEvents({
+        click(e) {
+           setposition([e.latlng.lat,e.latlng.lng])
+
+         
+
+        },
+    });
+    return null;
+  };
+
+  
   return (
-    <MapContainer  zoom={12} style={{ height: '100%',width:'100%' }}>
+    <>
+    {position && <MapContainer
+      zoomControl={true}
+      center={position }
+      zoom={14}
+      scrollWheelZoom={true}
+      style={{ height: "100%", width: "100%" }}
+      >
       <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-     
-        <Marker position={[props.lat, props.lng]} />
+         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+         />
+         <Marker position={position}></Marker>
       
-      <ChangeView coords={center} />
-    </MapContainer>
+      <LocationFinderDummy  />
+    </MapContainer>}
+         </>
   );
-}
+};
+
+export default Map;

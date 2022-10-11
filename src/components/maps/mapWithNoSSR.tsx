@@ -6,12 +6,17 @@ const MapWithNossr = dynamic(() => import('./map'), {
   ssr: false,
 });
 
+
 type Props={
-  lat:number,
-  lng:number
+  position:[number,number]|undefined,
+  setposition:(p:[number,number]) => void
 }
-const MapWithNoSSR = (props:Props) => {
-    return ( <MapWithNossr lat={props.lat} lng={props.lng}/> );
+
+const MapWithNoSSR:React.FC<Props> = ({position,setposition}) => {
+
+  console.log('statment from MapWith no ssr this is the mun poisition :',position)
+
+    return ( <MapWithNossr position={position} setposition={setposition}  /> );
 }
  
 export default MapWithNoSSR;
