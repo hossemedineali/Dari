@@ -26,7 +26,7 @@ const Map:React.FC<Props> = ({position,setposition}) => {
  
 const Updateposition =()=>{
   const map=useMap()
-  map.setView(position as [number,number])
+      map.setView(position as [number,number])
   return(null)
 }
 
@@ -49,7 +49,7 @@ const Updateposition =()=>{
       center={position }
       zoom={14}
       scrollWheelZoom={true}
-      style={{ height: "100%", width: "100%" }}
+      style={{ height: "100%", width: "100%",zIndex:0 ,position:'relative' }}
       
       >
       <TileLayer

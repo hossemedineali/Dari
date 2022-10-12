@@ -12,8 +12,6 @@ import { NextPageWithLayout } from "./_app";
 
 const Home: NextPageWithLayout = () => {
 
-  console.log('index page rerendered')
- // const hello = trpc.useQuery(["auth.getSecretMessage"]);
 
   return (
     <>
