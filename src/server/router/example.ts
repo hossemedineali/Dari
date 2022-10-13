@@ -9,6 +9,7 @@ export const exampleRouter = createRouter()
       })
       .nullish(),
     resolve({ input }) {
+      
       return {
         greeting: `Hello ${input?.text ?? "world"}`,
       };

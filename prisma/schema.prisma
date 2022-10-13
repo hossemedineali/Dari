@@ -51,21 +51,32 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  
   posts         Post[]
+
 }
 
 
 
 model Post {
   id       String   @id @default(cuid())
-  auther   User     @relation(fields: [id], references: [id])
+
+  auther   String     
+
+  
   type     String
+ 
   price    Float
+  priceType String
   size     Float
   rooms    Int
  
-  lng      Float
-  lat      Float
+ governorate String
+ municipality String
+
+  isposition Boolean
+  lng      Float?
+  lat      Float?
   
    Garage Boolean @default(false)
    Balcony Boolean @default(false)
@@ -75,10 +86,12 @@ model Post {
    airConditioning Boolean @default(false)
    solarPanels Boolean @default(false)
    SolarHotwater Boolean @default(false)
-
+  images String ?
    
 
- 
+  user         User     @relation(fields: [auther], references: [id], onDelete: Cascade)
+
+
 }
 
 model VerificationToken {
@@ -88,3 +101,5 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+

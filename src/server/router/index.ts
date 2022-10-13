@@ -1,6 +1,7 @@
 // src/server/router/index.ts
 import { createRouter } from "./context";
 import superjson from "superjson";
+import { addPost } from "./addpost";
 
 
 
@@ -9,7 +10,7 @@ import superjson from "superjson";
 export const appRouter = createRouter()
   .transformer(superjson)
  
-  //.merge("addUser",signup);
+  .merge("add.",addPost);
 
 
 

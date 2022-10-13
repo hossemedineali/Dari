@@ -12,6 +12,7 @@ import MapWithNoSSR from "../components/maps/mapWithNoSSR";
 import { useMode } from "../store/store";
 import {governorates,cities,MygovernorateType} from '../utils/cities'
 import Switch from "../components/ui/switch";
+import { trpc } from "../utils/trpc";
 
 
         export type Location={
@@ -50,10 +51,11 @@ import Switch from "../components/ui/switch";
                     router.replace('/')
                 }
             }else{
+                console.log('id ', sesssion.user?.id ,'type   :',typeof (sesssion.user?.id))
 
             return (
                 
-                <Post/> );
+                <Post /> );
             }
             
         }
@@ -65,6 +67,7 @@ import Switch from "../components/ui/switch";
             
         }
 
+       
         const Post=()=>{
 
             const [selectedGovernorate, setselectedGovernorate] = useState<State>({label:'',value:'',position:[0,0]})
@@ -124,7 +127,7 @@ import Switch from "../components/ui/switch";
             
                       <div className='mx-2'>
                             {selectedMunicipality.value!=''&&
-                        <Filters selectedMunicipality={selectedMunicipality}/>
+                        <Filters selectedMunicipality={selectedMunicipality} selectedGovernorate={selectedGovernorate}/>
                             }
                             {selectedMunicipality.value==''&&<h1>Please select your Municipality To continue</h1>}
                         
@@ -171,7 +174,8 @@ import Switch from "../components/ui/switch";
        
 
         type FProps={
-            selectedMunicipality:MygovernorateType
+            selectedMunicipality:MygovernorateType,
+            selectedGovernorate:MygovernorateType
         }
 
 
@@ -190,7 +194,7 @@ import Switch from "../components/ui/switch";
         invalid_type_error:'required'
         
     }),
-    landsize:z.number({
+    size:z.number({
         required_error:'required '
     }),
     rooms:z.number({
@@ -201,25 +205,59 @@ import Switch from "../components/ui/switch";
     OutdoorArea: z.boolean().default(false),
     SwimmingPool: z.boolean().default(false),
     UndercoverParking: z.boolean().default(false),
-    AirConditioning: z.boolean().default(false),
-    SolarPanels: z.boolean().default(false),
-    SolarHotWater: z.boolean().default(false),
+    airConditioning: z.boolean().default(false),
+    solarPanels: z.boolean().default(false),
+    SolarHotwater: z.boolean().default(false)
+    
 
  })
 
 type Form =z.infer<typeof form>;
 
-const Filters:React.FC<FProps>=({selectedMunicipality})=>{
+const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
+
+    const {data:sesssion}=useSession()
+
+    console.log(sesssion?.user)
+            const addPost =trpc.useMutation('add.addPost')
+           const mode =useMode()
+
+           const [position,setposition]=useState<[number,number]>([0,0])
+    
     
     const [showMap,setshowMap]=useState(false)
-    const { register, handleSubmit,setValue ,setError,formState:{errors,isValid,isDirty,isSubmitted} } = useForm<Form>({ 
+    const {  handleSubmit,setValue ,formState:{errors} } = useForm<Form>({ 
         resolver:zodResolver(form)
     });
 
 
 
         const submit =(data:Form)=>{
-            console.log(data)       }
+            let isposition=false
+            if(position[0]!=0 ||position[1]!=0){
+                isposition=true
+            }
+
+            const postData={
+                ...data,
+                priceType:'dayli' ,
+                governorate:selectedGovernorate.value as string,
+                municipality:'selectedMunicipality.value as string',
+                type:mode.mode,
+                isposition,
+                lng:position[0],
+                lat:position[1],
+                images:'  test',
+                
+
+            }
+
+            addPost.mutate({
+                ...postData,
+                auther:sesssion?.user?.id as string
+            })
+
+        }
 
 
             
@@ -228,9 +266,7 @@ const Filters:React.FC<FProps>=({selectedMunicipality})=>{
         e.preventDefault()
             console.log('submitt')    
     } */
-            const mode =useMode()
-
-           const [position,setposition]=useState<[number,number]>([0,0])
+            
            
 
            useEffect(() => {
@@ -299,7 +335,7 @@ const Filters:React.FC<FProps>=({selectedMunicipality})=>{
                 <p  className=" pointer-events-none w-8 h-6 absolute top-1/2 transform -translate-y-1/2 right-2"> Tnd</p>
 
 
-                <input name="price" type="number"  id="price"   placeholder="" className="form-input  w-full h-[38px]" 
+                <input name="price" type="number"  id="price"  step="0.01" placeholder="" className="form-input  w-full h-[38px]" 
                 onChange={(e)=>setValue('price',parseFloat(e.currentTarget.value))}
                 />
                 
@@ -324,12 +360,12 @@ const Filters:React.FC<FProps>=({selectedMunicipality})=>{
             <div className='w-full  md:w-[30%]'>
                     {/* Land size Input  */}
 
-                <h5 className={`font-medium mb-1 ${errors.landsize?.message? 'text-red':'' }`}>Land size : {errors.landsize?.message? errors.landsize?.message:''}</h5>
-                <label htmlFor="landsize" className={`relative text-gray-400 focus-within:text-gray-600 block   border-2 rounded ${errors.landsize?.message? 'border-red':'border-devider'} `}>
+                <h5 className={`font-medium mb-1 ${errors.size?.message? 'text-red':'' }`}>Land size : {errors.size?.message? errors.size?.message:''}</h5>
+                <label htmlFor="landsize" className={`relative text-gray-400 focus-within:text-gray-600 block   border-2 rounded ${errors.size?.message? 'border-red':'border-devider'} `}>
 
 
-                <input type='number' id='landsize'  placeholder=" property size " className="w-full h-[38px] rounded-md"
-                onChange={(e)=>setValue('landsize',parseFloat(e.currentTarget.value)  )}
+                <input type='number' id='size'  placeholder=" property size " className="w-full h-[38px] rounded-md"
+                onChange={(e)=>setValue('size',parseFloat(e.currentTarget.value)  )}
                 />
 
                 <p  className=" pointer-events-none w-8 h-6 absolute top-1/2 transform -translate-y-1/2 right-4"> m2</p>
@@ -445,9 +481,9 @@ const Filters:React.FC<FProps>=({selectedMunicipality})=>{
 
         {showMap&&<div>
             
-            <h3>Plase set the property location on the map <br/> <span className="font-bold" >or <button onClick={getDevicePosition} className="  text-red px-1  rounded-2xl">use</button> the device location</span>(device location work better on devices with GPS) </h3>
+            <h3>Plase set the property location on the map <br/> <span className="font-bold" >or <span onClick={getDevicePosition} className="  text-red px-1  rounded-2xl cursor-pointer">use</span> the device location</span>(device location work better on devices with GPS) </h3>
             <div className="w-full h-[60vh] z-0">
-
+                    {location.error?.message&&<p className="text-secondary2 ">Enabel GPS on your device </p>}
             
                 <MapWithNoSSR position={position[0]!=0?position :selectedMunicipality.position} setposition={setposition}  />
 
@@ -467,7 +503,7 @@ const Filters:React.FC<FProps>=({selectedMunicipality})=>{
 
         <div className=" flex justify-center" >
 
-<button className="self-center bg-secondary1 p-1 hover:scale-105 active:scale-95 mb-1 rounded-3xl m-auto ">Add Announcment</button>
+<button type="submit" className="self-center bg-secondary1 p-1 hover:scale-105 active:scale-95 mb-1 rounded-3xl m-auto ">Add Announcment</button>
     </div>
                 </form>
             )
