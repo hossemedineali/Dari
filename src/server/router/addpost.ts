@@ -1,8 +1,8 @@
 import { createRouter } from "./context";
-import { string, z } from "zod";
+import {  z} from "zod";
 
+import {cloudinary} from '../../../cloudinary-config'
 
-import {prisma } from '../db/client'
 
 
 export const addPost =createRouter()
@@ -15,6 +15,7 @@ export const addPost =createRouter()
             price:z.number(),
             size:z.number(),
             rooms:z.number(),
+            pricePer:z.string(),
 
             Garage: z.boolean(),
             Balcony: z.boolean(),
@@ -32,23 +33,53 @@ export const addPost =createRouter()
             lng:z.number(),
             lat:z.number(),
 
-            images:z.string(),
-            priceType:z.string()
+            images :z.array(z.unknown()),
+            description:z.string()
 
 
         }),
-        resolve({input,ctx}){
-
+       async resolve({input,ctx}){
             
-                return  ctx.prisma.post.create({
+            
+                let res:any
+                const addimage=async()=>{
+                    let newimagesformat=''
+                  
+                    for (let i=0 ;i<input.images.length;i++){
+                        await   cloudinary.uploader.upload(input.images[i] as string).then((result)=>{
+                            console.log(result.public_id)
+                            if(i==input.images.length-1){
+                                newimagesformat=newimagesformat + result.public_id
+
+                            }
+                            else{
+                                newimagesformat=newimagesformat + result.public_id+',' 
+                            }
+                           console.log('newimagesformat !::',newimagesformat)
+                        })
+                       }
+                      return newimagesformat
+                }
+                  
+                const newimagesdata= await addimage()
+
+                return ctx.prisma.post.create({
                     data:{
-                        ...input
+                        ...input,
+                        images:newimagesdata 
                     }
                 })
+    
+                } 
+                 /*  ctx.prisma.post.create({
+                    data:{
+                        ...input,images:'aeeee'
+                    }
+                })  */
             
 
             
             
-        }
+        
     })
    

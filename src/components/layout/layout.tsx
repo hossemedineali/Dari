@@ -1,10 +1,12 @@
 
 import React from "react";
-import { Useauth } from "../../store/store";
 import AddPostForMobile from "./AddPostIconForMobile";
 
+import { useRouter } from 'next/router'
+
 import Navbar from "./navbar";
-import SigninModal from "./signinModal";
+
+
 
 
 type porps={
@@ -13,16 +15,17 @@ type porps={
 
 const Layout :React.FC<porps>= (props)=> {
 
-   const auth= Useauth()
+   const router=useRouter()
 
+   
 
     return ( 
         <>
         <Navbar/>
-        {auth.show&&<SigninModal/>}
+        
 
             {props.children}
-        <AddPostForMobile/>
+        {router.route!='/Addpost'&&<AddPostForMobile/>}
         </>
         
      );

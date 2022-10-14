@@ -48,11 +48,14 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime?
+  phone         Int ?
   image         String?
   accounts      Account[]
   sessions      Session[]
   
-  posts         Post[]
+  posts         Post[] @relation("owner")
+
+  liked       Post[] @relation(name: "likedby") 
 
 }
 
@@ -67,7 +70,7 @@ model Post {
   type     String
  
   price    Float
-  priceType String
+  pricePer String ?
   size     Float
   rooms    Int
  
@@ -87,10 +90,12 @@ model Post {
    solarPanels Boolean @default(false)
    SolarHotwater Boolean @default(false)
   images String ?
+  description String @default("")
    
 
-  user         User     @relation(fields: [auther], references: [id], onDelete: Cascade)
+  user         User     @relation(name:"owner",fields: [auther], references: [id], onDelete: Cascade)
 
+  liked       User?     @relation(name:"likedby",fields: [id], references: [id], onDelete: Cascade)
 
 }
 

@@ -18,6 +18,7 @@
     "@trpc/next": "^9.27.2",
     "@trpc/react": "^9.27.2",
     "@trpc/server": "^9.27.2",
+    "cloudinary": "^1.32.0",
     "firebase": "^9.10.0",
     "framer-motion": "^7.4.0",
     "leaflet-defaulticon-compatibility": "^0.1.1",
@@ -26,6 +27,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.36.1",
+    "react-images-uploading": "^3.1.7",
     "react-leaflet": "^4.1.0",
     "react-query": "^3.39.2",
     "react-select": "^5.4.0",
@@ -50,5 +52,10 @@
   },
   "ct3aMetadata": {
     "initVersion": "5.13.1"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }
