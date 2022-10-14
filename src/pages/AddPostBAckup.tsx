@@ -5,14 +5,21 @@ import { useForm } from "react-hook-form";
 import Select from "react-select";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Image from 'next/image'
 
 import MapWithNoSSR from "../components/maps/mapWithNoSSR";
+
+import ImageUploading, { ImageListType } from "react-images-uploading";
 
 
 import { useMode } from "../store/store";
 import {governorates,cities,MygovernorateType} from '../utils/cities'
 import Switch from "../components/ui/switch";
 import { trpc } from "../utils/trpc";
+
+
+
+
 
 
         export type Location={
@@ -51,7 +58,6 @@ import { trpc } from "../utils/trpc";
                     router.replace('/')
                 }
             }else{
-                console.log('id ', sesssion.user?.id ,'type   :',typeof (sesssion.user?.id))
 
             return (
                 
@@ -95,7 +101,7 @@ import { trpc } from "../utils/trpc";
         
             return(
                 
-                <div className="   relative top-20" >
+                <div className="   relative top-20 px-2" >
                     <h1 className="text-xl	">Add announcement :</h1>
                 <Tabs >
                     <div>
@@ -155,7 +161,7 @@ import { trpc } from "../utils/trpc";
 
             const mode=useMode()
             return(
-                <div style={{minHeight:'80vh'}} className=" rounded-lg border w-full md:w-5/6  min-h-[50%]  m-auto overflow-hidden " >
+                <div style={{minHeight:'80vh'}} className=" rounded-lg border w-full  md:w-5/6  min-h-[50%]  m-auto overflow-hidden " >
                     <div  className="bg-primary1 rounded-t-lg  flex flex-wrap justify-around w-full mb-2 ">
                         
                         <h3 onClick={()=>mode.setmode('Buy')} id='Buy' className={`${mode.mode=='Buy'?'border-red':'border-devider'}  w-1/3 text-center py-2 border-b-2 transition ease-in-out duration-1150 cursor-pointer` } >Sell</h3>
@@ -197,6 +203,7 @@ import { trpc } from "../utils/trpc";
     size:z.number({
         required_error:'required '
     }),
+    pricePer:z.string().default(''),
     rooms:z.number({
         required_error:'required'
     }),
@@ -207,10 +214,15 @@ import { trpc } from "../utils/trpc";
     UndercoverParking: z.boolean().default(false),
     airConditioning: z.boolean().default(false),
     solarPanels: z.boolean().default(false),
-    SolarHotwater: z.boolean().default(false)
+    SolarHotwater: z.boolean().default(false),
+    description:z.string().default('')
+    
     
 
  })
+
+ const imgtype=z.array(z.string())
+ type Imgtype=z.infer<typeof imgtype>
 
 type Form =z.infer<typeof form>;
 
@@ -218,13 +230,21 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
     const {data:sesssion}=useSession()
 
-    console.log(sesssion?.user)
+    const router=useRouter()
+   
+    
+
+    const [imagedata,setimagedata]=useState<Imgtype>([])
+
+    
             const addPost =trpc.useMutation('add.addPost')
            const mode =useMode()
 
            const [position,setposition]=useState<[number,number]>([0,0])
-    
-    
+           const [images, setImages] = useState([]);
+
+
+
     const [showMap,setshowMap]=useState(false)
     const {  handleSubmit,setValue ,formState:{errors} } = useForm<Form>({ 
         resolver:zodResolver(form)
@@ -232,7 +252,8 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
 
 
-        const submit =(data:Form)=>{
+        const submit =async(data:Form)=>{
+
             let isposition=false
             if(position[0]!=0 ||position[1]!=0){
                 isposition=true
@@ -240,42 +261,54 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
             const postData={
                 ...data,
-                priceType:'dayli' ,
+                
                 governorate:selectedGovernorate.value as string,
-                municipality:'selectedMunicipality.value as string',
+                municipality:selectedMunicipality.value as string,
                 type:mode.mode,
                 isposition,
                 lng:position[0],
                 lat:position[1],
-                images:'  test',
-                
-
+                images:imagedata,
             }
 
-            addPost.mutate({
+                
+        addPost.mutate({
                 ...postData,
-                auther:sesssion?.user?.id as string
+                auther:sesssion?.user?.id as string,
+               
             })
 
+               
+         
+       
         }
-
+        if (addPost.data){
+            router.replace('/')
+          }
+       
 
             
    
-/* const submit=(e:React.FormEvent<HTMLFormElement>) =>{
-        e.preventDefault()
-            console.log('submitt')    
-    } */
-            
+        const hundelFileInput=(imageList:ImageListType)=>{
+            const ttt=imagedata
+           setImages(imageList as never[])
+
+            imageList.map(item=>{
+                ttt.push(item.dataURL as string)
+                
+            })
+            setimagedata(ttt)
            
+        }
+            
+       
 
            useEffect(() => {
             if(selectedMunicipality.label!=''){
                 setposition(selectedMunicipality.position as [number,number])
             }
-           
-             
-           }, [setposition])
+   
+           }, [selectedMunicipality.label])
            
 
 
@@ -335,7 +368,7 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
                 <p  className=" pointer-events-none w-8 h-6 absolute top-1/2 transform -translate-y-1/2 right-2"> Tnd</p>
 
 
-                <input name="price" type="number"  id="price"  step="0.01" placeholder="" className="form-input  w-full h-[38px]" 
+                <input name="price" type="number"  id="price"  step="0.01" placeholder="" className="form-input px-1 w-full h-[38px]" 
                 onChange={(e)=>setValue('price',parseFloat(e.currentTarget.value))}
                 />
                 
@@ -344,10 +377,11 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
                 
                 {mode.mode==='Rent' &&<div className="flex gap-2">
 
-                <input type='checkbox'  id="price fac" value='Monthly'/> 
+                <input onChange={(e)=>{if(e.currentTarget.checked){setValue('pricePer','mounth')}}} type='radio' name="pricePer" id="mounth" value='mounth'/> 
+
                 <label>Mounthly</label>
 
-                <input type='checkbox' id="price fac"/>
+                <input onChange={(e)=>{if(e.currentTarget.checked){setValue('pricePer','day')}}} type='radio' name="pricePer" id="day" value='day'/>
 
                 <label>Dayli</label>
 
@@ -364,7 +398,7 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
                 <label htmlFor="landsize" className={`relative text-gray-400 focus-within:text-gray-600 block   border-2 rounded ${errors.size?.message? 'border-red':'border-devider'} `}>
 
 
-                <input type='number' id='size'  placeholder=" property size " className="w-full h-[38px] rounded-md"
+                <input type='number' id='size'  placeholder=" property size " className="w-full h-[38px] rounded-md px-1"
                 onChange={(e)=>setValue('size',parseFloat(e.currentTarget.value)  )}
                 />
 
@@ -416,28 +450,28 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
         <h3 className="font-medium mb-1">Outdoor features :</h3> 
         <>
         <div className=" flex ">
-        <input type='checkbox' id='Garage' name='Garage' value='Garage' className="mr-4 "/>
-        <label htmlFor='Garage' >Garage</label> <br/>
+        <input onChange={(e)=>{setValue('Garage',e.currentTarget.checked)}} type='checkbox' id='Garage' name='Garage' value='Garage' className="mr-4 "/>
+        <label  htmlFor='Garage' >Garage</label> <br/>
         </div>
 
         <div className=" flex ">
-        <input type='checkbox' id='Balcony' name='Balcony' value='Balcony' className="mr-4 "/>
+        <input onChange={(e)=>{setValue('Balcony',e.currentTarget.checked)}} type='checkbox' id='Balcony' name='Balcony' value='Balcony' className="mr-4 "/>
         <label htmlFor='Balcony' >Balcony</label> <br/>
         </div>
 
 
         <div className=" flex ">
-        <input type='checkbox' id='Outdoor area' name='Outdoor area' value='Outdoor area' className="mr-4 "/>
+        <input onChange={(e)=>{setValue('OutdoorArea',e.currentTarget.checked)}} type='checkbox' id='Outdoor area' name='Outdoor area' value='Outdoor area' className="mr-4 "/>
         <label htmlFor='Outdoor area' >Outdoor area</label> <br/>
         </div>
 
         <div className=" flex ">
-        <input type='checkbox' id='Swimming pool' name='Swimming pool' value='Swimming pool' className="mr-4 "/>
+        <input onChange={(e)=>{setValue('SwimmingPool',e.currentTarget.checked)}} type='checkbox' id='Swimming pool' name='Swimming pool' value='Swimming pool' className="mr-4 "/>
         <label htmlFor='Swimming pool' >Swimming pool</label> <br/>
         </div>
 
         <div className=" flex ">
-        <input type='checkbox' id='Undercover parking' name='Undercover parking' value='Undercover parking' className="mr-4 "/>
+        <input onChange={(e)=>{setValue('UndercoverParking',e.currentTarget.checked)}} type='checkbox' id='Undercover parking' name='Undercover parking' value='Undercover parking' className="mr-4 "/>
         <label htmlFor='Undercover parking' >Undercover parking</label> <br/>
         </div>
         </>
@@ -453,23 +487,82 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
         <h3 className="font-medium mb-1">Climate control & energy :</h3> <br/>
 
                 <div className=" flex">
-                <input type='checkbox' id='Air conditioning' name='Air conditioning' value='Air conditioning' className="mr-4 "/>
+                <input onChange={(e)=>{setValue('airConditioning',e.currentTarget.checked)}} type='checkbox' id='Air conditioning' name='Air conditioning' value='Air conditioning' className="mr-4 "/>
                 <label htmlFor='Air conditioning' >Air conditioning</label> <br/>
                 </div>
 
                 <div className=" flex">
-                <input type='checkbox' id='Solar panels' name='Solar panels' value='Solar panels' className="mr-4 "/>
+                <input onChange={(e)=>{setValue('solarPanels',e.currentTarget.checked)}} type='checkbox' id='Solar panels' name='Solar panels' value='Solar panels' className="mr-4 "/>
                 <label htmlFor='Solar panels' >Solar panels</label> <br/>
                 </div>
 
 
                 <div className=" flex">
-                <input type='checkbox' id='Solar hot water' name='Solar hot water' value='Solar hot water' className="mr-4 "/>
+                <input onChange={(e)=>{setValue('SolarHotwater',e.currentTarget.checked)}} type='checkbox' id='Solar hot water' name='Solar hot water' value='Solar hot water' className="mr-4 "/>
                 <label htmlFor='Solar hot water' >Solar hot water</label> <br/>
                 </div>
         </div>
         </div>
 
+        <div className="border border-devider my-2  "></div>
+
+                    <div className="flex flex-col">
+                    
+                    <ImageUploading
+                        multiple
+                        value={images}
+                        onChange={hundelFileInput}
+                        maxNumber={10}
+                        >
+        {({
+          
+          imageList,
+          onImageUpload,
+          onImageRemoveAll,
+          onImageUpdate,
+          onImageRemove,
+          isDragging,
+          dragProps
+        }) => (
+          // write your building UI
+          <div className="upload__image-wrapper  ">
+            <div className="flex flex-wrap gap-2">
+
+            <span
+              style={isDragging ? { color: "red" } : undefined}
+              onClick={onImageUpload}
+              {...dragProps}
+              className="cursor-pointer border w-max p-1 rounded-lg hover:scale-95 active:scale-105"
+              >
+              Add images(max 10)
+            </span>
+            &nbsp;
+           
+            <span onClick={onImageRemoveAll} className="cursor-pointer border w-max p-1 rounded-lg hover:scale-95 active:scale-105">Remove all images</span>
+                </div>
+            <br/>
+            <span className="mt-4"> {images.length } images selected </span>
+
+            <div className="flex flex-wrap gap-2">
+
+            {imageList.map((image, index) => (
+                <div key={index} className=" border p-2">
+                <Image src={image.dataURL as string} alt="" width="100" />
+                
+                  <span  onClick={() => onImageUpdate(index)} className="mr-2 cursor-pointer border w-max p-1 rounded-lg hover:bg-red">Update</span>
+                  <span onClick={() => onImageRemove(index)} className="cursor-pointer border w-max p-1 rounded-lg hover:border-red ">Remove</span>
+                
+              </div>
+            ))}
+            </div>
+          </div>
+        )}
+          </ImageUploading>
+                     </div>
+
+                 <div className="border border-devider my-2  "></div>
+                
+                
                 
                 <div className="flex ">
 
@@ -496,17 +589,15 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
         <div className="px-4 py-8  ">
             <label>Description</label>
             <div className="flex justify-between mt-2">
-                <input type='text'  placeholder="Keywords" className="border h-16 w-full rounded-md "/>
+                <input onChange={(e)=>{setValue('description',e.currentTarget.value)}} type='text'  placeholder="Description" className="border h-16 w-full rounded-md pl-2"/>
             </div>
             
         </div>
 
         <div className=" flex justify-center" >
 
-<button type="submit" className="self-center bg-secondary1 p-1 hover:scale-105 active:scale-95 mb-1 rounded-3xl m-auto ">Add Announcment</button>
+<button type="submit" className="self-center bg-secondary1 p-1 hover:scale-105 active:scale-95 mb-1 rounded-3xl m-auto  ">{!addPost.isLoading? 'Add Announcment' : 'Sending data...'}</button>
     </div>
-
-    
                 </form>
             )
         }

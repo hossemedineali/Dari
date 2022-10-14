@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import Select from "react-select";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Image from 'next/image'
 
 import MapWithNoSSR from "../components/maps/mapWithNoSSR";
 
@@ -270,22 +271,25 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
                 images:imagedata,
             }
 
-            addPost.mutate({
+                
+        addPost.mutate({
                 ...postData,
                 auther:sesssion?.user?.id as string,
                
             })
-           
-            if(addPost.isSuccess){
-                router.push('/')
-            }
-        }
 
+               
+         
+       
+        }
+        if (addPost.data){
+            router.replace('/')
+          }
        
 
             
    
-        const hundelFileInput=(imageList:ImageListType, addUpdateIndex:number[] | undefined)=>{
+        const hundelFileInput=(imageList:ImageListType)=>{
             const ttt=imagedata
            setImages(imageList as never[])
 
@@ -303,10 +307,8 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
             if(selectedMunicipality.label!=''){
                 setposition(selectedMunicipality.position as [number,number])
             }
-           
-           
-             
-           }, [setposition])
+   
+           }, [selectedMunicipality.label])
            
 
 
@@ -545,7 +547,7 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
             {imageList.map((image, index) => (
                 <div key={index} className=" border p-2">
-                <img src={image.dataURL} alt="" width="100" />
+                <Image src={image.dataURL as string} alt="" width={"100px"} height={"100px"} />
                 
                   <span  onClick={() => onImageUpdate(index)} className="mr-2 cursor-pointer border w-max p-1 rounded-lg hover:bg-red">Update</span>
                   <span onClick={() => onImageRemove(index)} className="cursor-pointer border w-max p-1 rounded-lg hover:border-red ">Remove</span>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { boolean } from "zod";
+
 
 
 type Props={
@@ -10,9 +10,9 @@ type Props={
 
 const Switch:React.FC<Props> = ({showMap,setshowMap}) => {
 
-    const [toggle , setToggle ] = useState(true)
+   
 
-    const toggleClass = 'bg-red transform translate-x-6'
+   
 
         return ( 
             <div className="md:w-14 md:h-7 w-12 h-6 flex items-center bg-devider rounded-full p-1 cursor-pointer"

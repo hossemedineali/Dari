@@ -41,7 +41,7 @@ export const addPost =createRouter()
        async resolve({input,ctx}){
             
             
-                let res:any
+                
                 const addimage=async()=>{
                     let newimagesformat=''
                   
