@@ -16,6 +16,7 @@ import { useMode } from "../store/store";
 import {governorates,cities,MygovernorateType} from '../utils/cities'
 import Switch from "../components/ui/switch";
 import { trpc } from "../utils/trpc";
+import { motion } from "framer-motion";
 
 
 
@@ -179,6 +180,9 @@ import { trpc } from "../utils/trpc";
 
        
 
+
+
+
         type FProps={
             selectedMunicipality:MygovernorateType,
             selectedGovernorate:MygovernorateType
@@ -226,6 +230,8 @@ import { trpc } from "../utils/trpc";
 
 type Form =z.infer<typeof form>;
 
+
+
 const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
     const {data:sesssion}=useSession()
@@ -246,7 +252,7 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
 
     const [showMap,setshowMap]=useState(false)
-    const {  handleSubmit,setValue ,formState:{errors} } = useForm<Form>({ 
+    const {  handleSubmit,setValue,reset ,formState:{errors} } = useForm<Form>({ 
         resolver:zodResolver(form)
     });
 
@@ -283,7 +289,12 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
        
         }
         if (addPost.data){
-            router.replace('/')
+            setTimeout(() => {
+                router.replace('/')
+                
+            }, (2500));
+
+           // reset()
           }
        
 
@@ -598,6 +609,22 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
 <button type="submit" className="self-center bg-secondary1 p-1 hover:scale-105 active:scale-95 mb-1 rounded-3xl m-auto  ">{!addPost.isLoading? 'Add Announcment' : 'Sending data...'}</button>
     </div>
+
+
+
+
+{ addPost.isSuccess&&   <motion.div
+    initial={{x:'-100%'}}
+    animate={{x:'0'}}
+    transition={{duration:1}}
+    className=" flex  border border-red text-red-700 px-4 py-3 rounded absolute z-2000 bottom-20  left-0 bg-devider" role="alert">
+  <strong className="font-bold mr-1">Post added  </strong>
+  <span className="block sm:inline"> Rederecting to Home page.</span>
+</motion.div>}
+
+
+
+
                 </form>
             )
         }
