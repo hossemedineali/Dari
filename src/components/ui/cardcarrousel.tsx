@@ -1,10 +1,40 @@
 
+import {motion} from 'framer-motion'
+import {  useEffect, useRef, useState } from 'react';
+
+//const posts=[1,2,3,4,5,6,7,8,9,10]
+
+type Props={
+  children:JSX.Element
+}
+
+const CardCarrousel:React.FC <Props>= ({children}) => {
+
+  const [width, setwidth] = useState(0)
+  const carosel = useRef() as React.MutableRefObject<HTMLInputElement>;
 
 
-const CardCarrousel = () => {
-  return ( <div>
-    <h1>carrousel</h1>
-  </div> );
+
+  useEffect(()=>{
+    setwidth(carosel.current.scrollWidth -carosel.current.offsetWidth)
+  },[])
+
+
+
+  return (
+
+     <motion.div whileTap={{cursor:'grabbing'}} ref={carosel} className='flex gap-4  cursor-grab overflow-hidden w-full'> {/* carousel */}
+                
+                {/* inner-carrousel */}  
+      <motion.div  drag="x" dragConstraints={{right:0,left:-width}} className='flex  gap-4 ' >                           
+
+
+         
+          
+        {children}
+
+      </motion.div>
+  </motion.div> );
 }
  
 export default CardCarrousel;

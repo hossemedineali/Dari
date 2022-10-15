@@ -41,14 +41,35 @@ console.log(Posts)
 </div>
 
 
-<div>
-  <CardCarrousel/>
+<div className="flex justify-center  w-[95vw] ">
+  <CardCarrousel>
+    <>
+  <OneCard/>
+  <OneCard/>
+  <OneCard/>
+  <OneCard/>
+  <OneCard/>
+  <OneCard/>
+  <OneCard/>
+  <OneCard/>
+  <OneCard/>
+  <OneCard/>
+  <OneCard/>
+  <OneCard/>
+  <OneCard/>
+  <OneCard/>
+  <OneCard/>
+  <OneCard/>
+ 
+    </>
+  
+  </CardCarrousel>
 </div>
 <div className=" p-4 mt-12">
 <h1 className="border-b w-max border-devider ">Houses fo Sell </h1>
 <div>
 
-<OneCard/>
+
 
 
 </div>
@@ -61,7 +82,7 @@ console.log(Posts)
 <h1 className="border-b w-max border-devider ">Houses fo Rent </h1>
 <div>
 
-<OneCard/>
+
 </div>
 
 

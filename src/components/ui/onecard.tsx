@@ -1,4 +1,5 @@
-
+import Link from 'next/link'
+import {motion} from 'framer-motion'
 
 
 
@@ -45,8 +46,8 @@ const OneCard:React.FC = (props) => {
     console.log('images array',images)
     return (
        
-  <div className="relative mx-auto w-[250px]">
-	<a href="#" className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
+  <motion.div whileHover={{scale: 1.1,cursor:'pointer'}} className="relative mx-auto w-[250px] mb-4">
+	<Link href={'/'} className="cursor-pointer relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
 	  <div className="shadow p-4 rounded-lg bg-white">
 		<div className="flex justify-center relative rounded-lg overflow-hidden h-52">
 		  <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
@@ -100,8 +101,8 @@ const OneCard:React.FC = (props) => {
 
 
 	  </div>
-	</a>
-  </div>
+	</Link>
+  </motion.div>
 
  
 
