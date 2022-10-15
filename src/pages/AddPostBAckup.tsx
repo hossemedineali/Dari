@@ -16,6 +16,7 @@ import { useMode } from "../store/store";
 import {governorates,cities,MygovernorateType} from '../utils/cities'
 import Switch from "../components/ui/switch";
 import { trpc } from "../utils/trpc";
+import { motion } from "framer-motion";
 
 
 
@@ -29,8 +30,8 @@ import { trpc } from "../utils/trpc";
             lng:number|null
             },
             error? :{
-                code:number,
-                message:string
+                code?:number,
+                message?:string
             }
             
         }
@@ -179,6 +180,9 @@ import { trpc } from "../utils/trpc";
 
        
 
+
+
+
         type FProps={
             selectedMunicipality:MygovernorateType,
             selectedGovernorate:MygovernorateType
@@ -203,7 +207,7 @@ import { trpc } from "../utils/trpc";
     size:z.number({
         required_error:'required '
     }),
-    pricePer:z.string().default(''),
+    pricePer:z.string().default('mounth'),
     rooms:z.number({
         required_error:'required'
     }),
@@ -226,6 +230,18 @@ import { trpc } from "../utils/trpc";
 
 type Form =z.infer<typeof form>;
 
+type LocationType={
+    coords:{accuracy: number,
+        altitude: number|null, //|null
+        altitudeAccuracy: number |null, //|null
+        heading: number |null, //|null
+        latitude: number,
+        longitude: number,
+        speed: number|null  ,   // |null
+    }
+}
+
+
 const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
     const {data:sesssion}=useSession()
@@ -235,6 +251,7 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
     
 
     const [imagedata,setimagedata]=useState<Imgtype>([])
+
 
     
             const addPost =trpc.useMutation('add.addPost')
@@ -259,6 +276,14 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
                 isposition=true
             }
 
+                const checkmode =()=>{
+                    if (mode.mode =="Rent"){
+                        setValue('pricePer','')
+                    }
+                }
+                checkmode()
+               
+            
             const postData={
                 ...data,
                 
@@ -283,21 +308,30 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
        
         }
         if (addPost.data){
-            router.replace('/')
+            setTimeout(() => {
+                router.replace('/')
+                
+            }, (2500));
+
+          
           }
        
 
             
    
         const hundelFileInput=(imageList:ImageListType)=>{
-            const ttt=imagedata
+
+
+        setimagedata([])
+          
            setImages(imageList as never[])
 
             imageList.map(item=>{
-                ttt.push(item.dataURL as string)
-                
+               
+                setimagedata(prev=> [...prev,item.dataURL as string]
+                )
             })
-            setimagedata(ttt)
+
            
         }
             
@@ -320,19 +354,25 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
         });
     
     const getDevicePosition=()=>{
-        const onSuccess = (location :any) => {
+        const onSuccess = (location :LocationType) => {
+
+            console.log('debig location ' , location)
 
             setposition([location.coords.latitude,location.coords.longitude])
             
         
     };
 
-    const onError = (error:any) => {
+
+    const onError = (err: any) => {
+
+        console.log (err)
+
         setLocation({
             loaded: true,
             error: {
-                code: error.code,
-                message: error.message,
+                code: err.code ,
+                message: err.message,
             },
         });
     };
@@ -512,7 +552,7 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
                         multiple
                         value={images}
                         onChange={hundelFileInput}
-                        maxNumber={10}
+                        maxNumber={9}
                         >
         {({
           
@@ -534,7 +574,7 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
               {...dragProps}
               className="cursor-pointer border w-max p-1 rounded-lg hover:scale-95 active:scale-105"
               >
-              Add images(max 10)
+              Add images(9)
             </span>
             &nbsp;
            
@@ -547,11 +587,13 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
             {imageList.map((image, index) => (
                 <div key={index} className=" border p-2">
-                <Image src={image.dataURL as string} alt="" width="100" />
+                <Image src={image.dataURL as string} alt="" width={"150px"} height={"120px"} className="relative" />
                 
-                  <span  onClick={() => onImageUpdate(index)} className="mr-2 cursor-pointer border w-max p-1 rounded-lg hover:bg-red">Update</span>
+                <div>
+
+                  <span  onClick={() => onImageUpdate(index)} className="absloute mr-2 cursor-pointer border w-max p-1 rounded-lg hover:bg-red">Update</span>
                   <span onClick={() => onImageRemove(index)} className="cursor-pointer border w-max p-1 rounded-lg hover:border-red ">Remove</span>
-                
+                </div>
               </div>
             ))}
             </div>
@@ -598,6 +640,22 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
 <button type="submit" className="self-center bg-secondary1 p-1 hover:scale-105 active:scale-95 mb-1 rounded-3xl m-auto  ">{!addPost.isLoading? 'Add Announcment' : 'Sending data...'}</button>
     </div>
+
+
+
+
+{ addPost.isSuccess&&   <motion.div
+    initial={{x:'-100%'}}
+    animate={{x:'0'}}
+    transition={{duration:1}}
+    className=" flex  border border-red text-red-700 px-4 py-3 rounded absolute z-2000 bottom-20  left-0 bg-devider" role="alert">
+  <strong className="font-bold mr-1">Post added  </strong>
+  <span className="block sm:inline"> Rederecting to Home page.</span>
+</motion.div>}
+
+
+
+
                 </form>
             )
         }

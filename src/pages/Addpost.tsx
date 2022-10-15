@@ -30,8 +30,8 @@ import { motion } from "framer-motion";
             lng:number|null
             },
             error? :{
-                code:number,
-                message:string
+                code?:number,
+                message?:string
             }
             
         }
@@ -230,6 +230,16 @@ import { motion } from "framer-motion";
 
 type Form =z.infer<typeof form>;
 
+type LocationType={
+    coords:{accuracy: number,
+        altitude: number|null, //|null
+        altitudeAccuracy: number |null, //|null
+        heading: number |null, //|null
+        latitude: number,
+        longitude: number,
+        speed: number|null  ,   // |null
+    }
+}
 
 
 const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
@@ -238,12 +248,10 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
     const router=useRouter()
    
-    console.log('filter rendere')
     
 
     const [imagedata,setimagedata]=useState<Imgtype>([])
 
-    //console.log('image data on render :',imagedata)
 
     
             const addPost =trpc.useMutation('add.addPost')
@@ -301,7 +309,7 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
         }
         if (addPost.data){
             setTimeout(() => {
-              //  router.replace('/')
+                router.replace('/')
                 
             }, (2500));
 
@@ -315,11 +323,11 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
 
         setimagedata([])
-            let ttt :Imgtype=[]
+          
            setImages(imageList as never[])
 
             imageList.map(item=>{
-                ttt.push(item.dataURL as string)
+               
                 setimagedata(prev=> [...prev,item.dataURL as string]
                 )
             })
@@ -346,19 +354,25 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
         });
     
     const getDevicePosition=()=>{
-        const onSuccess = (location :any) => {
+        const onSuccess = (location :LocationType) => {
+
+            console.log('debig location ' , location)
 
             setposition([location.coords.latitude,location.coords.longitude])
             
         
     };
 
-    const onError = (error:any) => {
+
+    const onError = (err: any) => {
+
+        console.log (err)
+
         setLocation({
             loaded: true,
             error: {
-                code: error.code,
-                message: error.message,
+                code: err.code ,
+                message: err.message,
             },
         });
     };

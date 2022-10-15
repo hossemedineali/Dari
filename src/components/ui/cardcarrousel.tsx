@@ -1,4 +1,26 @@
-        
+
+
+
+const CardCarrousel = () => {
+  return ( <div>
+    <h1>carrousel</h1>
+  </div> );
+}
+ 
+export default CardCarrousel;
+
+
+
+
+
+
+
+
+
+
+
+
+/*         
         
         
 const CardCarrousel = () => {
@@ -85,4 +107,4 @@ const CardCarrousel = () => {
               );
         }
         
-        export default CardCarrousel;
+        export default CardCarrousel; */

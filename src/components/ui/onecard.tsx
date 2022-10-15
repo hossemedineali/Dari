@@ -36,7 +36,7 @@ type: "Buy"
 
 const OneCard:React.FC = (props) => {
 
-
+    console.log('propps from one card ',props)
 
 
    // console.log('image string : ',post.images)

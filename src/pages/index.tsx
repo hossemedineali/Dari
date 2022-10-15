@@ -14,7 +14,7 @@ import CardCarrousel from "../components/ui/cardcarrousel";
 const Home: NextPageWithLayout = () => {
 
   const Posts=trpc.useQuery(['getpost.getpost',{}])
-
+console.log(Posts)
 
 //console.log((Posts.data?Posts.data:'no data'))
 
