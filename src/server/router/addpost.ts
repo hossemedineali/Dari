@@ -45,7 +45,7 @@ export const addPost =createRouter()
                 const addimage=async()=>{
                     let newimagesformat=''
                   
-                    for (let i=0 ;i<input.images.length;i++){
+                    for (let i=0 ;i<input.images.length &&i<9;i++){
                         await   cloudinary.uploader.upload(input.images[i] as string).then((result)=>{
                             console.log(result.public_id)
                             if(i==input.images.length-1){

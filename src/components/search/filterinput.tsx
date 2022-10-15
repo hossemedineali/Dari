@@ -10,7 +10,7 @@ const FilterInput  = () => {
 
    
 
-    console.log('mode::: ',mode.mode)
+  
 
     const changemode=(e:string)=>{
         console.log(e)
@@ -18,7 +18,9 @@ const FilterInput  = () => {
     }
     
     return ( 
-    <div className=" drop-shadow-2xl relative mt-2 mb-4  ">
+    <div className="  relative mt-2 ">
+
+       
 
         <div className="flex flex-wrap ">
             <h3 onClick={()=>changemode('Buy')} id='Buy' className={`${mode.mode=='Buy'?'border-red':'border-black'}  w-1/3 text-center py-2 border-b-2 transition ease-in-out duration-1150 cursor-pointer` } >Buy</h3>
@@ -131,9 +133,7 @@ const FilterInput  = () => {
             
         </div>
 
-        <div className="h-10 md:hidden">
-
-        </div>
+      
         
 
     </div> );

@@ -2,6 +2,7 @@
 import { createRouter } from "./context";
 import superjson from "superjson";
 import { addPost } from "./addpost";
+import { getpost } from "./querrypost";
 
 
 
@@ -10,7 +11,9 @@ import { addPost } from "./addpost";
 export const appRouter = createRouter()
   .transformer(superjson)
  
-  .merge("add.",addPost);
+  .merge("add.",addPost)
+  .merge("getpost.",getpost)
+  ;
 
 
 

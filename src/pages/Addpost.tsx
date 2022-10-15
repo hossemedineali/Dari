@@ -207,7 +207,7 @@ import { motion } from "framer-motion";
     size:z.number({
         required_error:'required '
     }),
-    pricePer:z.string().default(''),
+    pricePer:z.string().default('mounth'),
     rooms:z.number({
         required_error:'required'
     }),
@@ -238,9 +238,12 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
     const router=useRouter()
    
+    console.log('filter rendere')
     
 
     const [imagedata,setimagedata]=useState<Imgtype>([])
+
+    //console.log('image data on render :',imagedata)
 
     
             const addPost =trpc.useMutation('add.addPost')
@@ -252,7 +255,7 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
 
     const [showMap,setshowMap]=useState(false)
-    const {  handleSubmit,setValue,reset ,formState:{errors} } = useForm<Form>({ 
+    const {  handleSubmit,setValue ,formState:{errors} } = useForm<Form>({ 
         resolver:zodResolver(form)
     });
 
@@ -265,6 +268,14 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
                 isposition=true
             }
 
+                const checkmode =()=>{
+                    if (mode.mode =="Rent"){
+                        setValue('pricePer','')
+                    }
+                }
+                checkmode()
+               
+            
             const postData={
                 ...data,
                 
@@ -290,25 +301,29 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
         }
         if (addPost.data){
             setTimeout(() => {
-                router.replace('/')
+              //  router.replace('/')
                 
             }, (2500));
 
-           // reset()
+          
           }
        
 
             
    
         const hundelFileInput=(imageList:ImageListType)=>{
-            const ttt=imagedata
+
+
+        setimagedata([])
+            let ttt :Imgtype=[]
            setImages(imageList as never[])
 
             imageList.map(item=>{
                 ttt.push(item.dataURL as string)
-                
+                setimagedata(prev=> [...prev,item.dataURL as string]
+                )
             })
-            setimagedata(ttt)
+
            
         }
             
@@ -523,7 +538,7 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
                         multiple
                         value={images}
                         onChange={hundelFileInput}
-                        maxNumber={10}
+                        maxNumber={9}
                         >
         {({
           
@@ -545,7 +560,7 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
               {...dragProps}
               className="cursor-pointer border w-max p-1 rounded-lg hover:scale-95 active:scale-105"
               >
-              Add images(max 10)
+              Add images(9)
             </span>
             &nbsp;
            
@@ -558,11 +573,13 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
 
             {imageList.map((image, index) => (
                 <div key={index} className=" border p-2">
-                <Image src={image.dataURL as string} alt="" width={"100px"} height={"100px"} />
+                <Image src={image.dataURL as string} alt="" width={"150px"} height={"120px"} className="relative" />
                 
-                  <span  onClick={() => onImageUpdate(index)} className="mr-2 cursor-pointer border w-max p-1 rounded-lg hover:bg-red">Update</span>
+                <div>
+
+                  <span  onClick={() => onImageUpdate(index)} className="absloute mr-2 cursor-pointer border w-max p-1 rounded-lg hover:bg-red">Update</span>
                   <span onClick={() => onImageRemove(index)} className="cursor-pointer border w-max p-1 rounded-lg hover:border-red ">Remove</span>
-                
+                </div>
               </div>
             ))}
             </div>

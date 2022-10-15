@@ -1,16 +1,22 @@
 
 import Head from "next/head";
 
-//import Navbar from "../components/layout/navbar";
 import Searchwrapper from "../components/search/searchwrapper";
 
-//import { trpc } from "../utils/trpc";
 import { NextPageWithLayout } from "./_app";
 
+import { trpc } from "../utils/trpc";
+import OneCard from "../components/ui/onecard";
+import CardCarrousel from "../components/ui/cardcarrousel";
 
 
 
 const Home: NextPageWithLayout = () => {
+
+  const Posts=trpc.useQuery(['getpost.getpost',{}])
+
+
+//console.log((Posts.data?Posts.data:'no data'))
 
 
   return (
@@ -24,11 +30,53 @@ const Home: NextPageWithLayout = () => {
       
      
         
-<main className="container mx-auto flex flex-col items-center  relative p-4">
-<div className="mt-0 w-full flex justify-center">
+<main className="  flex flex-col   relative top-24 ">
+
+<div className="mt-0 mx-auto w-full flex justify-center">
 
     <Searchwrapper/>
+
     
+    
+</div>
+
+
+<div>
+  <CardCarrousel/>
+</div>
+<div className=" p-4 mt-12">
+<h1 className="border-b w-max border-devider ">Houses fo Sell </h1>
+<div>
+
+<OneCard/>
+
+
+</div>
+
+
+
+</div>
+
+<div className=" p-4 mt-12">
+<h1 className="border-b w-max border-devider ">Houses fo Rent </h1>
+<div>
+
+<OneCard/>
+</div>
+
+
+
+</div>
+
+<div className=" p-4 mt-12">
+<h1 className="border-b w-max border-devider ">People looking for CoRental </h1>
+<div>
+
+<OneCard/>
+</div>
+
+
+
 </div>
 
  
