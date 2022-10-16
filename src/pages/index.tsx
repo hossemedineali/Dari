@@ -5,18 +5,16 @@ import Searchwrapper from "../components/search/searchwrapper";
 
 import { NextPageWithLayout } from "./_app";
 
-import { trpc } from "../utils/trpc";
-import OneCard from "../components/ui/onecard";
+
 import CardCarrousel from "../components/ui/cardcarrousel";
+
+
+
 
 
 
 const Home: NextPageWithLayout = () => {
 
-  //const Posts=trpc.useQuery(['getpost.getpost',{}])
-//console.log(Posts)
-
-//console.log((Posts.data?Posts.data:'no data'))
 
 
   return (
@@ -27,57 +25,36 @@ const Home: NextPageWithLayout = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      
+     
      
         
 <main className="  flex flex-col   relative top-24 ">
 
-<div className="mt-0 mx-auto w-full flex justify-center">
+<div className="mt-0  w-full flex justify-center">
 
     <Searchwrapper/>
-
-    
-    
+  
 </div>
 
 
-<div className="flex justify-center   w-[97vw] ">
-  <CardCarrousel/>
+
+
+  <h1>properties for sell : </h1>
+<div className="flex justify-center  md:w-[97vw] w-[93vw] ">
+  <CardCarrousel type={'sell'} />
 </div> 
-<div className=" p-4 mt-12">
-<h1 className="border-b w-max border-devider ">Houses fo Sell </h1>
-<div>
 
 
+<h1>properties for Rent : </h1>
+<div className="flex justify-center  md:w-[97vw] w-[93vw] ">
+  <CardCarrousel type={'Rent'} />
+</div> 
 
 
-</div>
-
-
-
-</div>
-
-<div className=" p-4 mt-12">
-<h1 className="border-b w-max border-devider ">Houses fo Rent </h1>
-<div>
-
-
-</div>
-
-
-
-</div>
-
-<div className=" p-4 mt-12">
-<h1 className="border-b w-max border-devider ">People looking for CoRental </h1>
-<div>
-
-<OneCard/>
-</div>
-
-
-
-</div>
+<h1>Poeoples looking fo CoRental : </h1>
+<div className="flex justify-center  md:w-[97vw] w-[93vw] ">
+  <CardCarrousel type={'CoRental'} />
+</div> 
 
  
 </main>
@@ -87,5 +64,5 @@ const Home: NextPageWithLayout = () => {
   );
 };
 
-export default Home;
+export default  Home;
 

@@ -1,16 +1,31 @@
 
-import {motion,useAnimation,useDragControls} from 'framer-motion'
+import {motion,useDragControls} from 'framer-motion'
 import { useEffect, useRef, useState } from 'react';
 import OneCard from './onecard';
+import { trpc } from "../../utils/trpc";
+import {data} from '../../components/ui/onecard'
 
-const posts=[1,2,3,4,5,6]
 
 
-const CardCarrousel = () => {
+type p={
+  type:string
+}
 
+const CardCarrousel:React.FC<p> = ({type}) => {
+
+
+  const data=trpc.useQuery(['getpost.getpostforindexpage',{posttype:type}])
+
+ 
+
+  
+
+  
   const controle=useDragControls()
 
 const [width, setwidth] = useState(0)
+
+
 const carosel = useRef() as React.MutableRefObject<HTMLInputElement>;
 
 
@@ -19,7 +34,6 @@ const [size,setsize]=useState(0)
 
 
 
-console.log('X ::',x)
 
 
 const hundelprevclick=()=>{
@@ -29,7 +43,6 @@ const hundelprevclick=()=>{
     return
   }else{
 
-    console.log('carosel.current.offsetWidth',carosel.current.offsetWidth,'carosel.current.scrollWidth',carosel.current.scrollWidth)
     setx(x=>x+300)
   }
   
@@ -41,32 +54,18 @@ const hundelnextclick=()=>{
  if(Math.abs(x)>size){
   return
  }
-
- 
-    console.log('carosel.current.offsetWidth',carosel.current.offsetWidth,'carosel.current.scrollWidth',carosel.current.scrollWidth)
-    setx(x=>x-300)
-   
- 
+    setx(x=>x-300) 
   }
 
-  function startDrag(event:any) {
-    controle.start(event, { snapToCursor: true })
-  }
 
-  
-
-
-
+ 
 
   useEffect(()=>{
 
     setsize(carosel.current.scrollWidth-carosel.current.offsetWidth )
-    console.log('size!!:',size)
-
-    console.log('calc !!!!', carosel.current.scrollWidth-carosel.current.offsetWidth +200)  
-
-    console.log('carosel.current.offsetWidth',carosel.current.offsetWidth,'carosel.current.scrollWidth',carosel.current.scrollWidth)
     setwidth(carosel.current.scrollWidth -carosel.current.offsetWidth)
+
+
   },[])
 
 
@@ -88,14 +87,14 @@ const hundelnextclick=()=>{
 
       
           
-         {posts.map((item,idex)=>{
+         {data.data?data.data.map((item,idex)=>{
            return(
             <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{scale: 1.1,cursor:'pointer'}} className=' w-[250px] '>  {/*  item  */}
          
-          <OneCard/>
+          <OneCard {...item as data}/>
           </motion.div>
           )
-        }) }
+        }):'' }
 
       </motion.div>
       

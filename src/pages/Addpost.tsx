@@ -165,7 +165,7 @@ import { motion } from "framer-motion";
                 <div style={{minHeight:'80vh'}} className=" rounded-lg border w-full  md:w-5/6  min-h-[50%]  m-auto overflow-hidden " >
                     <div  className="bg-primary1 rounded-t-lg  flex flex-wrap justify-around w-full mb-2 ">
                         
-                        <h3 onClick={()=>mode.setmode('Buy')} id='Buy' className={`${mode.mode=='Buy'?'border-red':'border-devider'}  w-1/3 text-center py-2 border-b-2 transition ease-in-out duration-1150 cursor-pointer` } >Sell</h3>
+                        <h3 onClick={()=>mode.setmode('Sell')} id='Buy' className={`${mode.mode=='Buy'?'border-red':'border-devider'}  w-1/3 text-center py-2 border-b-2 transition ease-in-out duration-1150 cursor-pointer` } >Sell</h3>
                         <h3 onClick={()=>mode.setmode('Rent')} id='Rent' className={`${mode.mode=='Rent'?'border-red':'border-devider'}  w-1/3 text-center py-2 border-b-2 transition ease-in-out duration-1150 cursor-pointer`  }>Rent</h3>
                         <h3 onClick={()=>mode.setmode('CoRental')}  className={`${mode.mode=='CoRental'?'border-red':'border-devider'}  w-1/3 text-center py-2 border-b-2 transition ease-in-out duration-1150 cursor-pointer` }>CoRental</h3>
                     </div>

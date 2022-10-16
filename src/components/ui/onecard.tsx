@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import {motion} from 'framer-motion'
-
+import Image from 'next/image'
 
 
 const post ={
@@ -31,27 +31,40 @@ type: "Buy"
 
 
 
+export interface data{
+    id: string,
+    images:string,
+    type: string
+    price:number,
+    pricePer:string,
+    governorate: string,
+    municipality:string,
+    rooms:number,
+    size:number,
+  }
 
 
 
 
-const OneCard:React.FC = (props) => {
-
-    //console.log('propps from one card ',props)
 
 
-   // console.log('image string : ',post.images)
+const OneCard:React.FC<data> = (item) => {
 
-    const images =post.images.split(',')
-    //console.log('images array',images)
+    
+
+    //const image=item.images.split(',')
+
+   
     return (
        
   <motion.div  whileHover={{scale: 1.1,cursor:'pointer'}} className="relative mx-auto w-[250px] mb-4">
-	<Link href={'/'} className="cursor-pointer relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
+	<Link href={'/'} className="cursor-pointer relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full h-full">
 	  <div className="shadow p-4 rounded-lg bg-white">
 		<div className="flex justify-center relative rounded-lg overflow-hidden h-52">
-		  <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
-			<div className="absolute inset-0 bg-black opacity-10"></div>
+		  <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full h-full">
+
+            <Image src={`https://res.cloudinary.com/dou8jjade/image/upload/v1665870510/mu9qsfxeyykkl66rtkgn.jpg`} width='250' height='250'/>
+			{/* <div className="absolute inset-0 bg-black opacity-10"></div> */}
 		  </div>
 
 		  <div className="absolute flex justify-center bottom-0 mb-3">
@@ -59,12 +72,12 @@ const OneCard:React.FC = (props) => {
 			 
               <p className="flex items-center font-medium text-gray-800">
 				<svg className="w-5 h-5 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M480,226.15V80a48,48,0,0,0-48-48H80A48,48,0,0,0,32,80V226.15C13.74,231,0,246.89,0,266.67V472a8,8,0,0,0,8,8H24a8,8,0,0,0,8-8V416H480v56a8,8,0,0,0,8,8h16a8,8,0,0,0,8-8V266.67C512,246.89,498.26,231,480,226.15ZM64,192a32,32,0,0,1,32-32H208a32,32,0,0,1,32,32v32H64Zm384,32H272V192a32,32,0,0,1,32-32H416a32,32,0,0,1,32,32ZM80,64H432a16,16,0,0,1,16,16v56.9a63.27,63.27,0,0,0-32-8.9H304a63.9,63.9,0,0,0-48,21.71A63.9,63.9,0,0,0,208,128H96a63.27,63.27,0,0,0-32,8.9V80A16,16,0,0,1,80,64ZM32,384V266.67A10.69,10.69,0,0,1,42.67,256H469.33A10.69,10.69,0,0,1,480,266.67V384Z"></path></svg>
-				3 + 1
+				{item.rooms}
 			  </p>
 
 			  <p className="flex items-center font-medium text-gray-800">
               <svg className="inline-block w-5 h-5 xl:w-4 xl:h-4 mr-3 fill-current text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M399.959 170.585c-4.686 4.686-4.686 12.284 0 16.971L451.887 239H60.113l51.928-51.444c4.686-4.686 4.686-12.284 0-16.971l-7.071-7.07c-4.686-4.686-12.284-4.686-16.97 0l-84.485 84c-4.686 4.686-4.686 12.284 0 16.971l84.485 84c4.686 4.686 12.284 4.686 16.97 0l7.071-7.07c4.686-4.686 4.686-12.284 0-16.971L60.113 273h391.773l-51.928 51.444c-4.686 4.686-4.686 12.284 0 16.971l7.071 7.07c4.686 4.686 12.284 4.686 16.97 0l84.485-84c4.687-4.686 4.687-12.284 0-16.971l-84.485-84c-4.686-4.686-12.284-4.686-16.97 0l-7.07 7.071z"></path></svg>
-              120 m2
+              {item.size} m2
 			  </p>
 
 			</div>
@@ -85,11 +98,11 @@ const OneCard:React.FC = (props) => {
                     For sell
                 </h2>
                 <p className="mt-2 text-sm text-gray-800 line-clamp-1" title="New York, NY 10004, United States">
-                    Metlaoui -Gafsa
+                    {item.municipality} -{item.governorate}
                 </p>
             </div>
             <div className="mt-4">
-                <p>350 Tnd</p>
+                <p>{item.price} Tnd</p>
             </div>
 
 
