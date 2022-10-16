@@ -14,6 +14,8 @@ type p={
 const CardCarrousel:React.FC<p> = ({type}) => {
 
 
+  console.count( type )
+
   const data=trpc.useQuery(['getpost.getpostforindexpage',{posttype:type}])
 
  
@@ -71,7 +73,7 @@ const hundelnextclick=()=>{
 
 
   return (
-    <div className='w-full flex '>
+    <div className='w-full flex my-5 '>
 
 <button className=' rounded-lg bg-devider hidden md:block' onClick={hundelprevclick}>
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -79,17 +81,17 @@ const hundelnextclick=()=>{
 </svg>
 </button>
 
-     <motion.div whileTap={{cursor:'grabbing'}} ref={carosel} className=' gap-4  cursor-grab overflow-hidden w-full'> {/* carousel */}
+     <motion.div  ref={carosel} className=' gap-4   overflow-hidden w-full'> {/* carousel */}
                 
                 {/* inner-carrousel */}  
-      <motion.div  drag="x" dragConstraints={{right:0,left:-width}} dragControls={controle} className='flex  gap-4 ' >                           
+      <motion.div  dragConstraints={{right:0,left:-width}} dragControls={controle} className='  gap-4 hidden md:flex' >                           
 
 
       
           
          {data.data?data.data.map((item,idex)=>{
            return(
-            <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{scale: 1.1,cursor:'pointer'}} className=' w-[250px] '>  {/*  item  */}
+            <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{y:-10}} className=' w-[250px] flex  '>  {/*  item  */}
          
           <OneCard {...item as data}/>
           </motion.div>
@@ -97,6 +99,28 @@ const hundelnextclick=()=>{
         }):'' }
 
       </motion.div>
+
+
+
+
+
+      <motion.div  drag="x" dragConstraints={{right:0,left:-width}} dragControls={controle} className='  gap-4  md:hidden flex' >                           
+
+
+      
+          
+{data.data?data.data.map((item,idex)=>{
+  return(
+   <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{y:10}} className=' w-[250px] '>  {/*  item  */}
+
+ <OneCard {...item as data}/>
+ </motion.div>
+ )
+}):'' }
+
+</motion.div>
+
+
       
   </motion.div>
       <button className=' rounded-lg bg-devider hidden md:block' onClick={hundelnextclick}>

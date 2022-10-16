@@ -648,9 +648,18 @@ const Filters:React.FC<FProps>=({selectedMunicipality,selectedGovernorate})=>{
     initial={{x:'-100%'}}
     animate={{x:'0'}}
     transition={{duration:1}}
-    className=" flex  border border-red text-red-700 px-4 py-3 rounded absolute z-2000 bottom-20  left-0 bg-devider" role="alert">
+    className=" flex  border border-red text-red-700 px-4 py-3 rounded absolute z-2000 bottom-40  left-0 bg-devider" role="alert">
   <strong className="font-bold mr-1">Post added  </strong>
   <span className="block sm:inline"> Rederecting to Home page.</span>
+</motion.div>}
+
+{ addPost.isError&&   <motion.div
+    initial={{x:'-100%'}}
+    animate={{x:'0'}}
+    transition={{duration:1}}
+    className=" flex flex-col md:flex-row border border-red text-red-700 px-4 py-3 rounded absolute z-2000 bottom-20  left-0 bg-devider" role="alert">
+  <strong className="font-bold mr-1">Oops , somthing went wrong  </strong>
+  <span className="block sm:inline"> Please retry again later</span>
 </motion.div>}
 
 

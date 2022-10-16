@@ -15,9 +15,7 @@ export const getpost =createRouter()
                 take:10,
                 where:{
                     
-                    type:{
-                        contains:input.posttype
-                    },
+                    type:input.posttype,
                 },
                 select:{
                     type:true,

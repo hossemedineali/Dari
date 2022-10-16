@@ -28,7 +28,7 @@ const Home: NextPageWithLayout = () => {
      
      
         
-<main className="  flex flex-col   relative top-24 ">
+<main className="  flex flex-col   relative top-24 md:px-3 lg:px:6 ">
 
 <div className="mt-0  w-full flex justify-center">
 
@@ -40,19 +40,19 @@ const Home: NextPageWithLayout = () => {
 
 
   <h1>properties for sell : </h1>
-<div className="flex justify-center  md:w-[97vw] w-[93vw] ">
+<div className="flex justify-center  md:w-[96vw] w-[93vw] ">
   <CardCarrousel type={'sell'} />
 </div> 
 
 
 <h1>properties for Rent : </h1>
-<div className="flex justify-center  md:w-[97vw] w-[93vw] ">
+<div className="flex justify-center  md:w-[96vw] w-[93vw] ">
   <CardCarrousel type={'Rent'} />
 </div> 
 
 
 <h1>Poeoples looking fo CoRental : </h1>
-<div className="flex justify-center  md:w-[97vw] w-[93vw] ">
+<div className="flex justify-center  md:w-[96vw] w-[93vw] ">
   <CardCarrousel type={'CoRental'} />
 </div> 
 

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import {motion} from 'framer-motion'
 import Image from 'next/image'
+import Tooltip from '../layout/tooltip'
 
 
 
@@ -29,22 +30,19 @@ const OneCard:React.FC<data> = (item) => {
 
     const image=item.images.split(',')
 
-   //const url ='https://res.cloudinary.com/dou8jjade/image/upload/v1665870510/'+image+'.jpg'
 
    const url="https://res.cloudinary.com/dou8jjade/image/upload/v1665870510/"+image[0]+".jpg"
 
-   console.log ("url",url)
 
    
     return (
        
-  <motion.div  whileHover={{scale: 1.1,cursor:'pointer'}} className="relative mx-auto w-[250px] mb-4">
-	<Link href={'/'} className="cursor-pointer relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full h-full">
-	  <div className="shadow p-4 rounded-lg bg-white">
-		<div className="flex justify-center relative rounded-lg overflow-hidden h-52">
+  <motion.div  whileHover={{scale: 1.1}} className="relative mx-auto w-[270px] mb-4 ">
+	  <div className="shadow p-4 rounded-lg bg-white ">
+		<div className="flex justify-center relative rounded-lg overflow-hidden h-64 ">
 		  <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full h-full">
 
-            <Image src={url} width='250' height='250'/>
+            <Image src={url} width='250' height='250' className='aspect-square'/>
 			{/* <div className="absolute inset-0 bg-black opacity-10"></div> */}
 		  </div>
 
@@ -52,7 +50,7 @@ const OneCard:React.FC<data> = (item) => {
 			<div className="flex bg-white px-4 py-1 space-x-5 rounded-lg overflow-hidden shadow">
 			 
               <p className="flex items-center font-medium text-gray-800">
-				<svg className="w-5 h-5 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M480,226.15V80a48,48,0,0,0-48-48H80A48,48,0,0,0,32,80V226.15C13.74,231,0,246.89,0,266.67V472a8,8,0,0,0,8,8H24a8,8,0,0,0,8-8V416H480v56a8,8,0,0,0,8,8h16a8,8,0,0,0,8-8V266.67C512,246.89,498.26,231,480,226.15ZM64,192a32,32,0,0,1,32-32H208a32,32,0,0,1,32,32v32H64Zm384,32H272V192a32,32,0,0,1,32-32H416a32,32,0,0,1,32,32ZM80,64H432a16,16,0,0,1,16,16v56.9a63.27,63.27,0,0,0-32-8.9H304a63.9,63.9,0,0,0-48,21.71A63.9,63.9,0,0,0,208,128H96a63.27,63.27,0,0,0-32,8.9V80A16,16,0,0,1,80,64ZM32,384V266.67A10.69,10.69,0,0,1,42.67,256H469.33A10.69,10.69,0,0,1,480,266.67V384Z"></path></svg>
+				<svg className="w-5 h-5  fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M480,226.15V80a48,48,0,0,0-48-48H80A48,48,0,0,0,32,80V226.15C13.74,231,0,246.89,0,266.67V472a8,8,0,0,0,8,8H24a8,8,0,0,0,8-8V416H480v56a8,8,0,0,0,8,8h16a8,8,0,0,0,8-8V266.67C512,246.89,498.26,231,480,226.15ZM64,192a32,32,0,0,1,32-32H208a32,32,0,0,1,32,32v32H64Zm384,32H272V192a32,32,0,0,1,32-32H416a32,32,0,0,1,32,32ZM80,64H432a16,16,0,0,1,16,16v56.9a63.27,63.27,0,0,0-32-8.9H304a63.9,63.9,0,0,0-48,21.71A63.9,63.9,0,0,0,208,128H96a63.27,63.27,0,0,0-32,8.9V80A16,16,0,0,1,80,64ZM32,384V266.67A10.69,10.69,0,0,1,42.67,256H469.33A10.69,10.69,0,0,1,480,266.67V384Z"></path></svg>
 				{item.rooms}
 			  </p>
 
@@ -64,26 +62,38 @@ const OneCard:React.FC<data> = (item) => {
 			</div>
 		  </div>
 
-		  <span className="absolute top-0 right-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-red-500 text-sm font-medium text-white select-none">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+		  <span className="absolute  top-0 right-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-red-500 text-sm font-medium text-white  select-none ">
+          <Tooltip text='add to favorites'>
+
+          <svg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="cursor-pointer w-6 h-6 ">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
             </svg>
+          </Tooltip>
 
 		  </span>
 		</div>
 
-        <div className="flex justify-between">
+
+        <div className="flex cursor-pointer  md:cursor-auto justify-between">
 
             <div className="mt-4">
+                <div className='flex gap-1'>
+
                 <h2 className="font-medium text-base md:text-lg text-gray-800 line-clamp-1" title="New York">
-                    For sell
+                    For {item.type} 
                 </h2>
+        <Link href={'/Posts/'+item.id} className="cursor-pointer relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full h-full">
+                    <motion.svg whileHover={{scale:1.2}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="cursor-pointer w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+</motion.svg>
+	   </Link>
+      </div>
                 <p className="mt-2 text-sm text-gray-800 line-clamp-1" title="New York, NY 10004, United States">
                     {item.municipality} -{item.governorate}
                 </p>
             </div>
             <div className="mt-4">
-                <p>{item.price} Tnd</p>
+                <p> {item.price} <span className='text-xs'>Tnd</span> {item.type=='Rent'&& item.pricePer&& <span>/{item.pricePer}</span>} </p>
             </div>
 
 
@@ -95,7 +105,6 @@ const OneCard:React.FC<data> = (item) => {
 
 
 	  </div>
-	</Link>
   </motion.div>
 
  
