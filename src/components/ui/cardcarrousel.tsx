@@ -1,40 +1,112 @@
 
-import {motion} from 'framer-motion'
-import {  useEffect, useRef, useState } from 'react';
+import {motion,useAnimation,useDragControls} from 'framer-motion'
+import { useEffect, useRef, useState } from 'react';
+import OneCard from './onecard';
 
-//const posts=[1,2,3,4,5,6,7,8,9,10]
+const posts=[1,2,3,4,5,6]
 
-type Props={
-  children:JSX.Element
+
+const CardCarrousel = () => {
+
+  const controle=useDragControls()
+
+const [width, setwidth] = useState(0)
+const carosel = useRef() as React.MutableRefObject<HTMLInputElement>;
+
+
+const [x,setx]=useState(0)
+const [size,setsize]=useState(0)
+
+
+
+console.log('X ::',x)
+
+
+const hundelprevclick=()=>{
+
+
+  if(Math.abs(x)<=0){
+    return
+  }else{
+
+    console.log('carosel.current.offsetWidth',carosel.current.offsetWidth,'carosel.current.scrollWidth',carosel.current.scrollWidth)
+    setx(x=>x+300)
+  }
+  
+   
 }
 
-const CardCarrousel:React.FC <Props>= ({children}) => {
+const hundelnextclick=()=>{
 
-  const [width, setwidth] = useState(0)
-  const carosel = useRef() as React.MutableRefObject<HTMLInputElement>;
+ if(Math.abs(x)>size){
+  return
+ }
+
+ 
+    console.log('carosel.current.offsetWidth',carosel.current.offsetWidth,'carosel.current.scrollWidth',carosel.current.scrollWidth)
+    setx(x=>x-300)
+   
+ 
+  }
+
+  function startDrag(event:any) {
+    controle.start(event, { snapToCursor: true })
+  }
+
+  
+
 
 
 
   useEffect(()=>{
+
+    setsize(carosel.current.scrollWidth-carosel.current.offsetWidth )
+    console.log('size!!:',size)
+
+    console.log('calc !!!!', carosel.current.scrollWidth-carosel.current.offsetWidth +200)  
+
+    console.log('carosel.current.offsetWidth',carosel.current.offsetWidth,'carosel.current.scrollWidth',carosel.current.scrollWidth)
     setwidth(carosel.current.scrollWidth -carosel.current.offsetWidth)
   },[])
 
 
 
   return (
+    <div className='w-full flex '>
 
-     <motion.div whileTap={{cursor:'grabbing'}} ref={carosel} className='flex gap-4  cursor-grab overflow-hidden w-full'> {/* carousel */}
+<button className=' rounded-lg bg-devider hidden md:block' onClick={hundelprevclick}>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+</svg>
+</button>
+
+     <motion.div whileTap={{cursor:'grabbing'}} ref={carosel} className=' gap-4  cursor-grab overflow-hidden w-full'> {/* carousel */}
                 
                 {/* inner-carrousel */}  
-      <motion.div  drag="x" dragConstraints={{right:0,left:-width}} className='flex  gap-4 ' >                           
+      <motion.div  drag="x" dragConstraints={{right:0,left:-width}} dragControls={controle} className='flex  gap-4 ' >                           
 
 
-         
+      
           
-        {children}
+         {posts.map((item,idex)=>{
+           return(
+            <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{scale: 1.1,cursor:'pointer'}} className=' w-[250px] '>  {/*  item  */}
+         
+          <OneCard/>
+          </motion.div>
+          )
+        }) }
 
       </motion.div>
-  </motion.div> );
+      
+  </motion.div>
+      <button className=' rounded-lg bg-devider hidden md:block' onClick={hundelnextclick}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-full ">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+</svg>
+</button>
+        </div>
+   );
 }
  
 export default CardCarrousel;

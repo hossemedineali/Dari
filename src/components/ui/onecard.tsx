@@ -37,16 +37,16 @@ type: "Buy"
 
 const OneCard:React.FC = (props) => {
 
-    console.log('propps from one card ',props)
+    //console.log('propps from one card ',props)
 
 
    // console.log('image string : ',post.images)
 
     const images =post.images.split(',')
-    console.log('images array',images)
+    //console.log('images array',images)
     return (
        
-  <motion.div whileHover={{scale: 1.1,cursor:'pointer'}} className="relative mx-auto w-[250px] mb-4">
+  <motion.div  whileHover={{scale: 1.1,cursor:'pointer'}} className="relative mx-auto w-[250px] mb-4">
 	<Link href={'/'} className="cursor-pointer relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
 	  <div className="shadow p-4 rounded-lg bg-white">
 		<div className="flex justify-center relative rounded-lg overflow-hidden h-52">
@@ -71,8 +71,8 @@ const OneCard:React.FC = (props) => {
 		  </div>
 
 		  <span className="absolute top-0 right-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-red-500 text-sm font-medium text-white select-none">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
             </svg>
 
 		  </span>

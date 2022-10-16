@@ -13,8 +13,8 @@ import CardCarrousel from "../components/ui/cardcarrousel";
 
 const Home: NextPageWithLayout = () => {
 
-  const Posts=trpc.useQuery(['getpost.getpost',{}])
-console.log(Posts)
+  //const Posts=trpc.useQuery(['getpost.getpost',{}])
+//console.log(Posts)
 
 //console.log((Posts.data?Posts.data:'no data'))
 
@@ -41,30 +41,9 @@ console.log(Posts)
 </div>
 
 
-<div className="flex justify-center  w-[95vw] ">
-  <CardCarrousel>
-    <>
-  <OneCard/>
-  <OneCard/>
-  <OneCard/>
-  <OneCard/>
-  <OneCard/>
-  <OneCard/>
-  <OneCard/>
-  <OneCard/>
-  <OneCard/>
-  <OneCard/>
-  <OneCard/>
-  <OneCard/>
-  <OneCard/>
-  <OneCard/>
-  <OneCard/>
-  <OneCard/>
- 
-    </>
-  
-  </CardCarrousel>
-</div>
+<div className="flex justify-center   w-[97vw] ">
+  <CardCarrousel/>
+</div> 
 <div className=" p-4 mt-12">
 <h1 className="border-b w-max border-devider ">Houses fo Sell </h1>
 <div>
