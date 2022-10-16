@@ -3,31 +3,6 @@ import {motion} from 'framer-motion'
 import Image from 'next/image'
 
 
-const post ={
-    Balcony: true,
-    Garage: true,
-    OutdoorArea: true,
-    SolarHotwater: true,
-    SwimmingPool: true,
-    UndercoverParking: true,
-    airConditioning: true,
-auther: "cl8ve4j6s0023bwu6lxzz70jg",
-date: 'Sat Oct 15 2022 01:44:18 GMT+0100 (Central European Standard Time)' ,
-description: "this is a fake post ...",
-governorate: "Ariana",
-id: "cl9974ovu0000u6lwacr989lh",
-images: "iphq7rhtqsmvkr5k5qcn,z8yna9zjqxsh0fmr1ova,omfezngbj8cs4zi1kc2g",
-isposition: true,
-lat: 10.18869092035217,
-lng:36.85801789961968,
-municipality: "Ariana",
-price: 220,
-pricePer: "",
-rooms: 2,
-size: 215,
-solarPanels: true,
-type: "Buy"
-}
 
 
 
@@ -52,7 +27,13 @@ const OneCard:React.FC<data> = (item) => {
 
     
 
-    //const image=item.images.split(',')
+    const image=item.images.split(',')
+
+   //const url ='https://res.cloudinary.com/dou8jjade/image/upload/v1665870510/'+image+'.jpg'
+
+   const url="https://res.cloudinary.com/dou8jjade/image/upload/v1665870510/"+image[0]+".jpg"
+
+   console.log ("url",url)
 
    
     return (
@@ -63,7 +44,7 @@ const OneCard:React.FC<data> = (item) => {
 		<div className="flex justify-center relative rounded-lg overflow-hidden h-52">
 		  <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full h-full">
 
-            <Image src={`https://res.cloudinary.com/dou8jjade/image/upload/v1665870510/mu9qsfxeyykkl66rtkgn.jpg`} width='250' height='250'/>
+            <Image src={url} width='250' height='250'/>
 			{/* <div className="absolute inset-0 bg-black opacity-10"></div> */}
 		  </div>
 
