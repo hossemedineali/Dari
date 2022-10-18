@@ -4,9 +4,10 @@ import {  Useauth } from "../../store/store";
 
 const SigninModal = () => {
 
+    console.log('signin modal')
     const auth=Useauth()
     return ( 
-        <div className=" absolute z-10 w-full  h-24 top-28 right-0 backdrop backdrop-grayscale">
+        <div className=" absolute z-10 w-full  h-24 top-24 right-0 backdrop backdrop-grayscale">
 
             <div className="lg:w-1/5 md:w-2/5  w-4/5 h-full gap-4  text-center border rounded-lg bg-primary2 m-auto">
                 <svg onClick={()=>auth.setToogleShow(false)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 cursor-pointer">

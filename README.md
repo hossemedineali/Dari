@@ -7,7 +7,7 @@ and also look for Co rental
 
 10/16/2022
 
-- [] add post error handling
+-[X] add post error handling
 
 -[] add fetching user id and user favirites and own post and set them to global state
 

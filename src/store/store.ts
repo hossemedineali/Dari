@@ -20,6 +20,10 @@ type authState={
 }
 
 
+
+
+
+
 const Useauth=create<authState>((set)=>({
     
     show:false,
@@ -43,6 +47,9 @@ const useMode=create<ModeState>((set)=>({
         }))
     },
 }))
+
+
+
 const useShowFilter=create<ShowFilterState>((set)=>({
     showMobile:false,
     showDesktop:false,
@@ -57,4 +64,49 @@ const useShowFilter=create<ShowFilterState>((set)=>({
 
 
 
- export{  useMode,useShowFilter,Useauth};
+interface filterstate {
+    form:{
+
+        municipality?:string,
+        type?:string
+        governorate?:string,
+        posttype?:string,
+        price?:{
+            gt?:number,
+            lt?:number
+        },
+        rooms?:{
+            gt?:number,
+        lt?:number
+    },
+   
+    size?:{
+        gt?:number
+    },
+    Garage?: boolean,
+    Balcony?: boolean,
+    OutdoorArea?: boolean,
+    SwimmingPool?: boolean,
+    UndercoverParking?: boolean,
+    airConditioning?: boolean,
+    solarPanels?: boolean,
+    SolarHotwater?: boolean,
+ },
+    
+    setstate:(value:{})=>void,
+}
+
+const usefilter =create<filterstate>((set)=>({
+    form:{},
+    
+    setstate(value) {
+        set(()=>({
+               
+        form:value
+        }))
+    },
+}))
+
+
+
+ export{  useMode,useShowFilter,Useauth,usefilter};

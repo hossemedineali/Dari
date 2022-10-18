@@ -1,11 +1,12 @@
 export interface MygovernorateType {
     value?:string
     ,label:string,
+    gov?:string,
     position?:[number,number]
 }
 
 
-interface MyType {
+export interface MyType {
     [key: string]: MygovernorateType[];
 }
 
@@ -15,12 +16,12 @@ interface MyType {
 
 export const cities: MyType  ={
     //A
-   'Ariana':[{value:'Ariana',label:'Ariana',position:[36.806496,10.181532]},{value:'Ettadhamen-Mnihla',label: 'Ettadhamen-Mnihla',position:[36.806496,10.181532]}, {value:'Kalàt el-Andalous',label:'Kalàt el-Andalous',position:[36.806496,10.181532]},{value:'La Soukra',label:'La Soukra',position:[36.806496,10.181532]},{value:'Raoued',label:'Raoued',position:[36.806496,10.181532]}, {value:'Sidi Thabet',label:'Sidi Thabet',position:[36.806496,10.181532]}],
+   'Ariana':[{value:'ariana',label:'Ariana',position:[36.806496,10.181532],gov:'Ariana'},{value:'ettadhamen-Mnihla',label: 'Ettadhamen-Mnihla',position:[36.806496,10.181532],gov:'Ariana'}, {value:'kalàt el-Andalous',label:'Kalàt el-Andalous',position:[36.806496,10.181532],gov:'Ariana'},{value:'la Soukra',label:'La Soukra',position:[36.806496,10.181532],gov:'Ariana'},{value:'raoued',label:'Raoued',position:[36.806496,10.181532],gov:'Ariana'}, {value:'sidi Thabet',label:'Sidi Thabet',position:[36.806496,10.181532],gov:'Ariana'}],
     //B
-    'Ben Arous':[{value:'Ben Arous',label:'Ben Arous',position:[36.806496,10.181532]}, {value:'Bou Mhel el-Bassatine',label:'Bou Mhel el-Bassatine',position:[36.806496,10.181532]},{value:'Ezzahra',label:'Ezzahra',position:[36.806496,10.181532]},{value:'El Mourouj',label:'El Mourouj',position:[36.806496,10.181532]},{value:'Hammam Chott',label:'Hammam Chott',position:[36.806496,10.181532]},{value:'Hammam Lif',label:'Hammam Lif',position:[36.806496,10.181532]},{value: 'Khalidia',label:'Khalidia',position:[36.806496,10.181532]}, {value:'Mégrine',label:'Mégrine',position:[36.806496,10.181532]}, {value:'Mohamedia-Fouchana',label:'Mohamedia-Fouchana',position:[36.806496,10.181532]},{value:'Mornag',label:'Mornag',position:[36.806496,10.181532]} ,{value:'Radès',label:'Radès',position:[36.806496,10.181532]}],
+    'Ben Arous':[{value:'ben arous',label:'Ben Arous',position:[36.806496,10.181532],gov:'Ben Arous'}, {value:'bou mhel el-bassatine',label:'Bou Mhel el-Bassatine',position:[36.806496,10.181532],gov:'Ben Arous'},{value:'ezzahra',label:'Ezzahra',position:[36.806496,10.181532],gov:'Ben Arous'},{value:'el mourouj',label:'El Mourouj',position:[36.806496,10.181532],gov:'Ben Arous'},{value:'hammam chott',label:'Hammam Chott',position:[36.806496,10.181532],gov:'Ben Arous'},{value:'hammam lif',label:'Hammam Lif',position:[36.806496,10.181532],gov:'Ben Arous'},{value: 'khalidia',label:'Khalidia',position:[36.806496,10.181532],gov:'Ben Arous'}, {value:'megrine',label:'Mégrine',position:[36.806496,10.181532],gov:'Ben Arous'}, {value:'mohamedia-fouchana',label:'Mohamedia-Fouchana',position:[36.806496,10.181532],gov:'Ben Arous'},{value:'mornag',label:'Mornag',position:[36.806496,10.181532],gov:'Ben Arous'} ,{value:'rades',label:'Radès',position:[36.806496,10.181532],gov:'Ben Arous'}],
     
     
-    'Béja':[{value:'Béja',label:'Béja',position:[36.806496,10.181532]},{value:'El Maâgoula',label:'El Maâgoula',position:[36.806496,10.181532]},{value:'Goubellat',label:'Goubellat',position:[36.806496,10.181532]},{value:'Majaz al Bab',label:'Majaz al Bab',position:[36.806496,10.181532]},{value:'Nefza',label:'Nefza',position:[36.806496,10.181532]},{value:'Testour',label:'Testour',position:[36.806496,10.181532]},{value:'Téboursouk',label:'Téboursouk',position:[36.806496,10.181532]},{value:'Zahret Medien',label:'Zahret Medien',position:[36.806496,10.181532]}],
+    'Béja':[{value:'béja',label:'Béja',position:[36.806496,10.181532],gov:'Béja'},{value:'el maagoula',label:'El Maâgoula',position:[36.806496,10.181532],gov:'Béja'},{value:'goubellat',label:'Goubellat',position:[36.806496,10.181532],gov:'Béja'},{value:'majaz al bab',label:'Majaz al Bab',position:[36.806496,10.181532],gov:'Béja'},{value:'nefza',label:'Nefza',position:[36.806496,10.181532],gov:'Béja'},{value:'testour',label:'Testour',position:[36.806496,10.181532],gov:'Béja'},{value:'teboursouk',label:'Téboursouk',position:[36.806496,10.181532],gov:'Béja'},{value:'zahret medien',label:'ahret Medien',position:[36.806496,10.181532],gov:'Béja'}],
   
     'Bizerte':[{value:'Bizerte',label:'Bizerte',position:[36.806496,10.181532]},{value:'Aousj',label:'Aousj',position:[36.806496,10.181532]},{value:'El Alia',label:'El Alia',position:[36.806496,10.181532]},{value:'Ghar al Mil',label:'Ghar al Mil',position:[36.806496,10.181532]},{value:'Sejnan',label:'Sejnan',position:[36.806496,10.181532]},{value:'Mateur',label:'Mateur',position:[36.806496,10.181532]},{value:'Menzel Abderrahmane',label:'Menzel Abderrahmane',position:[36.806496,10.181532]},{value:'Menzel Bourguiba',label:'Menzel Bourguiba',position:[36.806496,10.181532]},{value:'Menzel Jemil',label:'Menzel Jemil',position:[36.806496,10.181532]},{value:'Metlin',label:'Metlin',position:[36.806496,10.181532]},{value:'Raf Raf',label:'Raf Raf',position:[36.806496,10.181532]}, {value:'Ras Jebel',label:'Ras Jebel',position:[36.806496,10.181532]},{value:'Tinja',label:'Tinja',position:[36.806496,10.181532]}],
     //G
@@ -117,10 +118,50 @@ export const governorates:MygovernorateType[] =[
 ]
 
 
+export interface Groupeditem{
+    label:string,options:MygovernorateType[]
+}
+
+
+let groupedcities:Groupeditem[]=[]
+
+
+Object.keys(cities).map(key=>{
+    groupedcities.push({label:key,options :cities[key] as MygovernorateType[]})
+})
+
+
+export {groupedcities}
 
 
 
+interface somef{
+    (e:{label:string,value:string},sting:string):boolean
+}
 
+export const filterOption:somef = ({ label, value }, string) => {
+    // default search
+    if (label.includes(string) || value.includes(string as never)) return true;
+  
+    // check if a group as the filter string as label
+    const groupOptions = groupedcities.filter((group) =>
+      group.label.toLocaleLowerCase().includes(string)
+    );
+  
+    if (groupOptions) {
+      for (const groupOption of groupOptions) {
+        // Check if current option is in group
+        const option = groupOption.options.find((opt) => {
+            const valuelower=opt.value?.toLowerCase()
+            valuelower?.includes(value.toLowerCase())});
+        if (option) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+  
 
 
 

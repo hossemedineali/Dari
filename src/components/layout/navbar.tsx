@@ -7,7 +7,9 @@ import { useRouter } from 'next/router'
 
 import { useSession, signIn, signOut } from "next-auth/react"
 import { Useauth } from "../../store/store";
+import SigninModal from "./signinModal";
 
+import Link from 'next/link'
 const links=[
   'Buy','Rent','Find coRental'
 ]
@@ -46,8 +48,9 @@ const Navbar = () => {
 {togglemenu&&<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 cursor-pointer" onClick={toggle}>
   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
 </svg>}
-
-    <h1 className="text-2xl pl-6 md:w-1/5 flex justify-center w-2/5 m-auto ">Dari</h1>
+    <Link href='/'>
+    <h1 className="text-2xl pl-6 md:w-1/5 flex justify-center cursor-pointer w-2/5 m-auto ">Dari</h1>
+    </Link>
     
     <ul className="sm:flex flex-wrap justify-evenly w-4/5 hidden ">
       
@@ -76,7 +79,7 @@ const Navbar = () => {
     {togglemenu&&<MobileMenu/>}
 
   </nav>
-    
+    {auth.show&&<SigninModal/>}
            
             </>
      );

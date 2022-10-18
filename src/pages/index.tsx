@@ -9,13 +9,16 @@ import { NextPageWithLayout } from "./_app";
 import CardCarrousel from "../components/ui/cardcarrousel";
 
 
+//import { trpc } from "../utils/trpc";
+
+
 
 
 
 
 const Home: NextPageWithLayout = () => {
 
-
+  //const result =trpc.useQuery(['getpost.getfiltredposts',{type:'Buy',Balcony:true,maxprice:500}])
 
   return (
     <>

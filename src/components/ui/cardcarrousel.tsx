@@ -13,16 +13,9 @@ type p={
 
 const CardCarrousel:React.FC<p> = ({type}) => {
 
-
-  console.count( type )
-
-  const data=trpc.useQuery(['getpost.getpostforindexpage',{posttype:type}])
+  const data=trpc.useQuery(['getpost.getpostforindexpage',{type}])
 
  
-
-  
-
-  
   const controle=useDragControls()
 
 const [width, setwidth] = useState(0)

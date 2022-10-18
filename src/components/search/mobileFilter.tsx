@@ -50,8 +50,8 @@ const MobileFilter = () => {
             </div>
 
             <div className="w-full h-16 fixed bottom-0 left-0 text-center bg-primary2 ">
-            <button className="m-auto mt-4 bg-red py-1 px-2 rounded-full font-bold">Search</button>
-
+{/*             <button className="m-auto mt-4 bg-red py-1 px-2 rounded-full font-bold">Search</button>
+ */}
             </div>
             </motion.aside>
                     
