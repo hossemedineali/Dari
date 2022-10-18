@@ -64,7 +64,7 @@ const useShowFilter=create<ShowFilterState>((set)=>({
 
 
 
-interface filterstate {
+/* interface filterstate {
     form:{
 
         municipality?:string,
@@ -93,7 +93,7 @@ interface filterstate {
     SolarHotwater?: boolean,
  },
     
-    setstate:(value:{})=>void,
+    setstate:(value:unknown)=>void,
 }
 
 const usefilter =create<filterstate>((set)=>({
@@ -105,8 +105,8 @@ const usefilter =create<filterstate>((set)=>({
         form:value
         }))
     },
-}))
+})) */
 
 
 
- export{  useMode,useShowFilter,Useauth,usefilter};
+ export{  useMode,useShowFilter,Useauth};

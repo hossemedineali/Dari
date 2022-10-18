@@ -123,7 +123,7 @@ export interface Groupeditem{
 }
 
 
-let groupedcities:Groupeditem[]=[]
+const groupedcities:Groupeditem[]=[]
 
 
 Object.keys(cities).map(key=>{

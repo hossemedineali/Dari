@@ -1,4 +1,3 @@
-import { usefilter } from "../store/store";
 
 import Select from "react-select";
 
@@ -21,7 +20,6 @@ const Search = () => {
 
  
 
-    const filter =usefilter()
 
     return ( <div className="relative lef-1/3 top-32">
         <Select 
