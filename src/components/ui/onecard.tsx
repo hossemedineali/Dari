@@ -10,7 +10,7 @@ import Tooltip from '../layout/tooltip'
 export interface data{
     id: string,
     images:string,
-    type: string
+    announcementtype: string
     price:number,
     pricePer:string,
     governorate: string,
@@ -85,7 +85,7 @@ let url=''
                 <div className='flex gap-1'>
 
                 <h2 className="font-medium text-base md:text-lg text-gray-800 line-clamp-1" title="New York">
-                    For {item.type} 
+                    For {item.announcementtype} 
                 </h2>
         <Link href={'/Posts/'+item.id} className="cursor-pointer relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full h-full">
                     <motion.svg whileHover={{scale:1.2}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="cursor-pointer w-6 h-6">
@@ -98,7 +98,7 @@ let url=''
                 </p>
             </div>
             <div className="mt-4">
-                <p> {item.price} <span className='text-xs'>Tnd</span> {item.type=='Rent'&& item.pricePer&& <span>/{item.pricePer}</span>} </p>
+                <p> {item.price} <span className='text-xs'>Tnd</span> {item.announcementtype=='Rent'&& item.pricePer&& <span>/{item.pricePer}</span>} </p>
             </div>
 
 

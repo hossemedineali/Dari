@@ -1,4 +1,7 @@
 import create from 'zustand'
+import {Filter} from '../types/typeshelper'
+
+
 
 type ModeState={
     mode:string;
@@ -64,49 +67,33 @@ const useShowFilter=create<ShowFilterState>((set)=>({
 
 
 
-/* interface filterstate {
-    form:{
 
-        municipality?:string,
-        type?:string
-        governorate?:string,
-        posttype?:string,
-        price?:{
-            gt?:number,
-            lt?:number
-        },
-        rooms?:{
-            gt?:number,
-        lt?:number
-    },
-   
-    size?:{
-        gt?:number
-    },
-    Garage?: boolean,
-    Balcony?: boolean,
-    OutdoorArea?: boolean,
-    SwimmingPool?: boolean,
-    UndercoverParking?: boolean,
-    airConditioning?: boolean,
-    solarPanels?: boolean,
-    SolarHotwater?: boolean,
- },
+
+interface filterstate {
+    form:Filter,
+    municipality:string,
     
-    setstate:(value:unknown)=>void,
+    setsform:(key:string,value:Filter)=>void,
+    setmunicipality:(value:string)=>void,
 }
 
 const usefilter =create<filterstate>((set)=>({
-    form:{},
-    
-    setstate(value) {
-        set(()=>({
-               
-        form:value
+    form:{municipality:''},
+    municipality:''
+    ,
+    setsform(key,value) {
+        set((prev)=>({
+               ...prev,
+               form:value
         }))
     },
-})) */
+    setmunicipality(value){
+        set(()=>({
+            municipality:value
+        }))
+    }
+}))
 
 
 
- export{  useMode,useShowFilter,Useauth};
+ export{  useMode,useShowFilter,Useauth,usefilter};

@@ -3,8 +3,20 @@ import {motion,useDragControls} from 'framer-motion'
 import { useEffect, useRef, useState } from 'react';
 import OneCard from './onecard';
 import { trpc } from "../../utils/trpc";
-import {data} from '../../components/ui/onecard'
+import {data as Data} from '../../components/ui/onecard'
 
+
+ interface D{
+  id: string,
+  images:string|null,
+  announcementtype: string
+  price:number,
+  pricePer:string|null,
+  governorate: string,
+  municipality:string,
+  rooms:number,
+  size:number,
+}
 
 
 type p={
@@ -82,14 +94,15 @@ const hundelnextclick=()=>{
 
       
           
-         {data.data?data.data.map((item,idex)=>{
+         {data.data?data.data.map((item:D,idex:number)=>{ 
            return(
             <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{y:-10}} className=' w-[250px] flex  '>  {/*  item  */}
          
-          <OneCard {...item as data}/>
+          <OneCard {...item as Data}/>
           </motion.div>
           )
         }):'' }
+
 
       </motion.div>
 
@@ -102,11 +115,11 @@ const hundelnextclick=()=>{
 
       
           
-{data.data?data.data.map((item,idex)=>{
+{data.data?data.data.map((item:D,idex:number)=>{
   return(
    <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{y:10}} className=' w-[250px] '>  {/*  item  */}
 
- <OneCard {...item as data}/>
+ <OneCard {...item as Data}/>
  </motion.div>
  )
 }):'' }

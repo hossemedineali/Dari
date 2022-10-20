@@ -19,7 +19,7 @@ export const addpost=z.object({
 
 
 export interface Filter {
-    municipality?:string,
+    municipality:string,
     type?:string
     governorate?:string,
     posttype?:string,

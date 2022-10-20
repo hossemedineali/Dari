@@ -68,8 +68,9 @@ model Post {
 
   auther   String     
 
-  
-  type     String
+  propertyType String
+  announcementtype String
+  landtype     String?
  
   price    Float
   pricePer String ?
@@ -93,6 +94,8 @@ model Post {
    SolarHotwater Boolean @default(false)
   images String ?
   description String @default("")
+
+  contact String 
    
 
   user         User     @relation(name:"owner",fields: [auther], references: [id], onDelete: Cascade)

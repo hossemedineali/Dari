@@ -28,7 +28,7 @@ const Navbar = () => {
     if(!sesssion){
       auth.setToogleShow(true)
     }else{
-      router.push('/Addpost')
+      router.push('/add')
     }
   }
 
@@ -61,7 +61,7 @@ const Navbar = () => {
     </ul>
 
             {router.route!='/Addpost'&&(
-                  <div onClick={handeladdpostclick} className="hover:scale-105 active:scale-95 md:flex  mr-6 bg-red px-4 py-1 rounded-2xl cursor-pointer hidden ">
+                  <div onClick={handeladdpostclick} className="hover:scale-105 active:scale-95 md:flex  mr-6 bg-white border-red border text-red px-4 py-1 rounded-2xl cursor-pointer hidden ">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
@@ -71,8 +71,8 @@ const Navbar = () => {
         
 
 
-            {!sesssion&& <button className="hover:scale-105 active:scale-95 py-1 px-3 mr-2  bg-secondary2 rounded-lg" onClick={()=>signIn()} >signin</button>}
-            {sesssion&&<button className="hover:scale-105 active:scale-95 py-1 px-3 mr-2  bg-secondary2 rounded-lg" onClick={()=>signOut()} >Logout </button>}
+            {!sesssion&& <button className="hover:scale-105 active:scale-95 py-1 px-3 mr-2  bg-primary1 text-white py-auto rounded-lg" onClick={()=>signIn()} >signin</button>}
+            {sesssion&&<button className="hover:scale-105 active:scale-95 py-1 px-3 mr-2  bg-primary1 text-white py-auto rounded-lg" onClick={()=>signOut()} >Logout </button>}
           
 
 

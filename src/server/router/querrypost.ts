@@ -17,25 +17,25 @@ export const getpost =createRouter()
             return await ctx.prisma.post.findMany({
 
                 take:10,
-                where:{
-                    type:input.type,
+                
+                 where:{
+                    announcementtype:input.type,
                 },
-                select:{
-                    type:true,
-                    municipality:true,
-                    governorate:true,
-                    size:true,
-                    rooms:true,
-                    images:true,
-                    price:true,
-                    pricePer:true,
-                    id:true,
-                    
-                }
-                ,
+               select:{
+                id:true,
+                images:true,
+                announcementtype:true,
+                price:true,
+                pricePer:true,
+                governorate: true,
+                municipality:true,
+                rooms:true,
+                size:true,
+                
+               },
                 orderBy:{
                     date:'desc'
-                }
+                } 
             })
         }
     })
@@ -64,7 +64,7 @@ export const getpost =createRouter()
         async resolve({input,ctx}){
 
             const filter:Filter={
-                
+                municipality:''
             }
 
 

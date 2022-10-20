@@ -10,22 +10,24 @@ export const addPost =createRouter()
         input:z.object({
 
             auther:z.string(),
-
-            type:z.string(),
+            propertyType:z.string(),
+            announcementtype:z.string(),
+            landtype:z.string(),
             price:z.number(),
+            pricePer:z.string().optional(),
             size:z.number(),
             rooms:z.number(),
-            pricePer:z.string(),
 
-            Garage: z.boolean(),
-            Balcony: z.boolean(),
-            OutdoorArea: z.boolean(),
-            SwimmingPool: z.boolean(),
-            UndercoverParking: z.boolean(),
-            airConditioning: z.boolean(),
-            solarPanels: z.boolean(),
-            SolarHotwater: z.boolean(),
-            isposition:z.boolean(),
+
+            Garage: z.boolean().default(false),
+            Balcony: z.boolean().default(false),
+            OutdoorArea: z.boolean().default(false),
+            SwimmingPool: z.boolean().default(false),
+            UndercoverParking: z.boolean().default(false),
+            airConditioning: z.boolean().default(false),
+            solarPanels: z.boolean().default(false),
+            SolarHotwater: z.boolean().default(false),
+            isposition:z.boolean().default(false),
 
             governorate:z.string(),
             municipality:z.string(),
@@ -34,14 +36,15 @@ export const addPost =createRouter()
             lat:z.number(),
 
             images :z.array(z.unknown()),
-            description:z.string()
+
+            contact:z.string(),
+            description:z.string().optional()
 
 
         }),
        async resolve({input,ctx}){
             
-            
-                
+           
                 const addimage=async()=>{
                     let newimagesformat=''
                   
@@ -50,7 +53,6 @@ export const addPost =createRouter()
                             console.log(result.public_id)
                             if(i==input.images.length-1){
                                 newimagesformat=newimagesformat + result.public_id
-
                             }
                             else{
                                 newimagesformat=newimagesformat + result.public_id+',' 
@@ -66,19 +68,13 @@ export const addPost =createRouter()
                 return ctx.prisma.post.create({
                     data:{
                         ...input,
-                        images:newimagesdata 
+                        images:newimagesdata ,
+                        auther:'cl9g7s8ef0000u6wcwln0bd5b',
+                        description:'This is a Fake post for testing'
                     }
                 })
     
                 } 
-                 /*  ctx.prisma.post.create({
-                    data:{
-                        ...input,images:'aeeee'
-                    }
-                })  */
-            
-
-            
             
         
     })

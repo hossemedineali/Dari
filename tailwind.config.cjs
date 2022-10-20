@@ -8,7 +8,7 @@ module.exports = {
       current: 'currentColor',
       'white': '#ffffff',
       'black':'#000000',
-      'primary1':"#2ec4b6",
+      'primary1':"#6c63ff",
       'primary2':'#cbf3f0',
       'secondary1':'#ff9f1c',
       'secondary2':'#ffbf69',

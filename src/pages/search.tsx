@@ -1,14 +1,4 @@
-
-import Select from "react-select";
-
-import {groupedcities,filterOption} from '../utils/cities'
-
-
-//type GreetFunction = ({label,value},string:string) => boolean;
-
-
-
-
+import { usefilter } from "../store/store";
 
 
 
@@ -17,18 +7,14 @@ import {groupedcities,filterOption} from '../utils/cities'
 const Search = () => {
 
 
+    const filter =usefilter()
 
+    
  
 
 
     return ( <div className="relative lef-1/3 top-32">
-        <Select 
-            instanceId=" municipalities"
-            id=" municipalities"
-            options={groupedcities}
-            filterOption={filterOption}
-            onChange={(e)=>{console.log(e)}}
-        />
+            <h1>Search page : selected municipality is {filter.municipality}</h1>
     </div> );
 }
  

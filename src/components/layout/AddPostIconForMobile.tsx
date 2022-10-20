@@ -17,7 +17,7 @@ const AddPostForMobile = () => {
 
     const handelClick=()=>{
         if(sesssion){
-            router.push('/Addpost')
+            router.push('/add')
         }else{
             auth.setToogleShow(!auth.show)
             
@@ -26,7 +26,7 @@ const AddPostForMobile = () => {
     return ( 
 
         
-        <div onClick={handelClick} className=" fixed bottom-16 right-10 cursor-pointer md:hidden">
+        <div onClick={handelClick} className=" fixed bottom-2 right-5 text-red cursor-pointer md:hidden">
        
         <Tooltip text="Add post">
         
