@@ -10,9 +10,9 @@ export const addPost =createRouter()
         input:z.object({
 
             auther:z.string(),
-            propertyType:z.string(),
-            announcementtype:z.string(),
-            landtype:z.string(),
+            propertyType:z.string(), //house or Land
+            announcementtype:z.string(), //sell Rent CoRental
+            landtype:z.string(),         //buildable land or farmland
             price:z.number(),
             pricePer:z.string().optional(),
             size:z.number(),

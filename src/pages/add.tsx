@@ -2,40 +2,22 @@
 
 import { useSession } from "next-auth/react"
 import { useRouter } from 'next/router'
-import {  useEffect, useState } from "react"
-import { useForm } from "react-hook-form";
+import {   useState } from "react"
 import Select from "react-select";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Image from 'next/image'
-
-import MapWithNoSSR from "../components/maps/mapWithNoSSR";
-
-import ImageUploading, { ImageListType } from "react-images-uploading";
-
 
 import { useMode } from "../store/store";
 import {governorates,cities,MygovernorateType} from '../utils/cities'
-import Switch from "../components/ui/switch";
-import { trpc } from "../utils/trpc";
-import { motion } from "framer-motion";
-import HouseFilters from "../components/addpost/housefilter";
-import LandFilters from "../components/addpost/landfilter";
 
+import HouseFilters from "../components/addpost/addhousefilter";
+import LandFilters from "../components/addpost/addlandfilter";
 
+import {State} from '../types/typeshelper'
 // ###########Types###################
 
-type Props={
-    children :JSX.Element
-}
 
 
-type State={
-    value?:string
-    ,label:string,
-    position?:[number,number],
-    
-}
+
 
 const propertytype=[{label:'House',value:'House'},{label:'Land',value:'Land'}]
 
@@ -88,17 +70,17 @@ const AddPost = () => {
     const router=useRouter()
     const {data:sesssion}=useSession()
 
-    if(!sesssion){
+  /*   if(!sesssion){
         if (typeof window!=='undefined'){
             router.replace('/')
         }
-    }else{
+    }else{ */
 
         
         return (
             
             <Post /> );
-        }
+       // }
     }
 
 
@@ -106,17 +88,18 @@ const AddPost = () => {
  
         const Post=()=>{
 
-            const [selectedGovernorate, setselectedGovernorate] = useState<State>({label:'',value:'',position:[0,0]})
-            const [selectedMunicipality, setselectedMunicipality] = useState<State>({label:'',value:'',position:[0,0]})
             const [houseLand,sethouseLand ] = useState('')
-
+            const [selectedMunicipality, setselectedMunicipality] = useState<State>({label:'',value:'',position:[0,0]})
+            
+            
+            const [selectedGovernorate, setselectedGovernorate] = useState<State>({label:'',value:'',position:[0,0]})
+            const munoptions=cities[selectedGovernorate.label]
             const mode=useMode()
         
                console.log('selected mun :',selectedMunicipality)
 
            console.log('selected gov :',selectedGovernorate)
             
-            const munoptions=cities[selectedGovernorate.label]
 
         
         
@@ -154,7 +137,7 @@ const AddPost = () => {
                         />
                     </div>
 
-                    <div className="md:w-1/2">
+                    <div className="mt-2 md:mt-0 md:w-1/2">
                         <label htmlFor=" municipalities" className="font-medium">Municipality
                         </label>
                         <Select 
@@ -173,7 +156,7 @@ const AddPost = () => {
                     {/* Select type  */}
 
                      {selectedMunicipality.label&& (
-                    <div className="flex flex-col  justify-between  md:w-2/3 mx-auto   mt-2  ">
+                    <div className="flex flex-col mt-2 md:mt-0 justify-between  md:w-2/3 mx-auto     ">
                           <label className="font-medium">Property Type </label>  
                          <Select
                             options={propertytype}
@@ -187,9 +170,9 @@ const AddPost = () => {
                 {selectedGovernorate&&selectedMunicipality&&houseLand=='House'&&
                     <div>
 
-                    <div className="flex w-full md:w-2/3 mt-2 mx-auto  " >
+                    <div className="flex py-1 w-full md:w-2/3 mt-2 mx-auto  " >
                         
-                    <span onClick={()=>mode.setmode('Sell')} id='Buy' className={`${mode.mode=='Sell'?'border-red':'border-devider'}  w-1/3 text-center  border-b-2 transition ease-in-out duration-1150 cursor-pointer` } >Sell</span>
+                    <span onClick={()=>mode.setmode('Sell')} id='Sell' className={`${mode.mode=='Sell'?'border-red':'border-devider'}  w-1/3 text-center  border-b-2 transition ease-in-out duration-1150 cursor-pointer` } >Sell</span>
                     <span onClick={()=>mode.setmode('Rent')} id='Rent' className={`${mode.mode=='Rent'?'border-red':'border-devider'}  w-1/3 text-center  border-b-2 transition ease-in-out duration-1150 cursor-pointer`  }>Rent</span>
                     <span onClick={()=>mode.setmode('CoRental')}  className={`${mode.mode=='CoRental'?'border-red':'border-devider'}  w-1/3 text-center  border-b-2 transition ease-in-out duration-1150 cursor-pointer` }>CoRental</span>
                 </div>

@@ -55,18 +55,7 @@ type LocationType={
 
 
 
-const roomsOption=[
-    {value:1,label:1},
-    {value:2,label:2},
-    {value:3,label:3},
-    {value:4,label:4},
-    {value:5,label:5},
-    {value:6,label:6},
-    {value:7,label:7},
-    {value:8,label:8},
-    {value:9,label:9},
-    {value:'10+',label:10},
-]
+
 
 
 type Form =z.infer<typeof form>;
@@ -78,9 +67,7 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
 
     const {data:sesssion}=useSession()
 
-    console.log('user id',sesssion?.user?.id)
-
-    console.log('rest')
+  
     const router=useRouter()
    
     
@@ -140,7 +127,7 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
             }) }
         if (addPost.data){
             setTimeout(() => {
-                //router.replace('/')
+                router.replace('/')
             }, (2500));}
        
    
@@ -211,7 +198,7 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
 
 
         <div className="flex justify-between flex-col md:flex-row">
-            <div className='w-full  md:w-[30%]'>
+            <div className='w-full mt-2 md:mt-0  md:w-[30%]'>
              {/* -------------- Price Input---------------------- */}
             <h5 className={`font-medium mb-1 ${errors.price?.message? 'text-red':'' }`} >Price : {errors.price?.message? errors.price.message : ''}</h5>
 
@@ -243,8 +230,8 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
                 <div className="border border-devider my-2 md:hidden"></div>
             </div>
                 
-            <div className='w-full  md:w-[30%]'>
                     {/* Land size Input  */}
+            <div className='w-full  md:w-[30%]'>
 
                 <h5 className={`font-medium mb-1 ${errors.size?.message? 'text-red':'' }`}>Land size : {errors.size?.message? errors.size?.message:''}</h5>
                 <label htmlFor="landsize" className={`relative text-gray-400 focus-within:text-gray-600 block   border-2 rounded ${errors.size?.message? 'border-red':'border-devider'} `}>
@@ -381,13 +368,13 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
               style={isDragging ? { color: "red" } : undefined}
               onClick={onImageUpload}
               {...dragProps}
-              className="cursor-pointer border w-max p-1 rounded-lg hover:scale-95 active:scale-105"
+              className="cursor-pointer border border-primary1 text-primary1 w-max p-1 rounded-lg hover:scale-95 active:scale-105"
               >
               Add images(Max 9)
             </span>
             &nbsp;
            
-            <span onClick={onImageRemoveAll} className="cursor-pointer border w-max p-1 rounded-lg hover:scale-95 active:scale-105">Remove all images</span>
+            <span onClick={onImageRemoveAll} className="cursor-pointer border-red text-red border w-max p-1 rounded-lg hover:scale-95 active:scale-105">Remove all images</span>
                 </div>
             <br/>
             <span className="mt-4"> {images.length } images selected </span>
@@ -427,7 +414,7 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
             
             <h3>Plase set the property location on the map <br/> <span className="font-bold" >or <span onClick={getDevicePosition} className="  text-red px-1  rounded-2xl cursor-pointer">use</span> the device location</span>(device location work better on devices with GPS) </h3>
             <div className="w-full h-[60vh] z-0">
-                    {location.error?.message&&<p className="text-secondary2 ">Enabel GPS on your device </p>}
+                    {location.error?.message&&<p className="text-red ">Enabel GPS on your device </p>}
             
                 <MapWithNoSSR position={position[0]!=0?position :selectedMunicipality.position} setposition={setposition}  />
 
@@ -459,7 +446,7 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
 
         <div className=" flex justify-center" >
 
-                {!addPost.isLoading&&<button type="submit"  className="self-center bg-secondary1 p-1 hover:scale-105 active:scale-95 mb-1 rounded-3xl m-auto w-44 ">{!addPost.isLoading? 'Add Announcment' : ''} 
+                {!addPost.isLoading&&<button type="submit"  className="self-center bg-primary1 p-1 hover:scale-105 active:scale-95 mb-1 rounded-3xl m-auto w-44 ">{!addPost.isLoading? 'Add Announcment' : ''} 
                 </button>}
                {addPost.isLoading&& <span className="mx-auto "><Loader /></span>}
         </div>

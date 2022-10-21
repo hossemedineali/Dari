@@ -17,6 +17,7 @@ export interface data{
     municipality:string,
     rooms:number,
     size:number,
+    propertyType:string,
   }
 
 
@@ -26,6 +27,13 @@ export interface data{
 
 const OneCard:React.FC<data> = (item) => {
 
+   
+    function capitalizeFirstLetter(string :string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+
+    
+    
     
 let url=''
     if(item.images.length>1){
@@ -40,26 +48,29 @@ let url=''
    
     return (
        
-  <motion.div  whileHover={{scale: 1.1}} className="relative mx-auto w-[270px] mb-4 ">
-	  <div className="shadow p-4 rounded-lg bg-white ">
-		<div className="flex justify-center relative rounded-lg overflow-hidden h-64 ">
-		  <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full h-full">
+  <motion.div  whileHover={{scale: 1.1}} className="relative  mr-4 w-[69vw] sm:w-[40vw] md:w-[300px] mb-4  ">
+	  <div className="shadow  rounded-lg bg-white ">
+		<div className="flex justify-center relative rounded-lg  ">
+		  <div className=" w-full h-[340px] " 
+          style={{
+            backgroundImage: `url(${url})`,
+            backgroundSize:'cover'
+          }}
+          >
 
-            {url&&<Image src={url} width='250' height='250' className='aspect-square'/>}
-			{/* <div className="absolute inset-0 bg-black opacity-10"></div> */}
 		  </div>
 
           <span onClick={()=>{console.log('add to favorite',item.id)}} className="absolute  top-0 right-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg  bg-red-500 text-sm font-medium text-white  select-none ">
-          <Tooltip text='add to favorites'>
+          <Tooltip text='add to favorites' >
 
-          <svg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="cursor-pointer w-6 h-6 ">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="cursor-pointer  w-6 h-6 ">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
             </svg>
           </Tooltip>
 
 		  </span>
 
-		  <div className="absolute flex justify-center bottom-0 mb-3">
+		  <div className="absolute flex justify-center bottom-4  mb-3">
 			<div className="flex bg-white px-4 py-1 space-x-5 rounded-lg overflow-hidden shadow">
 			 
               <p className="flex items-center font-medium text-gray-800">
@@ -79,12 +90,12 @@ let url=''
 		</div>
 
 
-        <div className="flex cursor-pointer  md:cursor-auto justify-between">
+        <div className="flex cursor-pointer px-2 h-28 md:cursor-auto justify-between">
 
             <div className="mt-4">
+                <h2 className="font-medium text-base md:text-lg text-gray-800 line-clamp-1">{capitalizeFirstLetter(item.propertyType)}</h2>
                 <div className='flex gap-1'>
-
-                <h2 className="font-medium text-base md:text-lg text-gray-800 line-clamp-1" title="New York">
+                <h2 className="font-medium text-base md:text-lg text-gray-800 line-clamp-1" >
                     For {item.announcementtype} 
                 </h2>
         <Link href={'/Posts/'+item.id} className="cursor-pointer relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full h-full">
@@ -93,12 +104,12 @@ let url=''
 </motion.svg>
 	   </Link>
       </div>
-                <p className="mt-2 text-sm text-gray-800 line-clamp-1" title="New York, NY 10004, United States">
-                    {item.municipality} -{item.governorate}
+                <p className="mt-2  text-sm text-gray-800 line-clamp-1" >
+                    {item.municipality} 
                 </p>
             </div>
-            <div className="mt-4">
-                <p> {item.price} <span className='text-xs'>Tnd</span> {item.announcementtype=='Rent'&& item.pricePer&& <span>/{item.pricePer}</span>} </p>
+            <div className="mt-4 pr-1">
+                <p className='text-red'> {item.price} <span className='text-xs '>Tnd</span> {item.announcementtype=='Rent'&& item.pricePer&& <span className='text-black'>/{item.pricePer}</span>} </p>
             </div>
 
 

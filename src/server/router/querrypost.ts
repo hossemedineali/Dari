@@ -1,7 +1,7 @@
 import { createRouter } from "./context";
 import {   z} from "zod";
 import {Filter} from '../../types/typeshelper'
- 
+ import {FilterInput} from '../../types/typeshelper'
 
 
 
@@ -31,6 +31,7 @@ export const getpost =createRouter()
                 municipality:true,
                 rooms:true,
                 size:true,
+                propertyType:true
                 
                },
                 orderBy:{
@@ -41,26 +42,7 @@ export const getpost =createRouter()
     })
 
     .query('getfiltredposts',{
-        input:z.object({
-            type:z.string(),
-            municipality:z.string().optional(),
-            governorate:z.string().optional(),
-            maxprice:z.number().optional(),
-            minprice:z.number().optional(),
-            minrooms:z.number().optional(),
-            maxrooms:z.number().optional(),
-            size:z.number().optional(),
-            Garage: z.boolean().optional(),
-            Balcony: z.boolean().optional(),
-            OutdoorArea: z.boolean().optional(),
-            SwimmingPool: z.boolean().optional(),
-            UndercoverParking: z.boolean().optional(),
-            airConditioning: z.boolean().optional(),
-            solarPanels: z.boolean().optional(),
-            SolarHotwater: z.boolean().optional()
-
-            
-        }),
+        input:FilterInput,
         async resolve({input,ctx}){
 
             const filter:Filter={
@@ -74,14 +56,20 @@ export const getpost =createRouter()
             }
 
             if(input.municipality){
-
                 filter.municipality=input.municipality
             }
 
             
-            if(input.type){
+            if(input.propertyType){ //house or land
+                filter.propertyType=input.propertyType
+            }
 
-                filter.type=input.type
+            if(input.announcementtype){ //sell rent corental 
+                filter.announcementtype=input.announcementtype
+            }
+
+            if(input.landtype){      //buildable land or farmland
+                    filter.landtype=input.landtype
             }
 
             if(input.maxprice ){
@@ -169,16 +157,11 @@ export const getpost =createRouter()
 
 
             
-
-
-
-
-
-
-
-
-            
-            return  filter
+            return  ctx.prisma.post.findMany({
+              where:{
+                municipality:'Ariana'
+              }
+            })
         }
     })
     

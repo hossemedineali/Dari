@@ -11,18 +11,44 @@ export const addpost=z.object({
     outdoor_Featfures:z.string().array().optional(),
     Climate_control_energy:z.string().array().optional(),
     discription:z.string().optional()
-
-
-
 })
 
 
 
+export const FilterInput =z.object({
+    governorate:z.string().optional(),
+    municipality:z.string().optional(),
+    propertyType:z.string().optional(),                 //  house or land
+    announcementtype:z.string().optional(), // sell Rent Corental
+    landtype:z.string().optional(),        //buildable land or farmland
+    maxprice:z.number().optional(),
+    minprice:z.number().optional(),
+    minrooms:z.number().optional(),
+    maxrooms:z.number().optional(),
+    size:z.number().optional(),
+    Garage: z.boolean().optional(),
+    Balcony: z.boolean().optional(),
+    OutdoorArea: z.boolean().optional(),
+    SwimmingPool: z.boolean().optional(),
+    UndercoverParking: z.boolean().optional(),
+    airConditioning: z.boolean().optional(),
+    solarPanels: z.boolean().optional(),
+    SolarHotwater: z.boolean().optional()
+
+    
+})
+
+export type FilterInputType=z.infer<typeof FilterInput>
+
+
 export interface Filter {
-    municipality:string,
-    type?:string
     governorate?:string,
-    posttype?:string,
+    municipality:string,
+    
+    propertyType?:string,
+    announcementtype?:string,
+    landtype?:string,
+    
     price?:{
         gt?:number,
         lt?:number
@@ -43,4 +69,13 @@ export interface Filter {
     airConditioning?: boolean,
     solarPanels?: boolean,
     SolarHotwater?: boolean,
+}
+
+
+
+export type State={
+    value?:string
+    ,label:string,
+    position?:[number,number],
+    
 }

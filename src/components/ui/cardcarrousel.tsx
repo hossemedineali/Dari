@@ -78,7 +78,7 @@ const hundelnextclick=()=>{
 
 
   return (
-    <div className='w-full flex my-5 '>
+    <div className='w-full flex my-5 px-2 '>
 
 <button className=' rounded-lg bg-devider hidden md:block' onClick={hundelprevclick}>
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -86,23 +86,25 @@ const hundelnextclick=()=>{
 </svg>
 </button>
 
-     <motion.div  ref={carosel} className=' gap-4   overflow-hidden w-full'> {/* carousel */}
+     <motion.div  ref={carosel} className='    overflow-hidden  '> {/* carousel */}
                 
                 {/* inner-carrousel */}  
       <motion.div  dragConstraints={{right:0,left:-width}} dragControls={controle} className='  gap-4 hidden md:flex' >                           
+        
 
 
       
           
          {data.data?data.data.map((item:D,idex:number)=>{ 
            return(
-            <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{y:-10}} className=' w-[250px] flex  '>  {/*  item  */}
+             <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{y:-10}} className='mr-4' >  {/*  item  */}
          
           <OneCard {...item as Data}/>
           </motion.div>
           )
         }):'' }
 
+        
 
       </motion.div>
 
@@ -117,7 +119,7 @@ const hundelnextclick=()=>{
           
 {data.data?data.data.map((item:D,idex:number)=>{
   return(
-   <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{y:10}} className=' w-[250px] '>  {/*  item  */}
+   <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{y:10}} >  {/*  item  */}
 
  <OneCard {...item as Data}/>
  </motion.div>

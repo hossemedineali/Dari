@@ -42,7 +42,7 @@ const Useauth=create<authState>((set)=>({
 
 
 const useMode=create<ModeState>((set)=>({
-    mode:'Buy',
+    mode:'Sell',
     setmode(text) {
         set(()=>({
             mode:text
