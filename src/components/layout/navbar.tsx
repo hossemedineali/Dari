@@ -38,7 +38,7 @@ const Navbar = () => {
   return ( 
 
 <>
-  <nav className="border-b-2 border-devider bg-white px-0 py-4 flex justify-between   w-full  fixed z-50 backdrop">
+  <nav className="border-b-2 border-devider bg-white px-0 py-4 flex justify-between   w-full  fixed z-30 backdrop">
 
 
     

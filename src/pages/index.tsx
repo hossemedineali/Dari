@@ -7,13 +7,9 @@ import { NextPageWithLayout } from "./_app";
 
 
 import CardCarrousel from "../components/ui/cardcarrousel";
-import Image from 'next/image'
 
-import hero from '../../public/hero.jpg'
-
-import hero1 from '../../public/hero1.png'
 import hero2 from '../../public/hero2.png'
-import hero3 from '../../public/hero3.png'
+
 
 
 

@@ -8,7 +8,7 @@ const DesktopFilter = () => {
             <div className="lg:w-3/5 w-4/5  text-center border rounded-2xl bg-white m-auto">
             
             <svg 
-                onClick={()=>showFilter.setShowFilter(false,false)}
+                onClick={()=>showFilter.setShowFilter(false)}
             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 cursor-pointer">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>

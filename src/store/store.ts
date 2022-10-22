@@ -1,5 +1,6 @@
+import { z } from 'zod';
 import create from 'zustand'
-import {Filter} from '../types/typeshelper'
+import { FilterInputType } from '../types/typeshelper';
 
 
 
@@ -10,9 +11,9 @@ type ModeState={
 
 type ShowFilterState={
 
-    showMobile:boolean;
-    showDesktop:boolean;
-    setShowFilter:(mobile:boolean,desktop:boolean)=>void
+    show:boolean;
+    
+    setShowFilter:(show:boolean)=>void
 }
 
 type authState={
@@ -21,9 +22,6 @@ type authState={
     setToogleShow:(show:boolean)=>void,
     
 }
-
-
-
 
 
 
@@ -41,6 +39,10 @@ const Useauth=create<authState>((set)=>({
 }))
 
 
+
+
+
+
 const useMode=create<ModeState>((set)=>({
     mode:'Sell',
     setmode(text) {
@@ -54,12 +56,12 @@ const useMode=create<ModeState>((set)=>({
 
 
 const useShowFilter=create<ShowFilterState>((set)=>({
-    showMobile:false,
-    showDesktop:false,
-    setShowFilter(mobile,desktop) {
+    show:false,
+  
+    setShowFilter(show) {
         set(()=>({
             
-            showDesktop:desktop,showMobile:mobile
+            show
 
         }))
     },
@@ -70,23 +72,18 @@ const useShowFilter=create<ShowFilterState>((set)=>({
 
 
 interface filterstate {
-    form:Filter,
+  
     municipality:string,
     
-    setsform:(key:string,value:Filter)=>void,
+  
     setmunicipality:(value:string)=>void,
 }
 
 const usefilter =create<filterstate>((set)=>({
-    form:{municipality:''},
+ 
     municipality:''
     ,
-    setsform(key,value) {
-        set((prev)=>({
-               ...prev,
-               form:value
-        }))
-    },
+    
     setmunicipality(value){
         set(()=>({
             municipality:value
@@ -95,5 +92,45 @@ const usefilter =create<filterstate>((set)=>({
 }))
 
 
+interface Test {
+    form:FilterInputType,
+    setmunicipality:(value:string)=>void,
+}
 
- export{  useMode,useShowFilter,Useauth,usefilter};
+const usetest=create<Test>((set)=>({
+    form:{
+
+        governorate:'',
+        municipality:'',
+        propertyType:'',                 //  house or land
+        announcementtype:'', // sell Rent Corental
+        landtype:'',        //buildable land or farmland
+        maxprice:0,
+        minprice:0,
+        pricePer:'',
+    minrooms:0,
+    maxrooms:0,
+    minsize:0,
+    maxsize:0,
+    Garage: false,
+    Balcony: false,
+    OutdoorArea: false,
+    SwimmingPool: false,
+    UndercoverParking: false,
+    airConditioning: false,
+    solarPanels: false,
+    SolarHotwater: false
+},
+setmunicipality(value:string){
+    this.form.municipality=value,
+    set(()=>({
+     
+    }))
+}
+    
+
+
+}))
+
+
+ export{  useMode,useShowFilter,usefilter,Useauth,usetest};

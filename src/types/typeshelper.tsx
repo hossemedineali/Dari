@@ -16,16 +16,20 @@ export const addpost=z.object({
 
 
 export const FilterInput =z.object({
-    governorate:z.string().optional(),
-    municipality:z.string().optional(),
+    governorate:z.string({
+        required_error:'required'
+    }),
+    municipality:z.string({required_error:'required'}),
     propertyType:z.string().optional(),                 //  house or land
     announcementtype:z.string().optional(), // sell Rent Corental
     landtype:z.string().optional(),        //buildable land or farmland
     maxprice:z.number().optional(),
     minprice:z.number().optional(),
+    pricePer:z.string().optional(),
     minrooms:z.number().optional(),
     maxrooms:z.number().optional(),
-    size:z.number().optional(),
+    minsize:z.number().optional(),
+    maxsize:z.number().optional(),
     Garage: z.boolean().optional(),
     Balcony: z.boolean().optional(),
     OutdoorArea: z.boolean().optional(),
@@ -34,8 +38,7 @@ export const FilterInput =z.object({
     airConditioning: z.boolean().optional(),
     solarPanels: z.boolean().optional(),
     SolarHotwater: z.boolean().optional()
-
-    
+ 
 })
 
 export type FilterInputType=z.infer<typeof FilterInput>
@@ -59,7 +62,8 @@ export interface Filter {
     },
    
     size?:{
-        gt?:number
+        gt?:number,
+        lt?:number
     },
     Garage?: boolean,
     Balcony?: boolean,

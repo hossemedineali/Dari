@@ -1,6 +1,6 @@
 
 import Select from "react-select";
-import { usefilter} from "../../store/store";
+import {  usetest} from "../../store/store";
 import { useRouter } from 'next/router'
 import {groupedcities,filterOption} from '../../utils/cities'
 import { useState } from "react";
@@ -22,16 +22,19 @@ const SearchInput:React.FC = () => {
     
 
     const [selectedMunError,setselectedMunError]=useState('')
-    const filter=usefilter()    
+    const filter=usetest()    
     const router =useRouter()
     const hundelchange=(e:string)=>{
         if(e){
+            console.log('e :',e)
             setselectedMunError('')
             filter.setmunicipality(e)
+
+            console.log('filter.form.municipality',filter.form)
         }
     }
     const hundelclicksearch=()=>{
-        if(filter.municipality){
+        if(filter.form.municipality){
             router.push('/search')
         }
         else{

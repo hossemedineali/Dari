@@ -20,7 +20,10 @@ module.exports = {
     },
     extend: {backgroundImage: {
       'search-wrapper': "url('/../public/family.jpg')",
-      
+      dropShadow: {
+        'top': '35px 0 0 rgba(0, 0, 0, 0.25)',
+        
+      }
     }},
   },
   plugins: [],

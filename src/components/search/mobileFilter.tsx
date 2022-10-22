@@ -24,7 +24,7 @@ const MobileFilter = () => {
             <div className="flex  w-full  top-16 h-16 left-0  fixed   border-b-2 shadow-l bg-white z-10 ">
                 
                 <svg
-                    onClick={()=>showFilter.setShowFilter(false,false)}
+                    onClick={()=>showFilter.setShowFilter(false)}
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 mt-1 mr-4  ">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
                 </svg>

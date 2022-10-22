@@ -107,13 +107,25 @@ export const getpost =createRouter()
             }
                    
 
-            if(input.size){
+            if(input.minsize){
                 
                 filter.size={
-                    gt:input.size
+                    ...filter.size,
+                    gt:input.minsize
                 
                 }
             }
+
+            if(input.maxsize){
+                
+                filter.size={
+                    ...filter.size,
+                    lt:input.maxsize
+                
+                }
+            }
+
+
             if(input.Garage){
                 filter.Garage=input.Garage
 
@@ -157,11 +169,11 @@ export const getpost =createRouter()
 
 
             
-            return  ctx.prisma.post.findMany({
+            return   ctx.prisma.post.findMany({
               where:{
-                municipality:'Ariana'
+                ...filter
               }
-            })
+            }) 
         }
     })
     
