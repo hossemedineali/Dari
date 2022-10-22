@@ -62,11 +62,11 @@ const Search = () => {
 
 
           
-            <div className="mt-10 flex flex-wrap w-full  justify-center ">
+            {!show.show&&<div className="mt-10 flex flex-wrap w-full  justify-center ">
                 {data.data?.map((itm,idx)=>{
                     return <OneCard id={itm.id} images={itm.images as string} announcementtype={itm.announcementtype} price={itm.price} pricePer={itm.pricePer as string} governorate={itm.governorate} municipality={itm.municipality} rooms={itm.rooms} size={itm.size} propertyType={itm.propertyType} key={idx}/>
                 })}
-            </div>
+            </div>}
     </div> );
 }
  

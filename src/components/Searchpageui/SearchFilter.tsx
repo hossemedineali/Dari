@@ -7,38 +7,13 @@ import { useEffect, useState } from 'react'
 
 import {FilterInputType, FilterInput,State} from '../../types/typeshelper'
 
-import { useForm, Resolver } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { useShowFilter } from '../../store/store';
 
 
 
-/* export const FilterInput =z.object({
-    governorate:z.string({
-        required_error:'required'
-    }),
-    municipality:z.string(),
-    propertyType:z.string().optional().default(''),                 //  house or land
-    announcementtype:z.string().optional().default(''), // sell Rent Corental
-    landtype:z.string().optional(),        //buildable land or farmland
-    maxprice:z.union([z.number(), z.null()]).default(null), //z.union([z.number(), z.null()]).
-    minprice:z.union([z.number(), z.null()]).default(null),
-    pricePer:z.string(),
-    minrooms:z.union([z.number(), z.null()]).default(null),
-    maxrooms:z.union([z.number(), z.null()]).default(null),
-    minsize:z.union([z.number(), z.null()]).default(null),
-    maxsize:z.union([z.number(), z.null()]).default(null),
-    Garage: z.boolean().optional(),
-    Balcony: z.boolean().optional(),
-    OutdoorArea: z.boolean().optional(),
-    SwimmingPool: z.boolean().optional(),
-    UndercoverParking: z.boolean().optional(),
-    airConditioning: z.boolean().optional(),
-    solarPanels: z.boolean().optional(),
-    SolarHotwater: z.boolean().optional()
- 
-}) */
+
 
 
 type Props={
@@ -50,7 +25,7 @@ const SearchFilter:React.FC<Props> = ({setfilterInput}) => {
     const show=useShowFilter()
 
 
-    const { register, handleSubmit,setValue, getValues,formState } = useForm< FilterInputType>({ 
+    const {  handleSubmit,setValue, getValues,formState } = useForm< FilterInputType>({ 
         resolver:zodResolver(FilterInput) ,
        
     });
