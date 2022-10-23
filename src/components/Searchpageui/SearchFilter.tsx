@@ -21,43 +21,67 @@ type Props={
 }
 
 const SearchFilter:React.FC<Props> = ({setfilterInput}) => {
-
-    const show=useShowFilter()
-
-
-    const {  handleSubmit,setValue, getValues,formState } = useForm< FilterInputType>({ 
-        resolver:zodResolver(FilterInput) ,
-       
-    });
-  const onSubmit = handleSubmit((data) => {
-    console.log('submit')
-    setfilterInput(data)
-
-});
-
-
-
-useEffect(()=>{
-  if(formState.errors) {
-    console.log('error from use effect',formState.errors)
-    
-  }
-},[formState])
-
-  const filters=getValues()
-
-
     
     const [selectedGovernorate, setselectedGovernorate] = useState<State>({label:'',value:'',position:[0,0]})
     const munoptions=cities[selectedGovernorate.label]
     const [selectedMunicipality, setselectedMunicipality] = useState<State>({label:'',value:'',position:[0,0]})
+    
+    const [data, setdata] = useState<FilterInputType>()
+
+
+    console.log('rendered')
+   
+    
+
+    const show=useShowFilter()
+
+
+    const { watch,handleSubmit,setValue,reset, getValues,formState } = useForm< FilterInputType>({ 
+        resolver:zodResolver(FilterInput) ,
+       
+    });
+  const onSubmit = handleSubmit((data) => {
+    setfilterInput(data)
+});
+
+
+
+useEffect(() => {
+
+    const subscription = watch((value, { name, type }) => {
+        const data=getValues()
+        setdata(data)
+
+    });
+    return () => subscription.unsubscribe();
+
+
+
+ 
+}, [watch])
+
+ 
+const hundelresetfilters=()=>{
+    setselectedGovernorate({label:'',value:'',position:[0,0]})
+    setselectedMunicipality({label:'',value:'',position:[0,0]})
+
+    
+   // setValue('governorate','')
+    //reset()
+    console.log('before reset:',data)
+    reset()
+    console.log('after reset :',data)
+}
+
+
 
 
     const hundelgovchange=(e:MygovernorateType)=>{
         setselectedGovernorate({label:e.label,value:e.value as string,position:e.position as [number,number]})
         setselectedMunicipality({label:'',value:'',position:[0,0]})
+      //  reset({municipality:''})
         setValue('governorate',e.value as string)
-        setValue('municipality','')    
+        //setValue('municipality','')    
     }
 
 
@@ -67,26 +91,29 @@ useEffect(()=>{
         setValue('municipality',e.value as string)
     }
 
+    
 
     return ( 
-    <div  className="" >
+    <div  className=" rounded-xl" >
         
 
-              <div className="h-[7%] shadow-md mb-2 flex bg-white fixed  z-50 w-full">
+              <div className="h-[35px] shadow-md mb-2 flex bg-red fixed rounded-t-xl  z-50 w-full ">
                     <p className="flex-grow text-center">Filters</p>
                     <svg onClick={()=>show.setShowFilter(false)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 mr-4 cursor-pointer">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </div>
-              <form onSubmit={onSubmit} className='mx-auto mb-5 pt-14 pb-14'>
+              <form onSubmit={onSubmit} className='mx-auto mb-5 pt-12 pb-14 rounded-xl'>
 
-                                
+                                {formState.errors.governorate&&<p>{formState.errors.governorate.message}</p>}
                     <div className='flex flex-col md:flex-row gap-2  px-1  '>
 
                         <div className='w-full sm:w-1/2 self-center'>
 
                     <label htmlFor="governorate" className="font-medium">Governorate</label>
+                    
                         <Select
+                        value={selectedGovernorate}
                         id='governorate'
                         instanceId='governorate'
                         options={governorates}
@@ -111,24 +138,24 @@ useEffect(()=>{
                         </div>
                     </div>
 
-                    <div className="border border-white my-2 "></div>
+                    <div className="border rounded-xl border-white my-2 "></div>
 
                     <div className=' flex w-full sm:w-1/2 md:w-full gap-2  mx-auto px-[10%] justify-around'>
 
                         <div className='w-full sm:w-1/3 self-center  text-left'>
-                            <input onChange={(e)=>{setValue('propertyType',e.currentTarget.id)}} id='House' type='radio' name='property type'/>
+                            <input  onChange={(e)=>{setValue('propertyType',e.currentTarget.id)}} id='House' type='radio' name='property type' checked={data?.propertyType=='House'?true:false}/>
                             <label  htmlFor='House' >House</label>
                         </div>
                         
                         <div className='w-full sm:w-1/3 self-center text-center'>
 
-                            <input onChange={(e)=>{setValue('propertyType',e.currentTarget.id)}} id='Land' type='radio' name='property type'/>
+                            <input  onChange={(e)=>{setValue('propertyType',e.currentTarget.id)}} id='Land' type='radio' name='property type' checked={data?.propertyType=='Land'?true:false}/>
                             <label htmlFor='Land'>Land</label>
                         </div>
 
                         <div className='w-full sm:w-1/3 self-center text-right'>
 
-                            <input onChange={(e)=>{setValue('propertyType',e.currentTarget.id)}} id='' type='radio' name='property type'/>
+                            <input  onChange={(e)=>{setValue('propertyType',e.currentTarget.id)}} id='' type='radio' name='property type' checked={data?.propertyType==''?true:false}/>
                             <label htmlFor='Any'>Any</label>
                         </div>
 
@@ -279,12 +306,12 @@ useEffect(()=>{
                        
      
                     
-                    <div style={{boxShadow: '1px -4px 6px -5px rgb(0 0 0 / 0.1), 0 -2px -4px -2px rgb(0 0 0 / 0.1)'}} className="flex fixed z-50 h-[7%] bg-white bottom-0 w-full rounded-b-2xl pt-2	 ">
+                    <div style={{boxShadow: '1px -4px 6px -5px rgb(0 0 0 / 0.1), 0 -2px -4px -2px rgb(0 0 0 / 0.1)'}} className="flex fixed z-50 h-[45px] bg-white bottom-0 w-full rounded-b-xl pt-2	 ">
                         <div className="flex-grow  text-center ">
                     <button  type="submit" value="Submit" className="px-4 bg-red py-1 rounded hover:scale-105 active:scale-95">Search</button>
                     </div>
 
-                    <p className="cursor-pointer text-secondary1 mr-4">Reset filters</p>
+                    <p onClick={hundelresetfilters} className="cursor-pointer text-secondary1 mr-4">Reset filters</p>
 
                     </div>
                         </form>

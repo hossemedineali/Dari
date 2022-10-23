@@ -16,10 +16,8 @@ export const addpost=z.object({
 
 
 export const FilterInput =z.object({
-    governorate:z.string({
-        required_error:'required'
-    }),
-    municipality:z.string({required_error:'required'}),
+    governorate:z.string().optional(),
+    municipality:z.string().optional(),
     propertyType:z.string().optional(),                 //  house or land
     announcementtype:z.string().optional(), // sell Rent Corental
     landtype:z.string().optional(),        //buildable land or farmland
@@ -46,7 +44,7 @@ export type FilterInputType=z.infer<typeof FilterInput>
 
 export interface Filter {
     governorate?:string,
-    municipality:string,
+    municipality?:string,
     
     propertyType?:string,
     announcementtype?:string,

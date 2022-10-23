@@ -54,7 +54,7 @@ const Home: NextPageWithLayout = () => {
 
   <h1>properties for sell : </h1>
 <div className="flex justify-center  md:w-[96vw] w-[93vw] ">
-  <CardCarrousel type={'sell'} />
+  <CardCarrousel type={'Sell'} />
 </div> 
 
 

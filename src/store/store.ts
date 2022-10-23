@@ -92,18 +92,19 @@ const usefilter =create<filterstate>((set)=>({
 }))
 
 
-interface Test {
+interface Form {
     form:FilterInputType,
     setmunicipality:(value:string)=>void,
+    setannouncementtype:(value:string)=>void,
 }
 
-const usetest=create<Test>((set)=>({
+const useFormInput=create<Form>((set)=>({
     form:{
 
         governorate:'',
         municipality:'',
         propertyType:'',                 //  house or land
-        announcementtype:'', // sell Rent Corental
+        announcementtype:'Sell', // sell Rent Corental
         landtype:'',        //buildable land or farmland
         maxprice:0,
         minprice:0,
@@ -126,11 +127,21 @@ setmunicipality(value:string){
     set(()=>({
      
     }))
-}
+},
+
+setannouncementtype(value:string){
+    this.form.announcementtype=value,
+    set(()=>({
+     
+    }))
+},
+
+
+
     
 
 
 }))
 
 
- export{  useMode,useShowFilter,usefilter,Useauth,usetest};
+ export{  useMode,useShowFilter,Useauth,useFormInput};

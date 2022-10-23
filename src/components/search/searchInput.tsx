@@ -1,6 +1,6 @@
 
 import Select from "react-select";
-import {  usetest} from "../../store/store";
+import {  useFormInput} from "../../store/store";
 import { useRouter } from 'next/router'
 import {groupedcities,filterOption} from '../../utils/cities'
 import { useState } from "react";
@@ -22,7 +22,7 @@ const SearchInput:React.FC = () => {
     
 
     const [selectedMunError,setselectedMunError]=useState('')
-    const filter=usetest()    
+    const filter=useFormInput()    
     const router =useRouter()
     const hundelchange=(e:string)=>{
         if(e){
@@ -34,12 +34,9 @@ const SearchInput:React.FC = () => {
         }
     }
     const hundelclicksearch=()=>{
-        if(filter.form.municipality){
+        
             router.push('/search')
-        }
-        else{
-            setselectedMunError('please select a municipality')
-        }
+      
     }
     return (   
         <div className={`mt-4 flex  relative gap-4 bg-white border   rounded-2xl px-4 ${selectedMunError?'border-red':''}`}>           

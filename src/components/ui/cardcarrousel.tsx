@@ -27,6 +27,7 @@ const CardCarrousel:React.FC<p> = ({type}) => {
 
   const data=trpc.useQuery(['getpost.getpostforindexpage',{type}])
 
+
  
   const controle=useDragControls()
 

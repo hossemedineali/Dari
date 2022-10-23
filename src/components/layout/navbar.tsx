@@ -39,7 +39,7 @@ const Navbar = () => {
 
 <>
   <nav className="border-b-2 border-devider bg-white px-0 py-4 flex justify-between   w-full  fixed z-30 backdrop">
-
+    
 
     
    {!togglemenu&& <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 cursor-pointer sm:hidden" onClick={toggle}>
