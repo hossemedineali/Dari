@@ -1,5 +1,5 @@
 import Select from "react-select";
-import { usefilter} from "../../store/store";
+import { useFormInput} from "../../store/store";
 import { useRouter } from 'next/router'
 import {groupedcities,filterOption} from '../../utils/cities'
 import { useState } from "react";
@@ -21,7 +21,7 @@ const SearchBar:React.FC = () => {
     
 
     const [selectedMunError,setselectedMunError]=useState('')
-    const filter=usefilter()    
+    const filter=useFormInput()    
     const router =useRouter()
     const hundelchange=(e:string)=>{
         if(e){
