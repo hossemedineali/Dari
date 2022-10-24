@@ -9,6 +9,8 @@ and also look for Co rental
 
 -[X] add post error handling
 -[X] Implement reset filters
+-[X]  Modify the filters input for lands
+-[] add image size limitaions
 -[] add fetching user id and user favirites and own post and set them to global state
 
 -[] add To favorite logic(add to fav if user is logged and promt to login if not  )
@@ -16,12 +18,3 @@ and also look for Co rental
 -
 
 
-
--add options :
-
-1-maison 
-2-appartement
-3-villa
-4-local commercial 
-5-terrain 
-6-fond de commerce

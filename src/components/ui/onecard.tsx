@@ -48,7 +48,7 @@ let url=''
    
     return (
        
-  <motion.div  whileHover={{scale: 1.1}} className="relative  mr-4 w-[69vw] sm:w-[40vw] md:w-[300px] mb-4  ">
+  <motion.div  whileHover={{scale: 1.1}} className="relative  mr-4 w-[80vw] sm:w-[90vw] md:w-[350px] mb-4  ">
 	  <div className="shadow  rounded-lg bg-white ">
 		<div className="flex justify-center relative rounded-lg  ">
 		  <div className=" w-full h-[340px] " 

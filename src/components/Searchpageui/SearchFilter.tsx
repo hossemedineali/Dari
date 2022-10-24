@@ -156,13 +156,13 @@ const hundelresetfilters=()=>{
                     <div className=' flex w-full sm:w-1/2 md:w-full gap-2  mx-auto px-[10%] justify-around'>
 
                         <div className='w-full sm:w-1/3 self-center  text-left'>
-                            <input  onChange={(e)=>{setValue('propertyType',e.currentTarget.id)}} id='House' type='radio' name='property type' checked={data?.propertyType=='House'?true:false}/>
+                            <input  onChange={(e)=>{reset();setValue('propertyType',e.currentTarget.id)}} id='House' type='radio' name='property type' checked={data?.propertyType=='House'?true:false}/>
                             <label  htmlFor='House' >House</label>
                         </div>
                         
                         <div className='w-full sm:w-1/3 self-center text-center'>
 
-                            <input  onChange={(e)=>{setValue('propertyType',e.currentTarget.id)}} id='Land' type='radio' name='property type' checked={data?.propertyType=='Land'?true:false}/>
+                            <input  onChange={(e)=>{reset();setValue('propertyType',e.currentTarget.id); setValue('announcementtype','Sell');}} id='Land' type='radio' name='property type' checked={data?.propertyType=='Land'?true:false}/>
                             <label htmlFor='Land'>Land</label>
                         </div>
 
@@ -173,6 +173,30 @@ const hundelresetfilters=()=>{
                         </div>
 
                     </div>
+
+
+
+                    {data?.propertyType=='Land'?<>
+                    <div className="border border-white my-2 "></div>
+
+                        <p className='font-medium text-lg'> Land type :</p>
+                    <div className='flex  w-full sm:w-1/2 md:w-full gap-2  mx-auto px-[10%] justify-around'>
+
+                        <div> 
+                            <input onChange={(e)=>{if(e.currentTarget.checked){setValue('landtype','Buildable land')}} } id='Buildable land' type='radio' name='landtype' value='Buildable land' checked={data?.landtype=='Buildable land'?true:false}/>
+                            <label htmlFor='Sell' >Buildable land</label>
+                        </div>
+
+                        <div> 
+                            <input onChange={(e)=>{if(e.currentTarget.checked){setValue('landtype','farmland')}}} id='farmland' type='radio' name='landtype' value='farmland' checked={data?.landtype=='farmland'?true:false} />
+                            <label htmlFor='farmland' >Farm land</label>
+                        </div>   
+                    </div>
+                    </>:null}
+
+
+
+
 
                     <div className="border border-white my-2 "></div>
 
@@ -185,12 +209,12 @@ const hundelresetfilters=()=>{
                         </div>
 
                         <div> 
-                            <input onChange={(e)=>{if(e.currentTarget.checked){setValue('announcementtype','Rent')}}} id='Rent' type='radio' name='announcment type' value='Rent' checked={data?.announcementtype=='Rent'?true:false}/>
+                            <input onChange={(e)=>{if(e.currentTarget.checked){setValue('announcementtype','Rent')}}} id='Rent' type='radio' name='announcment type' value='Rent' checked={data?.announcementtype=='Rent'?true:false} disabled={data?.propertyType=='Land'}/>
                             <label htmlFor='Rent' >Rent</label>
                         </div>
 
                         <div> 
-                            <input onChange={(e)=>{if(e.currentTarget.checked){setValue('announcementtype','CoRental')} setValue('pricePer','')}} id='CoRental' type='radio' name='announcment type' value='CoRental' checked={data?.announcementtype=='CoRental'?true:false}/>
+                            <input onChange={(e)=>{if(e.currentTarget.checked){setValue('announcementtype','CoRental')} setValue('pricePer','')}} id='CoRental' type='radio' name='announcment type' value='CoRental' checked={data?.announcementtype=='CoRental'?true:false} disabled={data?.propertyType=='Land'}/>
                             <label htmlFor='CoRental' >CoRental</label>
                         </div>
                     </div>
@@ -249,7 +273,9 @@ const hundelresetfilters=()=>{
 
                         <div className="border border-white my-2 "></div>
 
-                    <p className='font-medium text-lg'> Rooms </p>
+                   {data?.propertyType!=='Land'? (
+                   <>
+                   <p className='font-medium text-lg'> Rooms </p>
 
                     <div className='flex  w-full sm:w-1/2 md:w-full gap-2  mx-auto px-[10%] justify-around'>
                             <div className='w-1/2'>
@@ -262,11 +288,11 @@ const hundelresetfilters=()=>{
                                 <input {...register('maxrooms',{valueAsNumber:true})} onChange={(e)=>{if(e.currentTarget.value==''){setValue('maxrooms',null)}}} id='maxrooms' type='number' className='w-full'/>
                             </div>
 
-                        </div>
+                        </div></>):null}
                     
 
                         <div className="border border-white my-2 "></div>
-
+                    {data?.propertyType!='Land'?<>
                     <p className='font-medium text-lg'> Features </p>
 
                     <div className='flex justify-evenly'>
@@ -317,6 +343,7 @@ const hundelresetfilters=()=>{
                         </div>
 
                     </div>
+                    </>:null}
                        
      
                     
