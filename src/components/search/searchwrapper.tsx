@@ -1,6 +1,6 @@
 
 
-import { useFormInput, useMode } from "../../store/store";
+import { useFormInput } from "../../store/store";
 import SearchInput from "./searchInput";
 
 
@@ -10,10 +10,8 @@ import SearchInput from "./searchInput";
 
 const Searchwrapper = () => {
 
-    const mode=useMode();
     const filter=useFormInput()    
 
-    console.log(filter.form)
 
         
 

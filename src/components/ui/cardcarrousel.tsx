@@ -20,13 +20,17 @@ import {data as Data} from '../../components/ui/onecard'
 
 
 type p={
-  type:string
+  type:string,
+  title:string,
+  setIsLoading: (value: boolean) => void;
 }
 
-const CardCarrousel:React.FC<p> = ({type}) => {
+const CardCarrousel:React.FC<p> = ({type,title,setIsLoading}) => {
 
   const data=trpc.useQuery(['getpost.getpostforindexpage',{type}])
 
+  if(data.isLoading){setIsLoading(true)}
+  if(data){setIsLoading(false)}
 
  
   const controle=useDragControls()
@@ -79,7 +83,11 @@ const hundelnextclick=()=>{
 
 
   return (
+    <div className='w-full '>
+
+    <h1>{title}</h1>
     <div className='w-full flex my-5 px-2 '>
+  
 
 <button className=' rounded-lg bg-devider hidden md:block' onClick={hundelprevclick}>
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -137,6 +145,7 @@ const hundelnextclick=()=>{
   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
 </svg>
 </button>
+        </div>
         </div>
    );
 }

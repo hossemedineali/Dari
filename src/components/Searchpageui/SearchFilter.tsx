@@ -25,23 +25,36 @@ const SearchFilter:React.FC<Props> = ({setfilterInput}) => {
     const [selectedGovernorate, setselectedGovernorate] = useState<State>({label:'',value:'',position:[0,0]})
     const munoptions=cities[selectedGovernorate.label]
     const [selectedMunicipality, setselectedMunicipality] = useState<State>({label:'',value:'',position:[0,0]})
-    
+    const [rez,setrez]=useState(false)
     const [data, setdata] = useState<FilterInputType>()
 
 
-    console.log('rendered')
+
    
     
 
     const show=useShowFilter()
 
 
-    const { watch,handleSubmit,setValue,reset, getValues,formState } = useForm< FilterInputType>({ 
+    const { register,watch,handleSubmit,setValue,reset, getValues,formState } = useForm< FilterInputType>({ 
         resolver:zodResolver(FilterInput) ,
+        defaultValues:{
+            maxprice:null,
+            minprice:null,
+            minsize:null,
+            maxsize:null,
+            minrooms:null,
+            maxrooms:null
+            
+        }
        
     });
   const onSubmit = handleSubmit((data) => {
     setfilterInput(data)
+    show.setShowFilter(false)
+    
+
+   
 });
 
 
@@ -70,6 +83,8 @@ const hundelresetfilters=()=>{
     //reset()
     console.log('before reset:',data)
     reset()
+    setrez(!rez)
+    rez
     console.log('after reset :',data)
 }
 
@@ -79,9 +94,7 @@ const hundelresetfilters=()=>{
     const hundelgovchange=(e:MygovernorateType)=>{
         setselectedGovernorate({label:e.label,value:e.value as string,position:e.position as [number,number]})
         setselectedMunicipality({label:'',value:'',position:[0,0]})
-      //  reset({municipality:''})
         setValue('governorate',e.value as string)
-        //setValue('municipality','')    
     }
 
 
@@ -97,7 +110,7 @@ const hundelresetfilters=()=>{
     <div  className=" rounded-xl" >
         
 
-              <div className="h-[35px] shadow-md mb-2 flex bg-red fixed rounded-t-xl  z-50 w-full ">
+              <div className="h-[35px] shadow-md mb-2 flex bg-white fixed rounded-t-xl  z-50 w-full ">
                     <p className="flex-grow text-center">Filters</p>
                     <svg onClick={()=>show.setShowFilter(false)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 mr-4 cursor-pointer">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -167,17 +180,17 @@ const hundelresetfilters=()=>{
                     <div className='flex  w-full sm:w-1/2 md:w-full gap-2  mx-auto px-[10%] justify-around'>
 
                         <div> 
-                            <input onChange={(e)=>{if(e.currentTarget.checked){setValue('announcementtype','Sell')}}} id='Sell' type='radio' name='announcment type' value='Sell'/>
+                            <input onChange={(e)=>{if(e.currentTarget.checked){setValue('announcementtype','Sell')} setValue('pricePer','')} } id='Sell' type='radio' name='announcment type' value='Sell' checked={data?.announcementtype=='Sell'?true:false}/>
                             <label htmlFor='Sell' >Sell</label>
                         </div>
 
                         <div> 
-                            <input onChange={(e)=>{if(e.currentTarget.checked){setValue('announcementtype','Rent')}}} id='Rent' type='radio' name='announcment type' value='Rent'/>
+                            <input onChange={(e)=>{if(e.currentTarget.checked){setValue('announcementtype','Rent')}}} id='Rent' type='radio' name='announcment type' value='Rent' checked={data?.announcementtype=='Rent'?true:false}/>
                             <label htmlFor='Rent' >Rent</label>
                         </div>
 
                         <div> 
-                            <input onChange={(e)=>{if(e.currentTarget.checked){setValue('announcementtype','CoRental')}}} id='CoRental' type='radio' name='announcment type' value='CoRental'/>
+                            <input onChange={(e)=>{if(e.currentTarget.checked){setValue('announcementtype','CoRental')} setValue('pricePer','')}} id='CoRental' type='radio' name='announcment type' value='CoRental' checked={data?.announcementtype=='CoRental'?true:false}/>
                             <label htmlFor='CoRental' >CoRental</label>
                         </div>
                     </div>
@@ -191,27 +204,28 @@ const hundelresetfilters=()=>{
                           
                             <div className='w-1/2'>
                                 <label  htmlFor='min'>min</label><br/>
-                                <input onChange={(e)=>{ if(e.currentTarget.value){setValue('minprice',parseFloat(e.currentTarget.value) )} else{setValue('minprice',0)}}} id='min' type='number' className='w-full'/>
+                                <input {...register('minprice',{valueAsNumber:true})} onChange={(e)=>{if(e.currentTarget.value==''){setValue('minprice',null)}}} id='min' type='number' className='w-full'/>
                             </div>
 
                             <div className='w-1/2'>
                                 <label htmlFor='max'>max</label><br/>
-                                <input onChange={(e)=>{ if(e.currentTarget.value){setValue('maxprice',parseFloat(e.currentTarget.value) )} else{setValue('maxprice',0)}}} id='max' type='number' className='w-full'/>
+                                <input {...register('maxprice',{valueAsNumber:true})} onChange={(e)=>{if(e.currentTarget.value==''){setValue('maxprice',null)}}} id='max' type='number' className='w-full'/>
+                                
                             </div>
                             
                         </div>
                         
-                        <div className='flex  w-full sm:w-1/2 md:w-full gap-2  mx-auto px-[10%] justify-around' >
+                        {data?.announcementtype=='Rent'&&<div className='flex  w-full sm:w-1/2 md:w-full gap-2  mx-auto px-[10%] justify-around' >
                                 <div> 
-                                    <input onChange={(e)=>{setValue("pricePer",e.currentTarget.id)}} id='Mounth' type='radio' name='pricePer'/>
-                                    <label htmlFor='Mounth' >Mounth</label>
+                                    <input  onChange={(e)=>{setValue("pricePer",e.currentTarget.id)}} id='Mounth' type='radio' name='pricePer' checked={data?.pricePer=='Mounth'?true:false}/>
+                                    <label  htmlFor='Mounth' >Mounth</label>
                                 </div>
 
                                 <div> 
-                                    <input id='Day' type='radio' name='pricePer'/>
+                                    <input id='Day' type='radio' name='pricePer' onChange={(e)=>{setValue("pricePer",e.currentTarget.id)}} checked={data?.pricePer=='Day'?true:false}/>
                                     <label htmlFor='Day' >Day</label>
                                 </div>
-                            </div>
+                            </div>}
 
 
 
@@ -223,12 +237,12 @@ const hundelresetfilters=()=>{
                         <div className='flex  w-full sm:w-1/2 md:w-full gap-2  mx-auto px-[10%] justify-around'>
                             <div className='w-1/2'>
                                 <label  htmlFor='minsize'>min</label><br/>
-                                <input onChange={(e)=>{ if(e.currentTarget.value){setValue('minsize',parseFloat(e.currentTarget.value) )} else{setValue('minsize',0)}}} id='minsize' type='number' className='w-full'/>
+                                <input {...register('minsize',{valueAsNumber:true})} onChange={(e)=>{if(e.currentTarget.value==''){setValue('minsize',null)}}} id='minsize' type='number' className='w-full'/>
                             </div>
 
                             <div className='w-1/2'>
                                 <label htmlFor='maxsize'>max</label><br/>
-                                <input onChange={(e)=>{ if(e.currentTarget.value){setValue('maxsize',parseFloat(e.currentTarget.value) )} else{setValue('maxsize',0)}}} id='maxsize' type='number' className='w-full'/>
+                                <input {...register('maxsize',{valueAsNumber:true})} onChange={(e)=>{if(e.currentTarget.value==''){setValue('maxsize',null)}}} id='maxsize' type='number' className='w-full'/>
                             </div>
 
                         </div>
@@ -239,13 +253,13 @@ const hundelresetfilters=()=>{
 
                     <div className='flex  w-full sm:w-1/2 md:w-full gap-2  mx-auto px-[10%] justify-around'>
                             <div className='w-1/2'>
-                                <label htmlFor='minsize'>min</label><br/>
-                                <input onChange={(e)=>{ if(e.currentTarget.value){setValue('minrooms',parseFloat(e.currentTarget.value) )} else{setValue('minrooms',0)}}} id='minsize' type='number' className='w-full'/>
+                                <label htmlFor='minrooms'>min</label><br/>
+                                <input {...register('minrooms',{valueAsNumber:true})} onChange={(e)=>{if(e.currentTarget.value==''){setValue('minrooms',null)}}} id='minrooms' type='number' className='w-full'/>
                             </div>
 
                             <div className='w-1/2'>
-                                <label htmlFor='maxsize'>max</label><br/>
-                                <input onChange={(e)=>{ if(e.currentTarget.value){setValue('maxrooms',parseFloat(e.currentTarget.value) )} else{setValue('maxrooms',0)}}} id='maxsize' type='number' className='w-full'/>
+                                <label htmlFor='maxrooms'>max</label><br/>
+                                <input {...register('maxrooms',{valueAsNumber:true})} onChange={(e)=>{if(e.currentTarget.value==''){setValue('maxrooms',null)}}} id='maxrooms' type='number' className='w-full'/>
                             </div>
 
                         </div>
@@ -258,22 +272,22 @@ const hundelresetfilters=()=>{
                     <div className='flex justify-evenly'>
                         <div>
                                 <div> 
-                                    <input onChange={(e)=>{setValue('Garage',e.currentTarget.checked)}} id='Garage' type='checkbox'/>
+                                    <input onChange={(e)=>{setValue('Garage',e.currentTarget.checked)}} id='Garage' type='checkbox' checked={data?.Garage}/>
                                     <label htmlFor='Garage' >Garage</label>
                                 </div>
 
                                 <div> 
-                                    <input onChange={(e)=>{setValue('Balcony',e.currentTarget.checked)}} id='Balcony' type='checkbox'/>
+                                    <input onChange={(e)=>{setValue('Balcony',e.currentTarget.checked)}} id='Balcony' type='checkbox' checked={data?.Balcony}/>
                                     <label htmlFor='Balcony' >Balcony</label>
                                 </div>
 
                                 <div> 
-                                    <input onChange={(e)=>{setValue('OutdoorArea',e.currentTarget.checked)}} id='OutdoorArea' type='checkbox'/>
+                                    <input onChange={(e)=>{setValue('OutdoorArea',e.currentTarget.checked)}} id='OutdoorArea' type='checkbox' checked={data?.OutdoorArea}/>
                                     <label htmlFor='OutdoorArea' >OutdoorArea</label>
                                 </div>
 
                                 <div> 
-                                    <input onChange={(e)=>{setValue('SwimmingPool',e.currentTarget.checked)}} id='SwimmingPool' type='checkbox'/>
+                                    <input onChange={(e)=>{setValue('SwimmingPool',e.currentTarget.checked)}} id='SwimmingPool' type='checkbox' checked={data?.SwimmingPool}/>
                                     <label htmlFor='SwimmingPool' >SwimmingPool</label>
                                 </div>
                             
@@ -281,22 +295,22 @@ const hundelresetfilters=()=>{
                         <div>
 
                                 <div> 
-                                    <input onChange={(e)=>{setValue('UndercoverParking',e.currentTarget.checked)}} id='UndercoverParking' type='checkbox'/>
+                                    <input onChange={(e)=>{setValue('UndercoverParking',e.currentTarget.checked)}} id='UndercoverParking' type='checkbox' checked={data?.UndercoverParking}/>
                                     <label htmlFor='UndercoverParking' >Parking</label>
                                 </div>
 
                                 <div> 
-                                    <input onChange={(e)=>{setValue('airConditioning',e.currentTarget.checked)}} id='airConditioning' type='checkbox'/>
+                                    <input onChange={(e)=>{setValue('airConditioning',e.currentTarget.checked)}} id='airConditioning' type='checkbox' checked={data?.airConditioning}/>
                                     <label htmlFor='airConditioning' >air Conditioning</label>
                                 </div>
 
                                 <div> 
-                                    <input onChange={(e)=>{setValue('solarPanels',e.currentTarget.checked)}} id='solarPanels' type='checkbox'/>
+                                    <input onChange={(e)=>{setValue('solarPanels',e.currentTarget.checked)}} id='solarPanels' type='checkbox' checked={data?.solarPanels}/>
                                     <label htmlFor='solarPanels' >solar Panels</label>
                                 </div>
 
                                 <div> 
-                                    <input onChange={(e)=>{setValue('SolarHotwater',e.currentTarget.checked)}} id='SolarHotwater' type='checkbox'/>
+                                    <input onChange={(e)=>{setValue('SolarHotwater',e.currentTarget.checked)}} id='SolarHotwater' type='checkbox' checked={data?.SolarHotwater}/>
                                     <label htmlFor='SolarHotwater' >Solar Hotwater</label>
                                 </div>
 

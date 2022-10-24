@@ -9,6 +9,8 @@ import { NextPageWithLayout } from "./_app";
 import CardCarrousel from "../components/ui/cardcarrousel";
 
 import hero2 from '../../public/hero2.png'
+import { useState } from "react";
+import Loader from "../components/loader/loader";
 
 
 
@@ -19,6 +21,8 @@ import hero2 from '../../public/hero2.png'
 
 
 const Home: NextPageWithLayout = () => {
+
+  const [IsLoading, setIsLoading] = useState(false)
 
   
 
@@ -51,23 +55,26 @@ const Home: NextPageWithLayout = () => {
 
 
 
+{IsLoading&&<div className=" px-auto">
+  <Loader/>
+  </div>}
 
-  <h1>properties for sell : </h1>
-<div className="flex justify-center  md:w-[96vw] w-[93vw] ">
-  <CardCarrousel type={'Sell'} />
-</div> 
-
-
-<h1>properties for Rent : </h1>
-<div className="flex justify-center  md:w-[96vw] w-[93vw] ">
-  <CardCarrousel type={'Rent'} />
-</div> 
+  
+{!IsLoading&&<div className="flex justify-center  md:w-[96vw] w-[93vw] ">
+  <CardCarrousel setIsLoading={setIsLoading} title="properties for sell :" type={'Sell'} />
+</div>} 
 
 
-<h1>Poeoples looking fo CoRental : </h1>
-<div className="flex justify-center  md:w-[96vw] w-[93vw] ">
-  <CardCarrousel type={'CoRental'} />
-</div> 
+
+{!IsLoading&&<div className="flex justify-center  md:w-[96vw] w-[93vw] ">
+  <CardCarrousel setIsLoading={setIsLoading} title="properties for Rent :" type={'Rent'} />
+</div> }
+
+
+
+{!IsLoading&&<div className="flex justify-center  md:w-[96vw] w-[93vw] ">
+  <CardCarrousel setIsLoading={setIsLoading} title="Poeoples looking fo CoRental :" type={'CoRental'} />
+</div> }
 
  
 </main>

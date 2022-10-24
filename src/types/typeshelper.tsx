@@ -21,13 +21,13 @@ export const FilterInput =z.object({
     propertyType:z.string().optional(),                 //  house or land
     announcementtype:z.string().optional(), // sell Rent Corental
     landtype:z.string().optional(),        //buildable land or farmland
-    maxprice:z.number().optional(),
-    minprice:z.number().optional(),
-    pricePer:z.string().optional(),
-    minrooms:z.number().optional(),
-    maxrooms:z.number().optional(),
-    minsize:z.number().optional(),
-    maxsize:z.number().optional(),
+    maxprice:z.number().optional().nullish(),
+    minprice:z.number().optional().nullish(),
+    pricePer:z.string().optional().nullish(),
+    minrooms:z.number().optional().nullish(),
+    maxrooms:z.number().optional().nullish(),
+    minsize:z.number().optional().nullish(),
+    maxsize:z.number().optional().nullish(),
     Garage: z.boolean().optional(),
     Balcony: z.boolean().optional(),
     OutdoorArea: z.boolean().optional(),

@@ -8,7 +8,7 @@ and also look for Co rental
 10/16/2022
 
 -[X] add post error handling
-
+-[X] Implement reset filters
 -[] add fetching user id and user favirites and own post and set them to global state
 
 -[] add To favorite logic(add to fav if user is logged and promt to login if not  )

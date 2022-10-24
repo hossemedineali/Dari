@@ -4,8 +4,9 @@ import { trpc } from "../utils/trpc";
 import {FilterInputType } from '../types/typeshelper'
 import OneCard from "../components/ui/onecard";
 import SearchFilter from "../components/Searchpageui/SearchFilter";
+import Loader from "../components/loader/loader";
 
-
+import no from '../../public/no.png'
 
 
 const Search = () => {
@@ -16,15 +17,12 @@ const Search = () => {
    
 
     const formInput=useFormInput()
-    console.log("formInput.form",formInput.form)
     const [filterInput, setfilterInput] = useState<FilterInputType >(formInput.form)
 
  
 
     const data=trpc.useQuery(['getpost.getfiltredposts',{  ...filterInput}])
 
-    console.log(data)
-   // const data=trpc.useQuery(['getpost.getpostforindexpage',{type:'Sell'}])
 
     return (
         <div  className="relative top-16 pt-1  ">
@@ -71,7 +69,34 @@ const Search = () => {
                     return <OneCard id={itm.id} images={itm.images as string} announcementtype={itm.announcementtype} price={itm.price} pricePer={itm.pricePer as string} governorate={itm.governorate} municipality={itm.municipality} rooms={itm.rooms} size={itm.size} propertyType={itm.propertyType} key={idx}/>
                 })}
             </div>}  
-                </div>
+
+            {data.data?.length==0&&
+                    <div  >
+                        <div style={{
+                            backgroundImage: `url(${no.src})`,
+                            backgroundSize:'contain' ,
+                            backgroundPosition: 'center', 
+                            backgroundRepeat:'no-repeat'
+                            }}    className="m-auto  h-[200px] w-[225px] flex justify-center ">
+                          
+                        
+                        </div>
+
+                        <div className="flex flex-col justify-center  ">
+                        <p className="m-auto"><span className="font-medium">Sorry! </span>We couldn&apos;t find a match {filterInput.municipality&&filterInput.governorate?`in ${filterInput.municipality}`:''} {filterInput.governorate&&!filterInput.municipality?` in ${filterInput.governorate}`:''} </p>
+                                  <button onClick={()=>show.setShowFilter(true)} className="m-4 bg-primary1 max-w-max mx-auto p-1 rounded-xl hover:scale-105">Search again ?</button>  
+                                  <p className="m-auto"><span className="font-medium">Hint : </span> Try to be less specefic</p>
+                        </div>
+
+                                
+                    </div>}
+            {data.isLoading&&<div className="w-full  flex justify-center items-center m-auto ">
+                <Loader/>
+                </div>}
+
+
+
+            </div>
     </div> );
 }
  
