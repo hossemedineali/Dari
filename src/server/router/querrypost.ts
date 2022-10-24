@@ -1,5 +1,5 @@
 import { createRouter } from "./context";
-import {   z} from "zod";
+import {   string, z} from "zod";
 import {Filter} from '../../types/typeshelper'
  import {FilterInput} from '../../types/typeshelper'
 
@@ -41,6 +41,7 @@ export const getpost =createRouter()
         }
     })
 
+  
     .query('getfiltredposts',{
         input:FilterInput,
         async resolve({input,ctx}){
@@ -176,3 +177,23 @@ export const getpost =createRouter()
             })  
         }
     })
+
+
+    .query('onepost',{
+        input:z.object({
+            id:z.string(),
+            
+        }),
+        async resolve({input,ctx}){
+
+            
+            return await ctx.prisma.post.findUnique({
+                where:{
+                    id:input.id
+                }
+            })
+        }
+    })
+
+
+ 

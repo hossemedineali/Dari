@@ -9,7 +9,7 @@ import {FilterInputType, FilterInput,State} from '../../types/typeshelper'
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useShowFilter } from '../../store/store';
+import { useFormInput, useShowFilter } from '../../store/store';
 
 
 
@@ -29,7 +29,9 @@ const SearchFilter:React.FC<Props> = ({setfilterInput}) => {
     const [data, setdata] = useState<FilterInputType>()
 
 
+const forminput=useFormInput()
 
+//console.log('**********',forminput.form)
    
     
 
@@ -38,7 +40,7 @@ const SearchFilter:React.FC<Props> = ({setfilterInput}) => {
 
     const { register,watch,handleSubmit,setValue,reset, getValues,formState } = useForm< FilterInputType>({ 
         resolver:zodResolver(FilterInput) ,
-        defaultValues:{
+        /* defaultValues:{
             maxprice:null,
             minprice:null,
             minsize:null,
@@ -46,10 +48,13 @@ const SearchFilter:React.FC<Props> = ({setfilterInput}) => {
             minrooms:null,
             maxrooms:null
             
-        }
+        } */
+
+        defaultValues:forminput.form
        
     });
   const onSubmit = handleSubmit((data) => {
+    forminput.setform(data)
     setfilterInput(data)
     show.setShowFilter(false)
     

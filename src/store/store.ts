@@ -96,6 +96,7 @@ interface Form {
     form:FilterInputType,
     setmunicipality:(value:string)=>void,
     setannouncementtype:(value:string)=>void,
+    setform:(value:FilterInputType)=>void
 }
 
 const useFormInput=create<Form>((set)=>({
@@ -106,13 +107,13 @@ const useFormInput=create<Form>((set)=>({
         propertyType:'',                 //  house or land
         announcementtype:'Sell', // sell Rent Corental
         landtype:'',        //buildable land or farmland
-        maxprice:0,
-        minprice:0,
+        maxprice:null,
+        minprice:null,
         pricePer:'',
-    minrooms:0,
-    maxrooms:0,
-    minsize:0,
-    maxsize:0,
+    minrooms:null,
+    maxrooms:null,
+    minsize:null,
+    maxsize:null,
     Garage: false,
     Balcony: false,
     OutdoorArea: false,
@@ -135,6 +136,10 @@ setannouncementtype(value:string){
      
     }))
 },
+
+setform(value:FilterInputType){
+    this.form=value
+}
 
 
 

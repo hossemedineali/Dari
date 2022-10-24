@@ -17,6 +17,8 @@ const Search = () => {
    
 
     const formInput=useFormInput()
+
+    console.log('||||' ,formInput.form)
     const [filterInput, setfilterInput] = useState<FilterInputType >(formInput.form)
 
  
