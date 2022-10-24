@@ -38,7 +38,7 @@ const Post = () => {
         
             {/* map */}
                 {post.data?.isposition&&<div className='  md:pt-6 w-full md:w-4/6 md:h-[85vh] h-[45vh] flex '>
-                 <div className='w-full '><MapWithNoSSR setposition={()=>{}} position={[post.data?.lng as number,post.data?.lat as number]}/></div>
+                 <div className='w-full '><MapWithNoSSR setposition={()=>{return null}} position={[post.data?.lng as number,post.data?.lat as number]}/></div>
                 </div>}
             </div>
        
@@ -211,7 +211,7 @@ const show=props.Garage||props.Balcony||props.OutdoorArea||props.SolarHotwater||
 
 if(show)  {return<div className='flex flex-wrap gap-6 mt-6'>
         {Object.keys(props).map(item=>{
-            return <div className='border w-2/5 text-center py-2 break-all'>
+            return <div className='border w-2/5 text-center py-2 break-all' key={item}>
                             {item}
             </div>
         })}
