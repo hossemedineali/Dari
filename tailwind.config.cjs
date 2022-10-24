@@ -14,7 +14,8 @@ module.exports = {
       'secondary2':'#ffbf69',
       'red'       :'#ef2d2d',
       'devider':'#F1F2EC',
-      'smallText':'#B5985A'
+      'smallText':'#B5985A',
+      'green':'#1fcf4e',
 
 
     },
