@@ -25,7 +25,7 @@ const Layout :React.FC<porps>= (props)=> {
         
 
             {props.children}
-        {router.route!='/Addpost'&&<AddPostForMobile/>}
+        {router.route!='/add'&&<AddPostForMobile/>}
         </>
         
      );

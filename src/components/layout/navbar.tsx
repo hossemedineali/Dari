@@ -5,11 +5,12 @@ import MobileMenu from "./mobilemenu";
 
 import { useRouter } from 'next/router'
 
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signIn } from "next-auth/react"
 import { Useauth } from "../../store/store";
 import SigninModal from "./signinModal";
 
 import Link from 'next/link'
+import UserIcon from "./userIcon";
 const links=[
   'Buy','Rent','Find coRental'
 ]
@@ -72,8 +73,7 @@ const Navbar = () => {
 
 
             {!sesssion&& <button className="hover:scale-105 active:scale-95 py-1 px-3 mr-2  bg-primary1 text-white py-auto rounded-lg" onClick={()=>signIn()} >signin</button>}
-            {sesssion&&<button className="hover:scale-105 active:scale-95 py-1 px-3 mr-2  bg-primary1 text-white py-auto rounded-lg" onClick={()=>signOut()} >Logout </button>}
-          
+          {sesssion&&<div><UserIcon/></div>}
 
 
     {togglemenu&&<MobileMenu/>}
@@ -91,3 +91,9 @@ export default Navbar;
 
 
 
+
+
+/*
+            {sesssion&&<button className="hover:scale-105 active:scale-95 py-1 px-3 mr-2  bg-primary1 text-white py-auto rounded-lg" onClick={()=>signOut()} >Logout </button>}
+
+*/

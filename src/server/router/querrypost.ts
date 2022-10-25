@@ -194,6 +194,18 @@ export const getpost =createRouter()
             })
         }
     })
+    .query('UserListing',{
+        input:z.object({
+            auther:z.string()
+        }),
+        async resolve({input,ctx}){
+            return await ctx.prisma.post.findMany({
+                where:{
+                    auther:input.auther
+                }
+            })
+        }
+    })
 
 
  

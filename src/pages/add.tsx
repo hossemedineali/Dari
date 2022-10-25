@@ -47,18 +47,14 @@ export const form=z.object({
         required_error:'Please provide a contact'
     }).regex(/^[0-9]{2}[-]*[0-9]{3}[-]*[0-9]{3}$/,{message:'Enter a valid phone number ex:22-000-000'}),
 
-    
-    //regex(/^([0-9]{2})[ \\-]*)*?[0-9]{3}?[ \\-]*[0-9]{3}?$/),
     description:z.string().default('')
-    
-    
 
  })
 
- const imgtype=z.array(z.string())
- type Imgtype=z.infer<typeof imgtype>
+ //const imgtype=z.array(z.string())
+ //type Imgtype=z.infer<typeof imgtype>
 
-type Form =z.infer<typeof form>;
+//type Form =z.infer<typeof form>;
 
 
 
@@ -95,9 +91,6 @@ const AddPost = () => {
             const munoptions=cities[selectedGovernorate.label]
             const mode=useMode()
         
-               console.log('selected mun :',selectedMunicipality)
-
-           console.log('selected gov :',selectedGovernorate)
             
 
         

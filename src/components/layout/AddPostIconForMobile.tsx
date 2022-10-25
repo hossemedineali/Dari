@@ -13,7 +13,9 @@ const AddPostForMobile = () => {
     
    const router=useRouter()
 
+   console.log(router.route)
     const { data:sesssion } = useSession()
+
 
     const handelClick=()=>{
         if(sesssion){

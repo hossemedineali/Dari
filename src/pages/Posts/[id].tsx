@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { trpc } from '../../utils/trpc'
+import {motion } from 'framer-motion'
 
 import Image from 'next/image'
 import MapWithNoSSR from '../../components/maps/mapWithNoSSR'
@@ -9,10 +10,8 @@ const Post = () => {
    
    const id=Object.values(router.query)[0]
      const post =trpc.useQuery(['getpost.onepost',{id :id as string}])
-   console.log('##############',post.data)
   
 
-   console.log(router.query)
     return ( <div className='relative h-64  top-0 '>
 
         
@@ -31,7 +30,7 @@ const Post = () => {
                     <Info propertyType={post.data?.propertyType} announcementtype={post.data?.announcementtype} 
                     governorate={post.data?.governorate} municipalities={post.data?.municipality} size={post.data?.size} 
                     rooms={post.data?.rooms} price={post.data?.price} priceper={post.data?.pricePer}/>
-                    <div className='hidden md:block h-20 '>
+                    <div className='hidden md:block  my-auto'>
                                         <Features Garage={post.data?.Garage} Balcony={post.data?.Balcony} OutdoorArea={post.data?.OutdoorArea} SolarHotwater={post.data?.SolarHotwater} SwimmingPool={post.data?.SwimmingPool} UndercoverParking={post.data?.UndercoverParking} airConditioning={post.data?.airConditioning} solarPanels={post.data?.solarPanels}/>
                     </div>
                 </div>
@@ -43,7 +42,7 @@ const Post = () => {
             </div>
        
        
-        <div className='w-full h-[50vh] md:hidden '>
+        <div className='w-full  md:hidden '>
             <h1 className='text-2xl '>Features </h1>
         <Features Garage={post.data?.Garage} Balcony={post.data?.Balcony} OutdoorArea={post.data?.OutdoorArea} SolarHotwater={post.data?.SolarHotwater} SwimmingPool={post.data?.SwimmingPool} UndercoverParking={post.data?.UndercoverParking} airConditioning={post.data?.airConditioning} solarPanels={post.data?.solarPanels}/>
         </div>
@@ -82,7 +81,6 @@ const Photos:React.FC<{images:string|null|undefined}>=({images})=>{
     const photos=images?.split(',')
     const [currentPhoto,setcurrentPhoto]=useState(0)
 
-    console.log(currentPhoto)
 
 let url
     if(photos){
@@ -125,7 +123,10 @@ return <div className='w-full h-full  absolute '>
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
             </svg>
         </span>
+        <motion.div draggable>
  {  <Image  src={url as string} layout='fill' objectFit='fill' />     } 
+
+        </motion.div >  
 
         <span onClick={forWard} className='absolute top-[50%]  right-0'> 
 
@@ -209,14 +210,18 @@ const Features:React.FC<Featuresprops>=(props)=>{
 
 const show=props.Garage||props.Balcony||props.OutdoorArea||props.SolarHotwater||props.SwimmingPool||props.UndercoverParking||props.airConditioning||props.solarPanels
 
-if(show)  {return<div className='flex flex-wrap gap-6 mt-6'>
-        {Object.keys(props).map(item=>{
-            return <div className='border w-2/5 text-center py-2 break-all' key={item}>
-                            {item}
-            </div>
+if(show)  {return<div className='flex flex-wrap gap-6 mt-6 justify-center content-end '>
+        {Object.entries(props).map((key,index)=>{
+                if(key[1]==true)return <div className='border w-2/5 text-center py-2 break-all' key={index}>
+                {key[0]}
+</div>
+                
         })}
 </div>}
 else{return null}
 }
  
 export default Post;
+
+
+

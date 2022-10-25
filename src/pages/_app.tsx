@@ -11,6 +11,7 @@ import type { Session } from "next-auth";
 import type { ReactElement, ReactNode } from 'react'
 import type { NextPage } from 'next'
 
+import { AnimatePresence } from "framer-motion"
 
 import "../styles/globals.css";
 
@@ -36,6 +37,7 @@ const MyApp: AppType<AppPropsWithLayout> = ({
   
   return (
     <SessionProvider session={session}>
+      <AnimatePresence>
       <Layout>
 
       <ThemeProvider>
@@ -44,7 +46,7 @@ const MyApp: AppType<AppPropsWithLayout> = ({
       
       </ThemeProvider>
       </Layout>
-      
+      </AnimatePresence>
     </SessionProvider>
   );
 };
