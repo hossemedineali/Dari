@@ -23,32 +23,19 @@ type Props={
 const SearchFilter:React.FC<Props> = ({setfilterInput}) => {
     
     const [selectedGovernorate, setselectedGovernorate] = useState<State>({label:'',value:'',position:[0,0]})
-    const munoptions=cities[selectedGovernorate.label]
     const [selectedMunicipality, setselectedMunicipality] = useState<State>({label:'',value:'',position:[0,0]})
-    const [rez,setrez]=useState(false)
+    const munoptions=cities[selectedGovernorate.label]
+   // const [rez,setrez]=useState(false)
     const [data, setdata] = useState<FilterInputType>()
 
 
-const forminput=useFormInput()
-
-//console.log('**********',forminput.form)
-   
-    
-
+    const forminput=useFormInput()
     const show=useShowFilter()
 
 
     const { register,watch,handleSubmit,setValue,reset, getValues,formState } = useForm< FilterInputType>({ 
         resolver:zodResolver(FilterInput) ,
-        /* defaultValues:{
-            maxprice:null,
-            minprice:null,
-            minsize:null,
-            maxsize:null,
-            minrooms:null,
-            maxrooms:null
-            
-        } */
+     
 
         defaultValues:forminput.form
        
@@ -58,10 +45,9 @@ const forminput=useFormInput()
     setfilterInput(data)
     show.setShowFilter(false)
     
+        });
 
-   
-});
-
+        
 
 
 useEffect(() => {
@@ -73,9 +59,6 @@ useEffect(() => {
     });
     return () => subscription.unsubscribe();
 
-
-
- 
 }, [watch])
 
  
@@ -83,13 +66,10 @@ const hundelresetfilters=()=>{
     setselectedGovernorate({label:'',value:'',position:[0,0]})
     setselectedMunicipality({label:'',value:'',position:[0,0]})
 
-    
-   // setValue('governorate','')
-    //reset()
     console.log('before reset:',data)
     reset()
-    setrez(!rez)
-    rez
+ //   setrez(!rez)
+   // rez
     console.log('after reset :',data)
 }
 

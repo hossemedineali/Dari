@@ -1,7 +1,8 @@
 import { createRouter } from "./context";
-import {   string, z} from "zod";
+import {    z} from "zod";
 import {Filter} from '../../types/typeshelper'
  import {FilterInput} from '../../types/typeshelper'
+
 
 
 
@@ -196,16 +197,20 @@ export const getpost =createRouter()
     })
     .query('UserListing',{
         input:z.object({
-            auther:z.string()
+            auther:z.string().optional()
         }),
         async resolve({input,ctx}){
-            return await ctx.prisma.post.findMany({
-                where:{
-                    auther:input.auther
-                }
-            })
+            if(input.auther){
+
+                
+                return await ctx.prisma.post.findMany({
+                    where:{
+                        auther:input.auther
+                    }
+                })
+            }
         }
-    })
+        })
 
 
  

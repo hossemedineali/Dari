@@ -32,7 +32,7 @@ const SearchBar:React.FC = () => {
    
     
     return (   
-        <div className={`mt-4 flex  relative gap-4 bg-white border   rounded-2xl px-4 `}>           
+        <div className={`mt-4 flex  relative gap-4 bg-red border   rounded-2xl px-4 `}>           
         <div className="flex-grow">      
         <Select 
             instanceId=" municipalities"

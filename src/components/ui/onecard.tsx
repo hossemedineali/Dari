@@ -3,7 +3,7 @@ import {motion} from 'framer-motion'
 
 import Tooltip from '../layout/tooltip'
 
-
+import { trpc } from '../../utils/trpc'
 
 
 
@@ -27,6 +27,7 @@ export interface data{
 
 const OneCard:React.FC<data> = (item) => {
 
+    const addToFav=trpc.useMutation('')
    
     function capitalizeFirstLetter(string :string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -44,6 +45,10 @@ let url=''
          url="https://res.cloudinary.com/dou8jjade/image/upload/v1665870510/"+image[0]+".jpg"
     }
 
+        const addToFaorites=(id:string)=>{
+            addToFav.mutate({postid:id})
+
+        }
 
    
     return (
@@ -60,7 +65,7 @@ let url=''
 
 		  </div>
 
-          <span onClick={()=>{console.log('add to favorite',item.id)}} className="absolute  top-0 right-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg  bg-red-500 text-sm font-medium text-white  select-none ">
+          <span onClick={()=>{addToFaorites(item.id)}} className="absolute  top-0 right-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg  bg-red-500 text-sm font-medium text-white  select-none ">
           <Tooltip text='add to favorites' >
 
           <svg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="cursor-pointer  w-6 h-6 ">

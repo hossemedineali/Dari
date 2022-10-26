@@ -18,6 +18,7 @@ import "../styles/globals.css";
 import { ThemeProvider } from "../context/context";
 
 import Layout from "../components/layout/layout";
+import { trpc } from "../utils/trpc";
 
 
 export type NextPageWithLayout<P = unknown, IP = P> = NextPage<P, IP> & {
@@ -34,7 +35,18 @@ const MyApp: AppType<AppPropsWithLayout> = ({
   pageProps: { session, ...pageProps },
 }) => {
 
-  
+  const user=trpc.useQuery(['getUser'])
+
+  console.log('user from _app.tsx',user)
+    if(typeof window !='undefined'){
+      localStorage.setItem('user',JSON.stringify(user.data))
+
+    }
+
+    
+
+   
+
   return (
     <SessionProvider session={session}>
       <AnimatePresence>

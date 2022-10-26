@@ -3,7 +3,9 @@ import { createRouter } from "./context";
 import superjson from "superjson";
 import { addPost } from "./addpost";
 import { getpost } from "./querrypost";
-
+import {Delete} from './Delete'
+import { getUser } from "./getuser";
+import {addLiked} from './addLiked'
 
 
 
@@ -13,6 +15,9 @@ export const appRouter = createRouter()
  
   .merge("add.",addPost)
   .merge("getpost.",getpost)
+  .merge('delete.',Delete)
+  .merge('',getUser)
+  .merge('',addLiked)
   ;
 
 
