@@ -8,7 +8,7 @@ import type { AppType,AppProps } from "next/app";
 import type { AppRouter } from "../server/router";
 import type { Session } from "next-auth";
 
-import type { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode, useEffect } from 'react'
 import type { NextPage } from 'next'
 
 import { AnimatePresence } from "framer-motion"
@@ -19,6 +19,7 @@ import { ThemeProvider } from "../context/context";
 
 import Layout from "../components/layout/layout";
 import { trpc } from "../utils/trpc";
+import { useLikedPosts } from "../store/fav";
 
 
 export type NextPageWithLayout<P = unknown, IP = P> = NextPage<P, IP> & {
@@ -35,16 +36,24 @@ const MyApp: AppType<AppPropsWithLayout> = ({
   pageProps: { session, ...pageProps },
 }) => {
 
-  const user=trpc.useQuery(['getUser'])
+   const user=trpc.useQuery(['getUser'])
+  const liked=user.data?.likedposts
 
-  console.log('user from _app.tsx',user)
-    if(typeof window !='undefined'){
-      localStorage.setItem('user',JSON.stringify(user.data))
+  const favorites=useLikedPosts()
 
+  useEffect(()=>{
+    if(liked){
+      favorites.setliked(liked.map(item=>item.id))
     }
+  },[liked])
+
+
+
+ 
+
+
 
     
-
    
 
   return (
@@ -91,7 +100,7 @@ export default withTRPC<AppRouter>({
       /**
        * @link https://react-query.tanstack.com/reference/QueryClient
        */
-       queryClientConfig: { defaultOptions: { queries: { staleTime: 60000 } } },
+       queryClientConfig: { defaultOptions: { queries: { staleTime: 6000000 } } },
 
       // To use SSR properly you need to forward the client's headers to the server
       // headers: () => {

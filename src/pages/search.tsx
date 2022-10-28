@@ -13,9 +13,6 @@ const Search = () => {
 
     const show=useShowFilter()
 
-    
-   
-
     const formInput=useFormInput()
 
     const [filterInput, setfilterInput] = useState<FilterInputType >(formInput.form)

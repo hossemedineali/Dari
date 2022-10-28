@@ -6,13 +6,15 @@ import MobileMenu from "./mobilemenu";
 import { useRouter } from 'next/router'
 
 import { useSession, signIn } from "next-auth/react"
-import { Useauth } from "../../store/store";
+import { Useauth, useFormInput } from "../../store/store";
 import SigninModal from "./signinModal";
 
 import Link from 'next/link'
 import UserIcon from "./userIcon";
 const links=[
-  'Buy','Rent','Find coRental'
+
+
+  {value:'Buy',label:'Sell'},{value:'Rent',label:'Rent'},{value:'Find coRental',label:'CoRental'}
 ]
 
 const Navbar = () => {
@@ -20,6 +22,10 @@ const Navbar = () => {
 
   const router=useRouter()
   const auth=Useauth()
+  const formInput=useFormInput()
+  
+
+  
 
   
 
@@ -46,9 +52,7 @@ const Navbar = () => {
    {!togglemenu&& <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 cursor-pointer sm:hidden" onClick={toggle}>
   <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
 </svg>}
-{togglemenu&&<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 cursor-pointer" onClick={toggle}>
-  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-</svg>}
+
     <Link href='/'>
     <h1 className="text-2xl pl-6 md:w-1/5 flex justify-center cursor-pointer w-2/5 m-auto ">Dari</h1>
     </Link>
@@ -56,7 +60,9 @@ const Navbar = () => {
     <ul className="sm:flex flex-wrap justify-evenly w-4/5 hidden ">
       
           {links.map((link,index)=>(
-            <li key={links[index]}>{links[index]}</li>
+            <Link href='/search' key={index} >
+             <li onClick={()=>formInput.setannouncementtype(link.label)} className='cursor-pointer hover:text-primary1 hover:border-b transition-all duration-500'>{link.value}</li>
+            </Link>
             ))}
       
     </ul>
@@ -76,7 +82,7 @@ const Navbar = () => {
           {sesssion&&<div><UserIcon/></div>}
 
 
-    {togglemenu&&<MobileMenu/>}
+    {togglemenu&&<MobileMenu togglemenu={togglemenu} settogglemenu ={settogglemenu}/>}
 
   </nav>
     {auth.show&&<SigninModal/>}

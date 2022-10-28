@@ -11,7 +11,8 @@ export const getUser=createRouter()
                     id:ctx.session?.user?.id
                 },
                 select:{
-                    liked:true
+                    likedposts:true,
+                
                 }
             })}
         }

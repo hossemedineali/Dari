@@ -46,8 +46,9 @@ const Home: NextPageWithLayout = () => {
       backgroundSize:'contain' ,
        backgroundPosition: 'center', 
        backgroundRepeat:'no-repeat'
-    }}    className="mt-0 h-[80vh] w-full flex justify-center">
+    }}    className="mt-0 h-[60vh] md:h-[80vh] w-full flex justify-center ">
 
+      
  
     <Searchwrapper/>
   

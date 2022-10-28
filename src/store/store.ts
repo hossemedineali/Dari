@@ -1,4 +1,3 @@
-import { z } from 'zod';
 import create from 'zustand'
 import { FilterInputType } from '../types/typeshelper';
 
@@ -25,7 +24,8 @@ type authState={
 
 
 
-const Useauth=create<authState>((set)=>({
+const Useauth=create<authState>(
+    (set)=>({
     
     show:false,
     setToogleShow() {
@@ -71,25 +71,7 @@ const useShowFilter=create<ShowFilterState>((set)=>({
 
 
 
-interface filterstate {
-  
-    municipality:string,
-    
-  
-    setmunicipality:(value:string)=>void,
-}
 
-const usefilter =create<filterstate>((set)=>({
- 
-    municipality:''
-    ,
-    
-    setmunicipality(value){
-        set(()=>({
-            municipality:value
-        }))
-    }
-}))
 
 
 interface Form {

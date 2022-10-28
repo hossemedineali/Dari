@@ -25,7 +25,6 @@ const SearchFilter:React.FC<Props> = ({setfilterInput}) => {
     const [selectedGovernorate, setselectedGovernorate] = useState<State>({label:'',value:'',position:[0,0]})
     const [selectedMunicipality, setselectedMunicipality] = useState<State>({label:'',value:'',position:[0,0]})
     const munoptions=cities[selectedGovernorate.label]
-   // const [rez,setrez]=useState(false)
     const [data, setdata] = useState<FilterInputType>()
 
 
@@ -59,7 +58,7 @@ useEffect(() => {
     });
     return () => subscription.unsubscribe();
 
-}, [watch])
+}, [watch,getValues])
 
  
 const hundelresetfilters=()=>{
@@ -80,6 +79,7 @@ const hundelresetfilters=()=>{
         setselectedGovernorate({label:e.label,value:e.value as string,position:e.position as [number,number]})
         setselectedMunicipality({label:'',value:'',position:[0,0]})
         setValue('governorate',e.value as string)
+        setValue('municipality','')
     }
 
 

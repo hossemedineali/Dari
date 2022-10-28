@@ -48,60 +48,56 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime?
-  phone         Int ?
+  phone         Int?
   image         String?
   accounts      Account[]
   sessions      Session[]
-  
-  posts         Post[] @relation("owner")
 
-  liked       Post[] @relation(name: "likedby") 
+  posts Post[] @relation("owner")
 
+  likedposts Post[] 
 }
 
-
-
 model Post {
-  id       String   @id @default(cuid())
+  id String @id @default(cuid())
 
-  date     DateTime @default(now())
+  date DateTime @default(now())
 
-  auther   String     
+  auther String
 
-  propertyType String
+  propertyType     String
   announcementtype String
-  landtype     String?
- 
+  landtype         String?
+
   price    Float
-  pricePer String ?
+  pricePer String?
   size     Float
   rooms    Int
- 
- governorate String
- municipality String
+
+  governorate  String
+  municipality String
 
   isposition Boolean
-  lng      Float?
-  lat      Float?
-  
-   Garage Boolean @default(false)
-   Balcony Boolean @default(false)
-   OutdoorArea Boolean @default(false)
-   SwimmingPool Boolean @default(false)
-   UndercoverParking Boolean @default(false)
-   airConditioning Boolean @default(false)
-   solarPanels Boolean @default(false)
-   SolarHotwater Boolean @default(false)
-  images String ?
-  description String @default("")
+  lng        Float?
+  lat        Float?
 
-  contact String 
-   
+  Garage            Boolean @default(false)
+  Balcony           Boolean @default(false)
+  OutdoorArea       Boolean @default(false)
+  SwimmingPool      Boolean @default(false)
+  UndercoverParking Boolean @default(false)
+  airConditioning   Boolean @default(false)
+  solarPanels       Boolean @default(false)
+  SolarHotwater     Boolean @default(false)
+  images            String?
+  description       String  @default("")
 
-  user         User     @relation(name:"owner",fields: [auther], references: [id], onDelete: Cascade)
+  contact String
 
-  liked       User?     @relation(name:"likedby",fields: [id], references: [id], onDelete: Cascade)
+  user    User  @relation(name: "owner", fields: [auther], references: [id], onDelete: Cascade)
 
+  likedBy User[] 
+  userId String?
 }
 
 model VerificationToken {
@@ -111,5 +107,3 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
-
-

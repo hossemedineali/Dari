@@ -5,7 +5,7 @@ import { addPost } from "./addpost";
 import { getpost } from "./querrypost";
 import {Delete} from './Delete'
 import { getUser } from "./getuser";
-import {addLiked} from './addLiked'
+import {manageLiked} from './FavPosts'
 
 
 
@@ -17,7 +17,7 @@ export const appRouter = createRouter()
   .merge("getpost.",getpost)
   .merge('delete.',Delete)
   .merge('',getUser)
-  .merge('',addLiked)
+  .merge('ManageFavPosts.',manageLiked)
   ;
 
 
