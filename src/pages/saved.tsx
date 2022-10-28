@@ -5,6 +5,7 @@ import { trpc } from "../utils/trpc";
 
 const Saved = () => {
     const session=useSession()
+    const router=useRouter()
     if(session){
         const favorites=trpc.useQuery(['getUser'])
             console.log(favorites.data?.likedposts)
@@ -18,7 +19,6 @@ const Saved = () => {
                
     </div> );
     }else{
-        const router=useRouter()
         
      
             router.replace('/')
