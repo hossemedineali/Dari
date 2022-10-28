@@ -6,7 +6,7 @@ import { trpc } from "../utils/trpc";
 const Saved = () => {
     const session=useSession()
     const router=useRouter()
-    if(session){
+    if(session.status=='authenticated'){
         const favorites=trpc.useQuery(['getUser'])
         console.log(favorites)
         console.log(favorites.data?.likedposts )

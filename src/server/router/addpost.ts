@@ -69,7 +69,7 @@ export const addPost =createRouter()
                     data:{
                         ...input,
                         images:newimagesdata ,
-                        auther:'cl9g7s8ef0000u6wcwln0bd5b',
+                        auther:ctx.session?.user?.id as string,
                         description:'This is a Fake post for testing'
                     }
                 })
