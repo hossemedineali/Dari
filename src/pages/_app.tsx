@@ -42,8 +42,8 @@ const MyApp: AppType<AppPropsWithLayout> = ({
   const favorites=useLikedPosts()
 
   useEffect(()=>{
-    if(liked){
-      favorites.setliked(liked.map(item=>item.id))
+    if(user.data?.likedposts){
+      favorites.setliked(user.data?.likedposts.map(item=>item.id))
     }
   },[liked])
 
@@ -100,7 +100,7 @@ export default withTRPC<AppRouter>({
       /**
        * @link https://react-query.tanstack.com/reference/QueryClient
        */
-       queryClientConfig: { defaultOptions: { queries: { staleTime: 6000000 } } },
+       queryClientConfig: { defaultOptions: { queries: { staleTime: 300000 } } },
 
       // To use SSR properly you need to forward the client's headers to the server
       // headers: () => {

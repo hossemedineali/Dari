@@ -6,6 +6,8 @@ import Tooltip from '../layout/tooltip'
 import { trpc } from '../../utils/trpc'
 import { useLikedPosts } from '../../store/fav'
 import Image from 'next/image'
+import { Useauth } from '../../store/store'
+import { useSession } from 'next-auth/react'
 
 
 
@@ -27,6 +29,8 @@ const OneCard:React.FC<data> = (item) => {
 
     const addToFav=trpc.useMutation(['ManageFavPosts.add'])
     const DeleteFromFav=trpc.useMutation(['ManageFavPosts.delete'])
+    const auth=Useauth()
+    const session=useSession()
 
     const favorites=useLikedPosts()
 
@@ -50,6 +54,7 @@ let url=''
     }
 
         const addPostToFavorites=(id:string)=>{
+            
            addToFav.mutate({postid:id})
            favorites.addPost(id)
         }
@@ -60,10 +65,16 @@ let url=''
         }
 
         const hundelFavorites=(id:string)=>{
-            if(favorites.liked.includes(id)){
-                removePostFromFavorites(id)
+            if(session.status=='authenticated'){
+
+                
+                if(favorites.liked.includes(id)){
+                    removePostFromFavorites(id)
+                }else{
+                    addPostToFavorites(id)
+                }
             }else{
-                addPostToFavorites(id)
+                auth.setToogleShow(true)
             }
           
         }
