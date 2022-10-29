@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import {  useEffect, useState } from "react";
 import MobileMenu from "./mobilemenu";
 
 
@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import { useSession, signIn } from "next-auth/react"
 import { Useauth, useFormInput } from "../../store/store";
 import SigninModal from "./signinModal";
+
 
 import Link from 'next/link'
 import UserIcon from "./userIcon";
@@ -20,9 +21,18 @@ const links=[
 const Navbar = () => {
   const [togglemenu, settogglemenu] = useState(false)
 
+
   const router=useRouter()
   const auth=Useauth()
   const formInput=useFormInput()
+
+  
+
+  
+  useEffect(()=>{
+
+
+  },[])
   
 
   
@@ -45,7 +55,8 @@ const Navbar = () => {
   return ( 
 
 <>
-  <nav className="border-b-2 border-devider bg-white px-0 py-4 flex justify-between   w-full  fixed z-30 backdrop">
+  <nav className=" border-b-2 border-devider bg-white px-0 py-4 flex justify-between   w-full  fixed z-30 backdrop">
+    
     
 
     
@@ -54,10 +65,10 @@ const Navbar = () => {
 </svg>}
 
     <Link href='/'>
-    <h1 className="text-2xl pl-6 md:w-1/5 flex justify-center cursor-pointer w-2/5 m-auto ">Dari</h1>
+    <h1 className="text-primary1  font-bold text-2xl pl-6 md:w-1/5 flex justify-center cursor-pointer w-2/5 m-auto ">Dari</h1>
     </Link>
     
-    <ul className="sm:flex flex-wrap justify-evenly w-4/5 hidden ">
+    <ul className="sm:flex flex-wrap justify-evenly w-4/5 hidden  ">
       
           {links.map((link,index)=>(
             <Link href='/search' key={index} >
@@ -66,6 +77,7 @@ const Navbar = () => {
             ))}
       
     </ul>
+            
 
             {router.route!='/Addpost'&&(
                   <div onClick={handeladdpostclick} className="hover:scale-105 active:scale-95 md:flex  mr-6 bg-white border-red border text-red px-4 py-1 rounded-2xl cursor-pointer hidden ">
@@ -93,13 +105,3 @@ const Navbar = () => {
  
 export default Navbar;
 
-
-
-
-
-
-
-/*
-            {sesssion&&<button className="hover:scale-105 active:scale-95 py-1 px-3 mr-2  bg-primary1 text-white py-auto rounded-lg" onClick={()=>signOut()} >Logout </button>}
-
-*/

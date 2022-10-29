@@ -23,9 +23,11 @@ const Layout :React.FC<porps>= (props)=> {
         <>
         <Navbar/>
         
+          
 
             {props.children}
         {router.route!='/add'&&<AddPostForMobile/>}
+            
         </>
         
      );

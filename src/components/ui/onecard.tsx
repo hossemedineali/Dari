@@ -9,7 +9,14 @@ import Image from 'next/image'
 import { Useauth } from '../../store/store'
 import { useSession } from 'next-auth/react'
 
+import ReactTimeAgo from 'react-time-ago'
+import TimeAgo  from 'javascript-time-ago'
 
+import en from 'javascript-time-ago/locale/en.json'
+import fr from 'javascript-time-ago/locale/fr.json'
+
+TimeAgo.addDefaultLocale(en)
+TimeAgo.addLocale(fr)
 
 export interface data{
     id: string,
@@ -22,6 +29,7 @@ export interface data{
     rooms:number,
     size:number,
     propertyType:string,
+    date:Date
   }
 
 
@@ -36,7 +44,7 @@ const OneCard:React.FC<data> = (item) => {
 
 
     
-  
+  const date=new Date(item.date as Date)
 
 
     function capitalizeFirstLetter(string :string) {
@@ -140,12 +148,13 @@ let url=''
 </motion.svg>
 	   </Link>
       </div>
-                <p className="mt-2  text-sm text-gray-800 line-clamp-1" >
+                <p className="mt-2  text-sm text-gray-800 line-clamp-1  " >
                     {item.municipality} 
                 </p>
             </div>
-            <div className="mt-4 pr-1">
+            <div className="mt-4 pr-1  flex justify-between flex-col">
                 <p className='text-red'> {item.price} <span className='text-xs '>Tnd</span> {item.announcementtype=='Rent'&& item.pricePer&& <span className='text-black'>/{item.pricePer}</span>} </p>
+               <ReactTimeAgo date={date} locale="en-US" className='mb-2'/>
             </div>
 
 

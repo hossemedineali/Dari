@@ -3,6 +3,7 @@ import { useState } from "react";
 import {motion,AnimatePresence} from 'framer-motion'
 import {  signOut } from "next-auth/react"
 import { useRouter } from 'next/router'
+import Link from "next/link";
 
 const UserIcon = () => {
 
@@ -27,9 +28,14 @@ const UserIcon = () => {
                           
                             
                             className="w-40 top-14 right-2 px-2 bg-white justify-center align-middle content-center absolute flex flex-col z-50  ">
-                                <span onClick={()=>{router.push('/Mylisting')}}  className="cursor-pointer my-1 border-b-devider border-b-2 py-1 hover:border-b-red transition-all duration-100">My posts</span>
+                             
+                                <Link href='/Mylisting'>
+                                <span  className="cursor-pointer my-1 border-b-devider border-b-2 py-1 hover:border-b-red transition-all duration-100">My posts</span>
+                                </Link>
                                {/*  <span className="h-[2px] bg-devider my-1"></span> */}
-                                <span onClick={()=>{router.push('/saved')}} className="cursor-pointer my-1 border-b-devider border-b-2 py-1 hover:border-b-red transition-all duration-100">My favorites posts</span>
+                                <Link href='/saved'>
+                                <span  className="cursor-pointer my-1 border-b-devider border-b-2 py-1 hover:border-b-red transition-all duration-100">My favorites posts</span>
+                                </Link>
                                {/*  <span className="h-[2px] bg-devider my-1"></span> */}
                                 <span onClick={()=>signOut()} className="cursor-pointer my-1 border-b-devider border-b-2 py-1 hover:border-b-red transition-all duration-100">Logout</span>
 

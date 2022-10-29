@@ -58,16 +58,16 @@ const MyApp: AppType<AppPropsWithLayout> = ({
 
   return (
     <SessionProvider session={session}>
+      <ThemeProvider >
       <AnimatePresence>
       <Layout>
 
-      <ThemeProvider>
 
       <Component {...pageProps} />
       
-      </ThemeProvider>
       </Layout>
       </AnimatePresence>
+      </ThemeProvider>
     </SessionProvider>
   );
 };

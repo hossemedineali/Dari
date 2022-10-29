@@ -1,6 +1,6 @@
 import create from 'zustand'
+import { persist } from 'zustand/middleware';
 import { FilterInputType } from '../types/typeshelper';
-
 
 
 type ModeState={
@@ -124,11 +124,12 @@ setform(value:FilterInputType){
 }
 
 
-
-    
-
-
 }))
+
+
+
+
+
 
 
  export{  useMode,useShowFilter,Useauth,useFormInput};

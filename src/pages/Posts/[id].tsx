@@ -5,6 +5,18 @@ import {motion } from 'framer-motion'
 
 import Image from 'next/image'
 import MapWithNoSSR from '../../components/maps/mapWithNoSSR'
+
+import ReactTimeAgo from 'react-time-ago'
+import TimeAgo  from 'javascript-time-ago'
+
+import en from 'javascript-time-ago/locale/en.json'
+import ru from 'javascript-time-ago/locale/ru.json'
+
+TimeAgo.addDefaultLocale(en)
+TimeAgo.addLocale(ru)
+
+
+
 const Post = () => {
    const router=useRouter()
    
@@ -12,7 +24,7 @@ const Post = () => {
      const post =trpc.useQuery(['getpost.onepost',{id :id as string}])
   
 
-    return ( <div className='relative h-64  top-0 '>
+    return ( <div className='relative h-64 lg:mx-[10vw] top-0 '>
 
         
            {/* photos section */}
@@ -26,10 +38,10 @@ const Post = () => {
             <div className='flex flex-col md:flex-row mt-20'>
             {/* info section */}
 
-                <div className='  md:w-2/6    h-full  pt-14 '> 
+                <div className='  md:w-2/6    h-full  pt-14 my-auto'> 
                     <Info propertyType={post.data?.propertyType} announcementtype={post.data?.announcementtype} 
                     governorate={post.data?.governorate} municipalities={post.data?.municipality} size={post.data?.size} 
-                    rooms={post.data?.rooms} price={post.data?.price} priceper={post.data?.pricePer}/>
+                    rooms={post.data?.rooms} price={post.data?.price} priceper={post.data?.pricePer} date={post.data?.date as Date}/>
                     <div className='hidden md:block  my-auto'>
                                         <Features Garage={post.data?.Garage} Balcony={post.data?.Balcony} OutdoorArea={post.data?.OutdoorArea} SolarHotwater={post.data?.SolarHotwater} SwimmingPool={post.data?.SwimmingPool} UndercoverParking={post.data?.UndercoverParking} airConditioning={post.data?.airConditioning} solarPanels={post.data?.solarPanels}/>
                     </div>
@@ -113,7 +125,7 @@ let url
     }
 
 
-return <div className='w-full h-full  absolute '>
+return <div className=' w-full h-full  absolute '>
 
     {photos&& 
     <>
@@ -149,17 +161,19 @@ type Info={
     size?:number|undefined,
     rooms?:number|undefined,
     price?:number|undefined,
-    priceper?:string|undefined|null
+    priceper?:string|undefined|null,
+    date:Date
 }
 
-const Info:React.FC<Info>=( {propertyType,announcementtype,governorate,municipalities,size,rooms ,price,priceper})=>{
+const Info:React.FC<Info>=( {propertyType,announcementtype,governorate,municipalities,size,rooms ,price,priceper,date})=>{
+    const t=new Date(date as Date )
     return(
-        <div className='h-full  w-full md:pt-10 pl-10 '>
+        <div className='h-full  w-full md:pt-10 pl-10 mb-12 md:mb-0  '>
                     {/* announcement type  */}
             <p className='text-2xl'><span className='font-semibold' >{propertyType} For :</span> {announcementtype}</p>
             
                         {/* Location  */}
-            <div className='mt-2 text-xl flex gap-2'>
+            <div className='mt-2 text-xl flex gap-2 '>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
@@ -170,7 +184,7 @@ const Info:React.FC<Info>=( {propertyType,announcementtype,governorate,municipal
 
             {/* size and rooms */}
 
-            <div className='flex  gap-4 w-full '>
+            <div className='flex  gap-4 w-full  '>
            
                
                <div className='mt-2 text-xl flex gap-2'>
@@ -178,15 +192,16 @@ const Info:React.FC<Info>=( {propertyType,announcementtype,governorate,municipal
                 <p>{size} m2</p>
                </div>
 
-               <div className='mt-2 text-xl flex gap-2 '>
+              {propertyType=="house"&& <div className='mt-2 text-xl flex gap-2 '>
                <svg className="w-6 h-6  fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M480,226.15V80a48,48,0,0,0-48-48H80A48,48,0,0,0,32,80V226.15C13.74,231,0,246.89,0,266.67V472a8,8,0,0,0,8,8H24a8,8,0,0,0,8-8V416H480v56a8,8,0,0,0,8,8h16a8,8,0,0,0,8-8V266.67C512,246.89,498.26,231,480,226.15ZM64,192a32,32,0,0,1,32-32H208a32,32,0,0,1,32,32v32H64Zm384,32H272V192a32,32,0,0,1,32-32H416a32,32,0,0,1,32,32ZM80,64H432a16,16,0,0,1,16,16v56.9a63.27,63.27,0,0,0-32-8.9H304a63.9,63.9,0,0,0-48,21.71A63.9,63.9,0,0,0,208,128H96a63.27,63.27,0,0,0-32,8.9V80A16,16,0,0,1,80,64ZM32,384V266.67A10.69,10.69,0,0,1,42.67,256H469.33A10.69,10.69,0,0,1,480,266.67V384Z"></path></svg>
                 <p>{rooms} rooms</p>
-               </div>
+               </div>}
             </div>
 
             {/* price */}
-            <div className='mt-2'>
-                <p className='text-2xl'>{price} Tnd{announcementtype=='Rent'?<span> {price?'/'+priceper:""}</span>:null}</p>
+            <div className='mt-2 flex justify-between'>
+                <p className='text-2xl text-red' >{price} Tnd{announcementtype=='Rent'?<span> {price?'/'+priceper:""}</span>:null}</p>
+                {date && <ReactTimeAgo date={date} className='mr-1'/>}
             </div>
 
         </div>

@@ -334,10 +334,10 @@ const hundelresetfilters=()=>{
                     
                     <div style={{boxShadow: '1px -4px 6px -5px rgb(0 0 0 / 0.1), 0 -2px -4px -2px rgb(0 0 0 / 0.1)'}} className="flex fixed z-50 h-[45px] bg-white bottom-0 w-full rounded-b-xl pt-2	 ">
                         <div className="flex-grow  text-center ">
-                    <button  type="submit" value="Submit" className="px-4 bg-red py-1 rounded hover:scale-105 active:scale-95">Search</button>
+                    <button  type="submit" value="Submit" className="px-4 bg-primary1 py-1 rounded hover:scale-105 active:scale-95">Search</button>
                     </div>
 
-                    <p onClick={hundelresetfilters} className="cursor-pointer text-secondary1 mr-4">Reset filters</p>
+                    <p onClick={hundelresetfilters} className="cursor-pointer text-red  mr-4">Reset filters</p>
 
                     </div>
                         </form>

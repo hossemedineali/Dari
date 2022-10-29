@@ -32,7 +32,8 @@ export const getpost =createRouter()
                 municipality:true,
                 rooms:true,
                 size:true,
-                propertyType:true
+                propertyType:true,
+                date:true
                 
                },
                 orderBy:{

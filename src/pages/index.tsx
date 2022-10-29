@@ -9,7 +9,7 @@ import { NextPageWithLayout } from "./_app";
 import CardCarrousel from "../components/ui/cardcarrousel";
 
 import hero2 from '../../public/hero2.png'
-import { useState } from "react";
+import {  useState } from "react";
 import Loader from "../components/loader/loader";
 
 
@@ -25,6 +25,7 @@ const Home: NextPageWithLayout = () => {
   const [IsLoading, setIsLoading] = useState(false)
 
   
+  
 
   return (
     <>
@@ -37,22 +38,26 @@ const Home: NextPageWithLayout = () => {
      
      
         
-<main className="  flex flex-col  relative top-24 md:px-3 lg:px:6 ">
+<main className="  flex flex-col  relative top-16 pt-10 md:px-3 lg:px:6 ">
 <h1 className="m-auto font-mono">Finding your next home , never been easier!</h1>
 
 
 <div style={{
       backgroundImage: `url(${hero2.src})`,
+      
       backgroundSize:'contain' ,
        backgroundPosition: 'center', 
-       backgroundRepeat:'no-repeat'
+       backgroundRepeat:'no-repeat',
+      
     }}    className="mt-0 h-[60vh] md:h-[80vh] w-full flex justify-center ">
 
-      
+    
  
     <Searchwrapper/>
   
 </div>
+
+<h1 className="text-primary1 font-bold text-2xl my-5">Latest announcement</h1>
 
 
 

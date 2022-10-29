@@ -34,7 +34,7 @@ const [updated,setupdated]=useState(false)
                     {
                         posts.data?.map(item=>{
                             return <div className="border-b-devider border-b-4 mb-1" key={item.id}>
-                                    <OneCard id={item.id} images={item.images as string}  announcementtype={item.announcementtype} price={item.price} pricePer={item.pricePer as string} governorate={item.governorate} municipality={item.municipality} rooms={item.rooms} size={item.size}  propertyType={item.propertyType}/>
+                                    <OneCard id={item.id} images={item.images as string}  announcementtype={item.announcementtype} price={item.price} pricePer={item.pricePer as string} governorate={item.governorate} municipality={item.municipality} rooms={item.rooms} size={item.size}  propertyType={item.propertyType} date={item.date}/>
                                     <div className="flex justify-center mt-6 px-20">
                                         <button onClick={()=>hundeldelet(item.id,item.images )} className=" flex  py-1 px-1  text-red border-red border w-20 rounded-xl hover:scale-110 active:scale-90">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

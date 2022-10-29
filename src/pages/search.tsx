@@ -23,7 +23,7 @@ const Search = () => {
 
 
     return (
-        <div  className="relative top-16 pt-1  ">
+        <div  className=" relative top-16 pt-1  ">
 
            
             <div onClick={()=>show.setShowFilter(true)} className=" h-14 fixed z-20 right-0 left-0 top-18 bg-white  shadow-md flex items-center justify-between md:gap-4 cursor-pointer">
@@ -31,7 +31,7 @@ const Search = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
-                    <p>{formInput.form.municipality}</p>
+                    <p>{formInput.form.municipality} </p>
 
                 </div>
                 <div className="rounded-2xl flex border px-3">
@@ -64,7 +64,7 @@ const Search = () => {
           
              {!show.show&&<div className="mt-32 flex flex-wrap w-full   justify-center  md:gap-10 ">
                 {data.data?.map((itm,idx)=>{
-                    return <OneCard id={itm.id} images={itm.images as string} announcementtype={itm.announcementtype} price={itm.price} pricePer={itm.pricePer as string} governorate={itm.governorate} municipality={itm.municipality} rooms={itm.rooms} size={itm.size} propertyType={itm.propertyType} key={idx}/>
+                    return <OneCard id={itm.id} images={itm.images as string} announcementtype={itm.announcementtype} price={itm.price} pricePer={itm.pricePer as string} governorate={itm.governorate} municipality={itm.municipality} rooms={itm.rooms} size={itm.size} propertyType={itm.propertyType} key={idx} date={itm.date}/>
                 })}
             </div>}  
 

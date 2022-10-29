@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const ThemeProvider: React.FC<Props> = ({ children }: Props) => {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>('dark');
   const toggleTheme = () => {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
 

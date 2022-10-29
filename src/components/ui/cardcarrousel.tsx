@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import OneCard from './onecard';
 import { trpc } from "../../utils/trpc";
 import {data as Data} from '../../components/ui/onecard'
+import Loader from '../loader/loader';
 
 
  interface D{
@@ -28,6 +29,8 @@ type p={
 const CardCarrousel:React.FC<p> = ({type,title,setIsLoading}) => {
 
   const data=trpc.useQuery(['getpost.getpostforindexpage',{type}])
+
+  //console.log("Card carrosel ::",typeof(data.data[0].date))
 
   if(data.isLoading){setIsLoading(true)}
   if(data){setIsLoading(false)}
@@ -81,11 +84,14 @@ const hundelnextclick=()=>{
   },[])
 
 
+  if(data.data){
 
-  return (
-    <div className='w-full '>
+    
+    return (
+      
+      <div className='w-full '>
 
-    <h1>{title}</h1>
+    <h1 className='text-xl'>{title}</h1>
     <div className='w-full flex my-5 px-2 '>
   
 
@@ -128,7 +134,7 @@ const hundelnextclick=()=>{
           
 {data.data?data.data.map((item:D,idex:number)=>{
   return(
-   <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{y:10}} >  {/*  item  */}
+    <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{y:10}} >  {/*  item  */}
 
  <OneCard {...item as Data}/>
  </motion.div>
@@ -148,15 +154,28 @@ const hundelnextclick=()=>{
         </div>
         </div>
    );
-}
- 
-export default CardCarrousel;
-
-
-
-
-
-
+  }
+  else if(data.isLoading){
+    return <Loader/>
+  }
+  else{
+    return (
+      <div className='h-screen flex align-middle justify-center items-center '>
+        <p className='font-bold text-2xl '>Sorry .. Somthing went wrong</p>
+        <p className='font-bold text-1xl '>We are tryiin to fix the issue as soon as possible</p>
+        <p className='font-bold text-1xl'>Please Try egain later</p>
+        </div>
+    )
+  }
+  }
+  
+  export default CardCarrousel;
+  
+  
+  
+  
+  
+  
 
 
 

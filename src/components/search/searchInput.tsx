@@ -4,7 +4,6 @@ import {  useFormInput} from "../../store/store";
 import { useRouter } from 'next/router'
 import {groupedcities,filterOption} from '../../utils/cities'
 import { useState } from "react";
-import {motion} from 'framer-motion'
 
 const style = {
     control: (base:any) => ({
@@ -47,10 +46,7 @@ const SearchInput:React.FC = () => {
             options={groupedcities}
             filterOption={filterOption}
             className=" border-0 w-full mr-auto bg-devider" 
-            placeholder={selectedMunError? 
-            <motion.div className="ml-2 text-red" animate={{scale:1.1}} transition={{repeat:Infinity, duration:2}}>where you want to search </motion.div>:'Type place'}
-            onChange={(e)=>{hundelchange(e?.label as string)}}
-            styles={style}
+            placeholder={filter.form.governorate||filter.form.municipality?  filter.form.governorate +'-' +filter.form.municipality :'Enter a City '}
             />
         </div>
             

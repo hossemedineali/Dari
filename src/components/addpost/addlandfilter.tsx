@@ -243,6 +243,7 @@ const LandFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate}
                                                 value={images}
                                                 onChange={hundelFileInput}
                                                 maxNumber={9}
+                                                maxFileSize={9437184}
                                                 >
                                 {({
                                 
@@ -252,7 +253,8 @@ const LandFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate}
                                 onImageUpdate,
                                 onImageRemove,
                                 isDragging,
-                                dragProps
+                                dragProps,
+                                errors
                                 }) => (
                                 // write your building UI
                                 <div className="upload__image-wrapper mx-auto ">
@@ -272,7 +274,10 @@ const LandFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate}
                                         </div>
                                     <br/>
                                     <span className="mt-4"> {images.length } images selected </span>
-
+                                        {errors&&<div className="text-red font-bold">
+                                        {errors.maxNumber && <span>Maximum images number allowed is 9</span>}
+                                        {errors.maxFileSize && <span>Maximum image size must be less then 9mb</span>}
+                                        </div>}
                                     <div className="flex flex-wrap gap-2 mx-auto">
 
                                     {imageList.map((image, index) => (

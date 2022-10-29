@@ -14,7 +14,7 @@ const Saved = () => {
             {favorites.data?.likedposts.map((item)=>{
                 return <OneCard key={item.id} id={item.id} images={item.images as string} announcementtype={item.announcementtype} 
                         price={item.price} pricePer={item.pricePer as string} governorate={item.governorate} municipality={item.municipality} 
-                        propertyType={item.propertyType} rooms={ item.rooms} size={item.size}  
+                        propertyType={item.propertyType} rooms={ item.rooms} size={item.size}  date={item.date}
                         />
                     })}
                

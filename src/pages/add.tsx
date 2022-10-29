@@ -51,31 +51,23 @@ export const form=z.object({
 
  })
 
- //const imgtype=z.array(z.string())
- //type Imgtype=z.infer<typeof imgtype>
-
-//type Form =z.infer<typeof form>;
-
-
-
-
-//#########################################################
+ 
 
 const AddPost = () => {
     const router=useRouter()
     const {data:sesssion}=useSession()
 
-  /*   if(!sesssion){
+    if(!sesssion){
         if (typeof window!=='undefined'){
             router.replace('/')
         }
-    }else{ */
+    }else{ 
 
         
         return (
             
             <Post /> );
-       // }
+        }
     }
 
 

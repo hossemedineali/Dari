@@ -45,7 +45,9 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
+  name          String?  @unique
+
+  
   email         String?   @unique
   emailVerified DateTime?
   phone         Int?
@@ -56,6 +58,8 @@ model User {
   posts Post[] @relation("owner")
 
   likedposts Post[] 
+
+  @@unique([name, id])
 }
 
 model Post {
@@ -64,6 +68,8 @@ model Post {
   date DateTime @default(now())
 
   auther String
+
+  
 
   propertyType     String
   announcementtype String
@@ -76,6 +82,7 @@ model Post {
 
   governorate  String
   municipality String
+
 
   isposition Boolean
   lng        Float?
@@ -94,7 +101,7 @@ model Post {
 
   contact String
 
-  user    User  @relation(name: "owner", fields: [auther], references: [id], onDelete: Cascade)
+  user    User  @relation(name: "owner", fields: [auther,id], references: [name,id], onDelete: Cascade)
 
   likedBy User[] 
   userId String?
