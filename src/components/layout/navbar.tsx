@@ -29,15 +29,6 @@ const Navbar = () => {
   
 
   
-  useEffect(()=>{
-
-
-  },[])
-  
-
-  
-
-  
 
   const { data:sesssion } = useSession()
 
