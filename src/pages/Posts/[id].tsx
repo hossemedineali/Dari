@@ -4,7 +4,7 @@ import { trpc } from '../../utils/trpc'
 import {motion } from 'framer-motion'
 
 import Image from 'next/image'
-import MapWithNoSSR from '../../components/maps/mapWithNoSSR'
+//import MapWithNoSSR from '../../components/maps/mapWithNoSSR'
 
 import ReactTimeAgo from 'react-time-ago'
 import TimeAgo  from 'javascript-time-ago'
@@ -49,8 +49,8 @@ const Post = () => {
         
             {/* map */}
                 {post.data?.isposition&&<div className='  md:pt-6 w-full md:w-4/6 md:h-[85vh] h-[45vh] flex '>
-                 <div className='w-full '><MapWithNoSSR setposition={()=>{return null}} position={[post.data?.lng as number,post.data?.lat as number]}/></div>
-                </div>}
+{/*                  <div className='w-full '><MapWithNoSSR setposition={()=>{return null}} position={[post.data?.lng as number,post.data?.lat as number]}/></div>
+ */}                </div>}
             </div>
        
        

@@ -8,7 +8,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from 'next/image'
 
-import MapWithNoSSR from "../maps/mapWithNoSSR";
+//import MapWithNoSSR from "../maps/mapWithNoSSR";
 
 import ImageUploading, { ImageListType } from "react-images-uploading";
 
@@ -423,8 +423,8 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
             <div className="w-full h-[60vh] z-0">
                     {location.error?.message&&<p className="text-red ">Enabel GPS on your device </p>}
             
-                <MapWithNoSSR position={position[0]!=0?position :selectedMunicipality.position} setposition={setposition}  />
-
+{/*                 <MapWithNoSSR position={position[0]!=0?position :selectedMunicipality.position} setposition={setposition}  />
+ */}
                
             
             </div>

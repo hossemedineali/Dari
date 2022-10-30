@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { MygovernorateType } from "../../utils/cities";
-import MapWithNoSSR from "../maps/mapWithNoSSR";
+//import MapWithNoSSR from "../maps/mapWithNoSSR";
 import Switch from "../ui/switch";
 import Image from 'next/image'
 import { trpc } from "../../utils/trpc";
@@ -314,8 +314,8 @@ const LandFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate}
                             <div className="w-full h-[60vh] z-0">
                                 {location.error?.message&&<p className="text-secondary2 ">Enabel GPS on your device </p>}
 
-                            <MapWithNoSSR position={position[0]!=0?position :selectedMunicipality.position} setposition={setposition}  />
-
+                          {/*   <MapWithNoSSR position={position[0]!=0?position :selectedMunicipality.position} setposition={setposition}  />
+ */}
 
 
                             </div>
