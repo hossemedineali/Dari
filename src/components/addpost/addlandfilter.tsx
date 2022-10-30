@@ -136,7 +136,7 @@ const LandFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate}
         })
     }
 
-    const getDevicePosition=()=>{
+   /*  const getDevicePosition=()=>{
         const onSuccess = (location :LocationType) => {
 
             console.log('debig location ' , location)
@@ -144,10 +144,10 @@ const LandFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate}
             setposition([location.coords.latitude,location.coords.longitude])
             
         
-    };
+    }; */
 
    
-
+/* 
     const onError = (err: any) => {
 
         console.log (err)
@@ -171,7 +171,7 @@ const LandFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate}
 
         navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
-    }
+    } */
 
 
 
@@ -310,8 +310,8 @@ const LandFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate}
 
                             {showMap&&<div>
 
-                            <h3>Plase set the property location on the map <br/> <span className="font-bold" >or <span onClick={getDevicePosition} className="  text-red px-1  rounded-2xl cursor-pointer">use</span> the device location</span>(device location work better on devices with GPS) </h3>
-                            <div className="w-full h-[60vh] z-0">
+{/*                             <h3>Plase set the property location on the map <br/> <span className="font-bold" >or <span onClick={getDevicePosition} className="  text-red px-1  rounded-2xl cursor-pointer">use</span> the device location</span>(device location work better on devices with GPS) </h3>
+ */}                            <div className="w-full h-[60vh] z-0">
                                 {location.error?.message&&<p className="text-secondary2 ">Enabel GPS on your device </p>}
 
                           {/*   <MapWithNoSSR position={position[0]!=0?position :selectedMunicipality.position} setposition={setposition}  />

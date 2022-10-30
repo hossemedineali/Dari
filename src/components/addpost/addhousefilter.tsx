@@ -153,7 +153,7 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
             coordinates: { lat:null  , lng:null },
         });
     
-    const getDevicePosition=()=>{
+ /*    const getDevicePosition=()=>{
         const onSuccess = (location :LocationType) => {
 
             console.log('debig location ' , location)
@@ -162,9 +162,9 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
             
         
     };
+ */
 
-
-    const onError = (err: any) => {
+    /* const onError = (err: any) => {
 
         console.log (err)
 
@@ -175,10 +175,10 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
                 message: err.message,
             },
         });
-    };
+    }; */
 
    
-        if (!("geolocation" in navigator)) {
+      /*   if (!("geolocation" in navigator)) {
             onError({
                 code: 0,
                 message: "Geolocation not supported",
@@ -187,7 +187,7 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
 
         navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
-    }
+    } */
 
         
             
@@ -419,8 +419,8 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
 
         {showMap&&<div>
             
-            <h3>Plase set the property location on the map <br/> <span className="font-bold" >or <span onClick={getDevicePosition} className="  text-red px-1  rounded-2xl cursor-pointer">use</span> the device location</span>(device location work better on devices with GPS) </h3>
-            <div className="w-full h-[60vh] z-0">
+{/*             <h3>Plase set the property location on the map <br/> <span className="font-bold" >or <span onClick={getDevicePosition} className="  text-red px-1  rounded-2xl cursor-pointer">use</span> the device location</span>(device location work better on devices with GPS) </h3>
+ */}            <div className="w-full h-[60vh] z-0">
                     {location.error?.message&&<p className="text-red ">Enabel GPS on your device </p>}
             
 {/*                 <MapWithNoSSR position={position[0]!=0?position :selectedMunicipality.position} setposition={setposition}  />
