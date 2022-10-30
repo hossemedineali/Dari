@@ -92,11 +92,11 @@ const hundelnextclick=()=>{
       <div className='w-full '>
 
     <h1 className='text-xl'>{title}</h1>
-    <div className='w-full flex my-5 px-2 '>
+    <div className='w-full flex my-5 px-2  gap-2'>
   
 
-<button className=' rounded-lg bg-devider hidden md:block' onClick={hundelprevclick}>
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+<button className=' rounded-lg  hidden   md:flex content-middle' onClick={hundelprevclick}>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 my-auto">
   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
 </svg>
 </button>
@@ -112,7 +112,7 @@ const hundelnextclick=()=>{
           
          {data.data?data.data.map((item:D,idex:number)=>{ 
            return(
-             <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{y:-10}} className='mr-4' >  {/*  item  */}
+             <motion.div transition={{duration:1}} animate={{x}} key={idex} whileHover={{y:-10}} className='mr-6' >  {/*  item  */}
          
           <OneCard {...item as Data}/>
           </motion.div>
@@ -146,8 +146,8 @@ const hundelnextclick=()=>{
 
       
   </motion.div>
-      <button className=' rounded-lg bg-devider hidden md:block' onClick={hundelnextclick}>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-full ">
+      <button className=' rounded-lg  hidden   md:flex content-middle' onClick={hundelnextclick}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 my-auto">
   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
 </svg>
 </button>

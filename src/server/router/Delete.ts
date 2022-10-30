@@ -14,7 +14,7 @@ export const Delete=createRouter()
         if(input.id){
 
         
-            const deletuser=await ctx.prisma.post.delete({
+            const deletPost=await ctx.prisma.post.delete({
                 where:{
                     id:input.id
                 }
@@ -31,6 +31,6 @@ export const Delete=createRouter()
 
 
             
-        return {deletuser,deletimages}
+        return {deletPost,deletimages}
     }}
 })

@@ -127,7 +127,7 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
             }) }
         if (addPost.data){
             setTimeout(() => {
-                router.replace('/')
+                //router.replace('/')
             }, (2500));}
        
    

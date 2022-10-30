@@ -93,7 +93,7 @@ let url=''
    
     return (
        
-  <motion.div  whileHover={{scale: 1.1}} className="relative md:mr-4 w-[88vw] sm:w-[90vw] md:w-[350px] mb-4  ">
+  <motion.div  whileHover={{translateY:-10}} className="relative md:mr-2 w-[80vw] sm:w-[80vw] md:w-[350px] mb-4  ">
 	  <div className="shadow  rounded-lg bg-white ">
 		<div className="flex justify-center relative rounded-lg  ">
 		

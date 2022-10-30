@@ -25,10 +25,10 @@ const [updated,setupdated]=useState(false)
 
     const hundeldelet=(id:string,images:string|null)=>{
         Delete.mutate({id,images})
-        router.reload()   
+      //  router.reload()   
     }
     return ( <div className="relative top-20">
-                <h1> My announcements: </h1> 
+                <h1 className="font-bold text-xl ml-20 text-primary1 "> My announcements: </h1> 
                 <div className="flex flex-col md:flex-row flex-wrap gap-5 md:px-10 mt-10 justify-center mx-auto content-center"> 
 
                     {
