@@ -2,12 +2,11 @@ import { useState } from "react";
 
 import {motion,AnimatePresence} from 'framer-motion'
 import {  signOut } from "next-auth/react"
-import { useRouter } from 'next/router'
 import Link from "next/link";
 
 const UserIcon = () => {
 
-    const router=useRouter()
+ 
 
     const [showMenu,setshowMenu]=useState(false)
 

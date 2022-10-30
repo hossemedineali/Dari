@@ -64,7 +64,7 @@ model Post {
   date DateTime @default(now())
 
   auther String
-
+  authername  String @default("hossem edine ")
   propertyType     String
   announcementtype String
   landtype         String?

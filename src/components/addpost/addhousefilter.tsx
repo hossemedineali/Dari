@@ -85,7 +85,7 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
 
 
     const [showMap,setshowMap]=useState(false)
-    const {  handleSubmit,setValue ,formState:{errors,isValid} } = useForm<Form>({ 
+    const {  handleSubmit,setValue ,formState:{errors} } = useForm<Form>({ 
         resolver:zodResolver(form)
     });
 
@@ -127,7 +127,7 @@ const HouseFilters:React.FC<FProps> = ({selectedMunicipality,selectedGovernorate
             }) }
         if (addPost.data){
             setTimeout(() => {
-                //router.replace('/')
+                router.replace('/')
             }, (2500));}
        
    

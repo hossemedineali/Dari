@@ -5,14 +5,7 @@ import { useRouter } from 'next/router'
 import {groupedcities,filterOption} from '../../utils/cities'
 import { useState } from "react";
 
-const style = {
-    control: (base:any) => ({
-      ...base,
-      border: 0,
-      boxShadow: 'none',
-      width:'100%'
-    })
-  };
+
 
 
 

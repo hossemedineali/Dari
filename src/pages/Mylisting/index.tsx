@@ -3,14 +3,12 @@ import { useSession } from "next-auth/react"
 
 import { useRouter } from 'next/router'
 import OneCard from "../../components/ui/onecard";
-import { useEffect, useState } from "react";
 
 
 const Listing = () => {
 
 const router=useRouter()
 
-const [updated,setupdated]=useState(false)
     const session=useSession()
     if(!session){
         return router.push('/')

@@ -70,7 +70,8 @@ export const addPost =createRouter()
                         ...input,
                         images:newimagesdata ,
                         auther:ctx.session?.user?.id as string,
-                        description:'This is a Fake post for testing'
+                        description:'This is a Fake post for testing',
+                        authername:ctx.session?.user?.name as string ||ctx.session?.user?.email as string ||"Unknown User"
                     }
                 })
     

@@ -41,7 +41,7 @@ const Post = () => {
                 <div className='  md:w-2/6    h-full  pt-14 my-auto'> 
                     <Info propertyType={post.data?.propertyType} announcementtype={post.data?.announcementtype} 
                     governorate={post.data?.governorate} municipalities={post.data?.municipality} size={post.data?.size} 
-                    rooms={post.data?.rooms} price={post.data?.price} priceper={post.data?.pricePer} date={post.data?.date as Date}/>
+                    rooms={post.data?.rooms} price={post.data?.price} priceper={post.data?.pricePer} date={post.data?.date as Date} authername={post.data?.authername }/>
                     <div className='hidden md:block  my-auto'>
                                         <Features Garage={post.data?.Garage} Balcony={post.data?.Balcony} OutdoorArea={post.data?.OutdoorArea} SolarHotwater={post.data?.SolarHotwater} SwimmingPool={post.data?.SwimmingPool} UndercoverParking={post.data?.UndercoverParking} airConditioning={post.data?.airConditioning} solarPanels={post.data?.solarPanels}/>
                     </div>
@@ -136,7 +136,7 @@ return <div className=' w-full h-full  absolute '>
             </svg>
         </span>
         <motion.div draggable>
- {  <Image  src={url as string} layout='fill' objectFit='fill' />     } 
+ {  <Image  src={url as string} layout='fill' objectFit='fill' alt='image' />     } 
 
         </motion.div >  
 
@@ -162,15 +162,17 @@ type Info={
     rooms?:number|undefined,
     price?:number|undefined,
     priceper?:string|undefined|null,
-    date:Date
+    date:Date,
+    authername?:string
 }
 
-const Info:React.FC<Info>=( {propertyType,announcementtype,governorate,municipalities,size,rooms ,price,priceper,date})=>{
-    const t=new Date(date as Date )
+const Info:React.FC<Info>=( {propertyType,announcementtype,governorate,municipalities,size,rooms ,price,priceper,date,authername})=>{
+  
     return(
         <div className='h-full  w-full md:pt-10 pl-10 mb-12 md:mb-0  '>
                     {/* announcement type  */}
-            <p className='text-2xl'><span className='font-semibold' >{propertyType} For :</span> {announcementtype}</p>
+                    <p className='md:text-2xl text:xl '>Aded By:<span className='md:text-2xl text:xl text-primary1'>{authername}</span></p>
+            <p className='md:text-2xl text:xl '><span className='font-semibold' >{propertyType} For :</span> {announcementtype}</p>
             
                         {/* Location  */}
             <div className='mt-2 text-xl flex gap-2 '>

@@ -22,8 +22,8 @@ const Saved = () => {
                 />
             })}
             {favorites.data?.likedposts.length==0&&(
-                <div className="flex justify-center content-center items-center">
-                    <h1 className="text-2xl font-medium">You don&#39;t have any saved announcement yet! </h1>
+                <div className="flex justify-center content-center items-center " >
+                    <h1 className="md:text-2xl font-medium  mx-4 text-xl">You don&#39;t have any saved announcement yet! </h1>
                 </div>
             )}
                
