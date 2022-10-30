@@ -5,6 +5,7 @@ import AddPostForMobile from "./AddPostIconForMobile";
 import { useRouter } from 'next/router'
 
 import Navbar from "./navbar";
+import Footer from "./footer";
 
 
 
@@ -27,6 +28,7 @@ const Layout :React.FC<porps>= (props)=> {
 
             {props.children}
         {router.route!='/add'&&<AddPostForMobile/>}
+        <Footer/>
             
         </>
         

@@ -27,7 +27,7 @@ const AddPostForMobile = () => {
     return ( 
 
         
-        <div onClick={handelClick} className=" fixed bottom-2 right-5 text-red cursor-pointer md:hidden">
+        <div onClick={handelClick} className=" fixed top-2 right-14 z-50  text-red cursor-pointer md:hidden">
        
         <Tooltip text="Add post">
         
