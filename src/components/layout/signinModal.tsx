@@ -1,5 +1,5 @@
 
-//import { signIn } from "next-auth/react"
+import { signIn } from "next-auth/react"
 import {  Useauth } from "../../store/store";
 
 const SigninModal = () => {
@@ -20,8 +20,8 @@ const SigninModal = () => {
                     <div className="flex  justify-evenly mt-2">
 
                 <button className="py-1 px-3 mr-2  bg-red rounded-lg" onClick={()=>auth.setToogleShow(false)} >Cancel</button>
-{/*                 <button className="py-1 px-3 mr-2  bg-secondary2 rounded-lg" onClick={()=>signIn()} >signin</button>
- */}                    </div>
+                <button className="py-1 px-3 mr-2  bg-secondary2 rounded-lg" onClick={()=>signIn()} >signin</button>
+                    </div>
 
             </div>
         </div>

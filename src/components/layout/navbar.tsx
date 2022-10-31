@@ -5,7 +5,7 @@ import MobileMenu from "./mobilemenu";
 
 import { useRouter } from 'next/router'
 
-import { useSession } from "next-auth/react"
+import { useSession, signIn } from "next-auth/react"
 import { Useauth, useFormInput } from "../../store/store";
 import SigninModal from "./signinModal";
 
@@ -81,8 +81,8 @@ const Navbar = () => {
         
 
 
-{/*             {!sesssion&& <button className="hover:scale-105 active:scale-95 py-1 px-3 mr-2  bg-primary1 text-white py-auto rounded-lg" onClick={()=>signIn()} >signin</button>}
- */}          {sesssion&&<div><UserIcon/></div>}
+            {!sesssion&& <button className="hover:scale-105 active:scale-95 py-1 px-3 mr-2  bg-primary1 text-white py-auto rounded-lg" onClick={()=>signIn()} >signin</button>}
+          {sesssion&&<div><UserIcon/></div>}
 
 
     {togglemenu&&<MobileMenu togglemenu={togglemenu} settogglemenu ={settogglemenu}/>}
